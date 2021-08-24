@@ -1,0 +1,5 @@
+package kr.ac.kopo.comment.vo;
+
+public class CommentVO {
+
+}

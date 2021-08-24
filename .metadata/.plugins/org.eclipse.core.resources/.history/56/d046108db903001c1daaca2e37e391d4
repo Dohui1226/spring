@@ -1,0 +1,6 @@
+package kr.ac.kopo;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+public class MybatisTest {
+
+}

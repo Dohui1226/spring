@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:context="http://www.springframework.org/schema/context"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/beans 
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<context:annotation-config></context:annotation-config>
+	
+	<bean class="di.anno02.HankookTire" id="hankook" />
+<!-- 	<bean class="di.anno02.KumhoTire" id="kumho" /> -->
+	<bean class="di.anno02.NexenTire" id="tire" />
+	<!-- auto는 타입-> 이름매칭/ 리소스는 이름매칭을 먼저한다...인젝트도 자바기반 하지만 타입매칭후 네임매칭으로 -->
+	<bean class="di.anno02.Car" id="car" />
+	
+</beans>

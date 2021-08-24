@@ -1,0 +1,21 @@
+package kr.ac.kopo;
+
+import org.junit.runner.RunWith;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations= {"classpath:config/spring/spring-mvc.xml"})
+public class BoardTest {
+	
+	@Autowired
+	private SqlSessionTemplate sqlSessionTemplate;
+	
+	@Test
+	public void 전체게시글조회Test() throws Exception{
+		
+	}
+
+}

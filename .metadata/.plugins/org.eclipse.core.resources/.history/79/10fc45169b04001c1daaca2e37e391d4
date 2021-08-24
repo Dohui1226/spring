@@ -1,0 +1,28 @@
+package kr.ac.kopo.member.Controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import kr.ac.kopo.member.service.MemberService;
+import kr.ac.kopo.member.vo.MemberVO;
+
+@Controller
+public class MemberController {
+	@Autowired
+	private MemberService service;
+	
+	@GetMapping("/login")
+	public String loginForm() {
+		return "login/login";
+	}
+	
+	@PostMapping("/login")
+	public String login(MemberVO member) {
+		MemberVO userVO = service.login(member);
+		System.out.println(member);
+		
+		return "";
+	}
+}

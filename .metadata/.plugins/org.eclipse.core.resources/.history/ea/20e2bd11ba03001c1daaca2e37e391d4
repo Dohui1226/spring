@@ -1,0 +1,22 @@
+package kr.ac.kopo;
+
+import javax.sql.DataSource;
+
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+//JUNIT실행하려고 하고
+@ContextConfiguration(locations= {"classpath:config/spring/spring-mvc.xml"})
+//실행하면서 저 파일을 읽어오려고함
+public class MybatisTest {
+	@Autowired
+	//객체가 올바르게 만들어져있다면 주입이 가능하다.
+	private DataSource dataSource;
+	
+	public void DataSource생성테스트() throws Exception{
+		
+	}
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:context="http://www.springframework.org/schema/context"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/beans 
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<context:annotation-config></context:annotation-config>
+	<bean class="di.anno01.HankookTire" id="hankook" />
+	<!-- HankookTire hankook = new HankookTire() -->
+	
+	<!-- <bean class="di.anno01.KumhoTire" id="tire" /> -->
+	<!-- KumhoTire tire = new KunhoTrie() -->
+	
+	<bean class="di.anno01.NexenTire" id="tire" />
+	<!-- 2. 객체 금호타이어 까지 두개만듬 어떤타입을 주입할지몰라서 에러뜸..누구인지 결정해줘야함..-> 이럴때 이름을 매칭시킨다. 아이디 하나를 tire로 한다.-->
+	<bean class="di.anno01.Car" id="car" />
+	<!-- Car car = new Car() -->
+	<!-- 1.아무것도 안쓰여있으니 기본생성자 생성임.. con이나 ref 등등 안쓰여있자나! -->
+	<!-- 만약 생성자 주입을 하고 싶으면 위에 한국타이어 생성했으니까 한국타이어의 생성자?를 @Autowired를 넣어서 자동으로 넣어줌.
+	타입매칭하고 이름매칭으로 찾음 , 아이디가 굳이 매개변수 이름과 같지않아도됨 -->
+</beans>

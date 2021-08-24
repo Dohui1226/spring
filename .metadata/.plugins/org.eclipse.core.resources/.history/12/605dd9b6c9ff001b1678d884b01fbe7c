@@ -1,0 +1,11 @@
+package kr.ac.kopo;
+
+import org.apache.ibatis.session.SqlSession;
+
+public class MybatisMain {
+	
+	public static void main(String[] args) {
+		BoardDAO dao = new BoardDAO();
+	}
+
+}

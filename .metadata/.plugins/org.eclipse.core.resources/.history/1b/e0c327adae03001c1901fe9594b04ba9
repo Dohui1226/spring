@@ -1,0 +1,5 @@
+package kr.ac.kopo.home;
+
+public class HomeController {
+
+}

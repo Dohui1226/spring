@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="MybatisTest" project="Mission-Spring" tests="2" started="2" failures="0" errors="0" ignored="1">
+  <testsuite name="kr.ac.kopo.MybatisTest" time="0.864">
+    <testcase name="DataSource생성테스트" classname="kr.ac.kopo.MybatisTest" time="0.855" ignored="true"/>
+    <testcase name="mybatis연동테스트" classname="kr.ac.kopo.MybatisTest" time="0.009"/>
+  </testsuite>
+</testrun>

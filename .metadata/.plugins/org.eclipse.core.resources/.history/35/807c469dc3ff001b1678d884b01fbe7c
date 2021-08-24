@@ -1,0 +1,9 @@
+package kr.ac.kopo;
+
+public class MybatisMain {
+	
+	public static void main(String[] args) {
+		new MyConfig();
+	}
+
+}

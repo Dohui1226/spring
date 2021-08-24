@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/beans 
+      http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+   <bean class="di.xml01.Car" id="car" />
+  
+  
+   <bean class="di.xml01.HankookTire" id="hankook"/>
+   <bean class="di.xml01.Kumho" id="kumho"/>
+   <bean class="di.xml01.Car" id="car2" >
+   	<property name="tire" ref="hankook"></property>
+   	<property name="frontL" ref="hankook"></property>
+   	<!-- 세터 주입하려는 대상이 tire라서 첫글자 소문자로 쓴다..ref 속성은 세터로 타이어가 주입되고  -->
+   </bean> 
+
+</beans>

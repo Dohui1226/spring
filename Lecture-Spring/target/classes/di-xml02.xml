@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/beans 
+      http://www.springframework.org/schema/beans/spring-beans.xsd">
+      
+      <bean class="di.xml02.HankookTire" id="hankook"></bean>
+      <bean class="di.xml02.KumhoTire" id="kumho"></bean>
+
+		<bean class="di.xml02.Car" id="car">
+		<constructor-arg ref="hankook"></constructor-arg>
+		</bean>
+		
+		
+		<bean class="di.xml02.Car" id="car2">
+		<constructor-arg ref="hankook"></constructor-arg>
+		<constructor-arg ref="kumho"></constructor-arg>
+		</bean>
+		
+		<bean class="di.xml02.Car" id="car3">
+		<constructor-arg ref="kumho" index="0" type="java.lang.String"></constructor-arg>
+		<constructor-arg value="hello" index="1"></constructor-arg>
+		<!-- ref는 객체를 의존주입하는 value는 상수값 type은 상수가 숫자일수도 있으니까 -->
+		<!--  index 0이번저 매개변수로 호출, 1그 다음 호출로 순서정해주는거임 위에 쓴게 디폴드값임.. 먼저쓴게 0됨-->
+		</bean>
+		
+		
+</beans>

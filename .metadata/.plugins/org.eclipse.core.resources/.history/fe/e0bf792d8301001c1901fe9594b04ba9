@@ -1,0 +1,11 @@
+/**
+ * 암호화 복호화 하는 js
+ */
+module.export = {
+	encrypt: function encript(shift, plaintext){
+		return ceasar()
+	}
+	
+	
+	
+}

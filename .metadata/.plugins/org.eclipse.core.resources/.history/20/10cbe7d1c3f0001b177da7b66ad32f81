@@ -1,0 +1,6 @@
+package di.homework1;
+
+public interface Operator {
+
+	String getValue(int num1, int num2);
+}

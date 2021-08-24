@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Lecture-Spring/src/main/resources/aoptext&apos; to &apos;aoptest&apos;" description="Rename resource &apos;aoptext&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/aoptext" name="aoptest" stamp="1628576718597" updateReferences="true"/>
+</session>

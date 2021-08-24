@@ -1,0 +1,5 @@
+/**
+ * 
+ */
+let ceasar = require('./ceasar.js');
+console.log(ceasar.decrypt(3, "kl krz dub"));  //복호화.

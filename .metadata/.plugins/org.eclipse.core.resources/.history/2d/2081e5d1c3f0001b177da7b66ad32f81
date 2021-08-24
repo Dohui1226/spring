@@ -1,0 +1,27 @@
+package di.homework1;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import di.anno03.Tire;
+
+public class Calculator {
+	
+	
+	private Operator o;
+	
+	
+	public Calculator(Operator o) {
+		this.o = o;
+		System.out.println("calculator생성");
+	}
+
+
+	
+
+	
+	public void getValue(int num1, int num2) {
+	
+		System.out.println(o.getValue(num1, num2));
+	}
+
+}
