@@ -2,6 +2,9 @@
 <section name="Workbench">
 	<section name="MavenProjectWizardLocationPage">
 		<list key="location">
+			<item value="C:\Lecture\spring-workspace\Mission-Spring\src\test\java"/>
+			<item value="C:\Lecture\spring-workspace\Mission-Spring"/>
+			<item value="C:\Users\HP\Desktop\Mission-Spring\pom.xml"/>
 			<item value="C:\Lecture\spring-workspace\Mybatis\src\common\db\board.xml"/>
 			<item value="C:\Lecture\spring-workspace\Lecture-Spring\src\main\resources\aoptext"/>
 		</list>
@@ -50,6 +53,8 @@
 		<list key="name">
 		</list>
 		<list key="artifactId">
+			<item value="HN-project"/>
+			<item value="Mission-Spring3"/>
 			<item value="Mission-Spring"/>
 			<item value="spring-mvc"/>
 			<item value="Lecture-Spring"/>
@@ -69,5 +74,18 @@
 	<section name="org.eclipse.m2e.core.pom.overview">
 	</section>
 	<section name="org.eclipse.m2e.core.pom.dependencies">
+	</section>
+	<section name="MavenProjectImportWizardPage">
+		<list key="rootDirectory">
+			<item value="C:\Users\HP\Desktop\Mission-Spring"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
 	</section>
 </section>

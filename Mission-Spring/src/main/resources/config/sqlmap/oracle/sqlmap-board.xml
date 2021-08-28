@@ -39,6 +39,6 @@
 		select no, board_no, content, writer, to_char(reg_date, 'yyyy-mm-dd') reg_date
 		from t_reply
 		where board_no=#{no}
-		order by reg_date
+		order by reg_date desc
 	</select>
 </mapper>

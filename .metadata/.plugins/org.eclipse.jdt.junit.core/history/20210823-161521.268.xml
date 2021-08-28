@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="BoardTest" project="Mission-Spring" tests="2" started="2" failures="0" errors="0" ignored="1">
-  <testsuite name="kr.ac.kopo.BoardTest" time="1.398">
-    <testcase name="전체게시글조회Test" classname="kr.ac.kopo.BoardTest" time="0.91" ignored="true"/>
-    <testcase name="상세게시글조회Test" classname="kr.ac.kopo.BoardTest" time="0.488"/>
-  </testsuite>
-</testrun>

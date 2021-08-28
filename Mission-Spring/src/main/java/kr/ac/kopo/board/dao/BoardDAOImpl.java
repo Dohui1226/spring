@@ -42,6 +42,7 @@ public class BoardDAOImpl implements BoardDAO {
 	
 	public List<CommentVO> selectAllComment(int no) {
 		List<CommentVO> list  = sqlSessionTemplate.selectList("board.BoardDAO.selectComment",no);
+		System.out.println("dao");
 		return list;
 	}
 	

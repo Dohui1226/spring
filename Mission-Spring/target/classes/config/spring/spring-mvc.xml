@@ -23,8 +23,34 @@
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location"
 			value="classpath:config/prop/db.properties" />
-		<property name="fileEncoding" value="UTF-8" />
+		<property name="fileEncoding" value="UTF-8" />	
+  
+  
 	</bean>
+	
+	
+	
+	    <mvc:annotation-driven>
+       <mvc:message-converters>
+          <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+             <property name="supportedMediaTypes">
+                <list>
+                   <value>text/html; charset=utf-8</value>
+                </list>
+             </property>
+          </bean>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+             <property name="supportedMediaTypes">
+                <list>
+                   <value>text/html; charset=utf-8</value>
+                   <value>application/json; charset=utf-8</value>
+                </list>
+             </property>
+          </bean>  
+       </mvc:message-converters>
+    </mvc:annotation-driven>
+	
+	
 
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
@@ -34,7 +60,7 @@
 		<property name="password" value="${password}" />
 
 	</bean>
-
+  
 
 
 	<bean id="sqlSessionFactory"

@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import kr.ac.kopo.board.service.BoardService;
 import kr.ac.kopo.board.vo.BoardVO;
 import kr.ac.kopo.comment.vo.CommentVO;
@@ -62,11 +64,9 @@ public class BoardController {
 	public ModelAndView selectByNo2(@PathVariable("no") int no) {
 
 		BoardVO board = service.selectOneBoard(no);
-		List<CommentVO> commetList = service.selectAllCommet(no);
 		
 		ModelAndView mav = new ModelAndView("board/detail");
 		mav.addObject("board", board);
-		mav.addObject("clist",commetList);
 		return mav;
 	}
 	/*
@@ -119,9 +119,24 @@ public class BoardController {
     public String addComment(@PathVariable("no") int no, CommentVO comment) {      
 		comment.setBoardNo(no);
 		service.addComment(comment);      
+		
         return "redirect:/board/"+no;
     }
-		
+	
+	//게시글 댓글 조회하기
+	@GetMapping("/board/{no}/listComment")
+	@ResponseBody
+	 public List<CommentVO> listComment(@PathVariable("no") int no) {     
+		 List<CommentVO> commentList = service.selectAllCommet(no);    
+				System.out.println("컨트롤러");
+				for(CommentVO board: commentList) {
+					System.out.println(board);
+				}
+				
+			
+	        return commentList;
+	    }
+	
 	
 }
 

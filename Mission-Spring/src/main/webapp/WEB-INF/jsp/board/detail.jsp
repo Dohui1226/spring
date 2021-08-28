@@ -1,15 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- 
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resourse/css/layout.css"></link>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resourse/css/board.css"></link>
-<script type="text/javascript" src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resourse/css/layout.css"></link>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resourse/css/board.css"></link>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 	function Btn(type){
 		switch(type){
@@ -27,34 +30,72 @@
 	}
 
 $(document).ready(function() {
-	
-/* 	$.ajax({
-		type:"post",
-		url:"${pageContext.request.contextPath}/board/${board.no}",
-		data: {"content":content, "no":no,"writer":writer},
-		success:function(result){
-			alert("댓글이 등록되었습니다.")
-		}
-	});
-	 */
+	listComment();
 	
 	
+
 	$("#btnReply").click(function(){
-			var content=$("#ccontent").val();
-			var no="${board.no}";
-			var writer=$("#cwriter").val();
-			
+		var content=$("#ccontent").val();
+		var no="${board.no}";
+		var writer=$("#cwriter").val();
 			$.ajax({
 				type:"post",
 				url:"${pageContext.request.contextPath}/board/"+no+"/addComment",
 				data: {"content":content, "no":no,"writer":writer},
 				success:function(result){
 					alert("댓글이 등록되었습니다.")
+					listComment();
 				}
-			});
-		})
+			})
+	
 	})	
+	
+	
+});	
+
+function listComment() {
+	var no="${board.no}";
+	$.ajax({
+		type:"get",
+		url:"${pageContext.request.contextPath}/board/"+no+"/listComment",
+		dataType: "json" ,
+		success:function(data){
+			console.log(data);
+		    if(data.length > 0) {
+		    	 let html = ''               
+		         data.forEach(function(reply){
+		         let temp = $('#replyTemplate').text()
+		                  temp = temp.replace(/\{writer\}/gi, reply.writer)
+		                           .replace(/\{content\}/gi, reply.content)
+		                           .replace(/\{regDate\}/gi, reply.regDate)
+		                  html += temp;
+		               })
+		               
+		               $('#listComment').html(html)
+		            }
+
+			
+			
+		},error:function(request,status,error){
+		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		   }	
+	})
+}
 </script>
+<script id="replyTemplate" type="text/template">
+   <div>
+      <table border="1" width="80%">
+
+         <tr>
+            <td width="15%">{writer}</td>
+            <td>{content}</td>
+            <td width="15%">{regDate}</td>
+         </tr>
+      
+      </table>
+   </div>
+</script>
+
 </head>
 <body>
 	<%-- <header>
@@ -62,80 +103,69 @@ $(document).ready(function() {
 	</header>
 	 --%>
 	<section>
-		<div align = "center">
-		<hr width="80%">
-		<h2>게시판 상세</h2>
-		<hr width="80%">
-		<table border="1" style="width:80%">
-			<tr>
-				<th width="25%">번호</th>
-				<td><c:out value="${board.no}"/></td>
-			</tr>
-			<tr>
-				<th width="25%">제목</th>
-				<td><c:out value="${board.title}"/></td>
-			</tr>
-			<tr>
-				<th width="25%">작성자</th>
-				<td><c:out value="${board.writer}"/></td>
-			</tr>
-			<tr>
-				<th width="25%">내용</th>
-				<td>${board.content}</td>
-			</tr>
-			<tr>
-				<th width="25%">조회수</th>
-				<td>${board.viewCnt}</td>
-			</tr>
-			<tr>
-				<th width="25%">등록일</th>
-				<td>${board.regDate}</td>
-			</tr>
-			<tr>
-				<th width="25%">첨부파일</th>
-				<td>
-					<c:forEach items="${fileList}" var="file">
-					<a href="/Mission-Web/upload/${file.fileSaveName}" download="${file.fileOriName}">
-						<%-- 서버상 실제위치 --%>
-						<c:out value="${ file.fileOriName }"/>
-					</a>
-						(${file.fileSize}bytes)
-						<br>
-					</c:forEach>
-				</td>
-			</tr>
-		</table>
-		<br>
-		<%-- <a href="updateForm.jsp?no=${board.no}"><button >수정</button></a> --%>
-		
-		<%-- <a href="delete.jsp?no=${board.no}"><button>삭제</button></a> --%>
-		
-		<!-- <a href="list.jsp"><button>목록</button></a> -->
-		<button onclick="Btn('U')">수정</button>
-		<button onclick="Btn('D')">삭제</button>
-		<button onclick="Btn('L')">목록</button>
-		
-	</div>
-	<hr>
-	
-	댓글 : <input type="text" id="ccontent" />
-	작성자 : <input type="text" id="cwriter" />
-	<a href="${pageContext.request.contextPath}/board/${board.no}"><button id="btnReply">댓글등록</button>
-	<hr>
-	<c:forEach items="${clist}" var="comment" varStatus="loop"> 
-	<table>
-				<tr><td> 
-					내용 : ${comment.content}</td>
-				<tr>	
-					<td>작성자 :${comment.writer}</td>
-					</tr>
-				<tr>	<td>작성일자 :${comment.regDate}</td>
+		<div align="center">
+			<hr width="80%">
+			<h2>게시판 상세</h2>
+			<hr width="80%">
+			<table border="1" style="width: 80%">
+				<tr>
+					<th width="25%">번호</th>
+					<td><c:out value="${board.no}" /></td>
 				</tr>
-				</table>
-			</c:forEach>
-	
-	</section>
+				<tr>
+					<th width="25%">제목</th>
+					<td><c:out value="${board.title}" /></td>
+				</tr>
+				<tr>
+					<th width="25%">작성자</th>
+					<td><c:out value="${board.writer}" /></td>
+				</tr>
+				<tr>
+					<th width="25%">내용</th>
+					<td>${board.content}</td>
+				</tr>
+				<tr>
+					<th width="25%">조회수</th>
+					<td>${board.viewCnt}</td>
+				</tr>
+				<tr>
+					<th width="25%">등록일</th>
+					<td>${board.regDate}</td>
+				</tr>
+				
+			</table>
+			<br>
+			<%-- <a href="updateForm.jsp?no=${board.no}"><button >수정</button></a> --%>
+
+			<%-- <a href="delete.jsp?no=${board.no}"><button>삭제</button></a> --%>
+
+			<!-- <a href="list.jsp"><button>목록</button></a> -->
+			<button onclick="Btn('U')">수정</button>
+			<button onclick="Btn('D')">삭제</button>
+			<button onclick="Btn('L')">목록</button>
+
+		</div>
+		<hr>
+      댓글 : <textarea rows="5" cols="80" id="ccontent"></textarea>
+      작성자 : <input type="text" id="cwriter" />   <%-- 누구나 등록 가능한 댓글 --%>
+      <button id="btnReply">댓글등록</button>
+
 		
+		<hr>
+
+		  <table border="1" width="80%">
+         <tr>
+            <th width="15%">작성자</th>
+            <th ">내용</th>            
+            <th width="15%">등록일</th>   
+         </tr>
+   </table>
+
+   <div id="listComment"></div>
+   
+
+	</section>
+
 	<%-- <footer>
 <!-- 		http://localhost:9999/Misson-web/jsp/board/list.jsp
 		a태그나 form 태그에서 /는 localhost:9999/까지 말함.
