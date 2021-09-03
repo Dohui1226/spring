@@ -15,9 +15,9 @@
 						<div class="footer-content logo-footer">
 							<div class="footer-head">
 								<div class="footer-logo">
-									<a class="footer-black-logo" href="#"><img
+									<%-- <a class="footer-black-logo" href="#"><img
 										src="${pageContext.request.contextPath}/resources/img/logo/logo.png"
-										alt=""></a>
+										alt=""></a> --%>
 								</div>
 								<p>Are you looking for professional advice for your new
 									business. Are you looking for professional advice for your new

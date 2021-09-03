@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -126,21 +127,36 @@
 							<div class="col-md-9 col-sm-9">
 								<div class="header-right-link">
 									<!-- search option end -->
-									<a class="s-menu" href="${pageContext.request.contextPath}/login">Login</a>
+
+									<c:if test="${empty userVO}">
+										<a class="s-menu"
+											href="${pageContext.request.contextPath}/login">Login</a>
+									</c:if>
+									<c:if test="${not empty userVO}">
+										<a class="s-menu"
+											href="${pageContext.request.contextPath}/logout">Logout</a>
+									</c:if>
+
+
+
 								</div>
 								<!-- mainmenu start -->
 								<nav class="navbar navbar-default">
 									<div class="collapse navbar-collapse" id="navbar-example">
 										<div class="main-menu">
 											<ul class="nav navbar-nav navbar-right">
-												<li><a class="pages" href="">Home</a></li>
-												<li><a href="about.html">가입하기</a></li>
+												<li><a class="pages"href="${pageContext.request.contextPath}">Home</a></li>
+												<li><a class="pages"
+													href="${pageContext.request.contextPath}/waggle">와글와글</a></li>
 												<li><a href="investment.html">관심종목</a></li>
-												<li><a class="pages" href="${pageContext.request.contextPath}/stocklist">종목조회</a></li>
-												<li><a class="pages" href="${pageContext.request.contextPath}/chat">채팅방</a></li>
-												<li><a class="pages" href="${pageContext.request.contextPath}/mystock">내 자산</a>
-													</li>
-							
+												<li><a class="pages"
+													href="${pageContext.request.contextPath}/stocklist">종목조회</a></li>
+												<li><a class="pages"
+													href="${pageContext.request.contextPath}/chat">채팅방</a></li>
+												<li><a class="pages"
+													href="${pageContext.request.contextPath}/myasset">내 자산</a>
+												</li>
+
 											</ul>
 										</div>
 									</div>

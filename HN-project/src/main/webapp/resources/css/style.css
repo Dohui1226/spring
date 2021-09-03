@@ -442,6 +442,42 @@ div#preloader {
     border-radius: 3px;
     text-transform: uppercase;
 }
+
+#button-modal{
+	
+    background: #fff;
+	color:#27B2A5;
+    border: 1px solid #27B2A5;
+    padding: 8px 20px;
+	
+}
+
+
+#button-modal2{
+	 border: 1px solid #fff;
+   background: #27B2A5;
+	 color: #fff;
+    padding: 8px 20px;
+	
+}
+
+
+#button:hover{
+	 color: #fff;
+    text-transform: uppercase;
+    transition: all 0.4s ease 0s;
+    border-radius: 2px;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 8px 20px;
+    background: #27B2A5;
+    display: inline-block;
+    border:1px solid #27B2A5;
+    transition: 0.4s;
+}
+	
+	
+
 .s-menu:hover {
     border: 1px solid #fff;
     background: #fff;
@@ -1135,7 +1171,7 @@ span.users {
 }
 .single-blog {
     position: relative;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+   /*  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1); */
     margin-bottom: 30px;
 }
 .blog-meta {
@@ -1376,7 +1412,7 @@ span.users {
 	padding-right: 0px;
 }
 .faq-area .faq-content {
-    margin-left: 80px;
+    margin-left: 20px;
     padding:30px;
     border-radius: 2px;
 	border:1px solid #27B2A5;
@@ -1519,7 +1555,7 @@ span.users {
 }
 .suscribe-input {
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
-    width: 95%;
+    width: 72%;
 }
 .footer-content.logo-footer {
     padding-right: 30px;
@@ -2067,6 +2103,11 @@ span.users {
     min-height: 36px;
     margin-bottom: 20px;
 }
+
+.form-acontrol{
+	width:75%
+}
+
 .login-title {
     font-size: 28px;
     font-weight: 700;
@@ -2933,3 +2974,4 @@ img{ max-width:100%;}
 /*--------------------------------*/
 /* .End CSS
 /*--------------------------------*/
+

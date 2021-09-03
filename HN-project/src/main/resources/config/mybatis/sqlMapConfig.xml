@@ -5,9 +5,17 @@
 <configuration>
 
 	<typeAliases>
-		<typeAlias type="kr.ac.kopo.member.vo.MemberVO"
+		<typeAlias type="kr.ac.kopo.vo.MemberVO"
 			alias="memberVO" />
-		<typeAlias type="kr.ac.kopo.comment.vo.CommentVO"
-			alias="commentVO" />
+		<typeAlias type="kr.ac.kopo.vo.WaggleJoinVO"
+			alias="wagglejoinVO" />
+		<typeAlias type="kr.ac.kopo.vo.AccountVO"
+			alias="accountVO" />
+		<typeAlias type="kr.ac.kopo.vo.AddHeartVO"
+			alias="addheartVO" />	
+		<typeAlias type="kr.ac.kopo.vo.ChangeHeartVO"
+			alias="changeheartVO" />		
+		<typeAlias type="kr.ac.kopo.vo.ChangeCouponVO"
+			alias="changecouponVO" />		
 	</typeAliases>
 </configuration>

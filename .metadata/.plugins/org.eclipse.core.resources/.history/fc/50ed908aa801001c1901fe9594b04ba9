@@ -1,3 +1,0 @@
-let ceasar = require('./ceasar')
-ceasar.encrypt 
- 

@@ -5,8 +5,8 @@
 <mapper namespace="member.MemberDAO">
 
 <select id="login" parameterType="memberVO" resultType="memberVO">
- select id, name, password, type
- from t_member
+ select id, name, password
+ from hn_member
  where id=#{id} and password=#{password}
 </select>
 	

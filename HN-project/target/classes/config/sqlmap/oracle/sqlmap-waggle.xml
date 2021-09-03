@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="waggle.WaggleDAO">
+
+<!-- 가입하기 -->
+<select id="join" parameterType="wagglejoinVO">
+ insert into hn_waggle(no, member_id, nickname, member_account)
+values(seq_waggle_id.nextval,#{member_id},#{nickname},#{member_account})
+</select>
+
+<!-- 가입여부 ?? -->
+<select id="joincheck" parameterType="wagglejoinVO" resultType="int">
+select count(*) from hn_waggle where member_id=#{member_id}
+</select>
+
+<!-- 와글 등록할 정보 가져오기 -->
+<select id="waggle" parameterType="memberVO" resultType="wagglejoinVO">
+select * from hn_waggle where member_id=#{member_id}
+</select>
+
+<!-- 하트갯수 조회 -->
+<select id="heartselect" parameterType="wagglejoinVO" resultType="int">
+select heart from hn_waggle where no=#{no} 
+</select>
+
+<!-- 하트충전 -->
+<select id="addheart" parameterType="addheartVO">
+EXEC addheart(#{heart}, #{no},#{money}, #{anum})
+</select>
+
+<!--하트 보내기(교환)-->
+<select id="changeheart" parameterType="changeheartVO">
+EXEC changeheart(#{tono},#{fromno},#{heart})
+</select>
+
+<!-- 쿠폰교환 -->
+<select id="changecoupon" parameterType="changecouponVO">
+EXEC changecoupon(#{coupontype},#{couponid},#{no},#{heart})
+</select>
+
+<!-- 쿠폰사용/삭제 -->
+<select id="deletecoupon" parameterType="changeCouponVO">
+delete from hn_coupon where coupon_id=#{couponid}
+</select>
+</mapper>
+
+
