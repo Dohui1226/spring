@@ -15,7 +15,7 @@
 			alias="addheartVO" />	
 		<typeAlias type="kr.ac.kopo.vo.ChangeHeartVO"
 			alias="changeheartVO" />		
-		<typeAlias type="kr.ac.kopo.vo.ChangeCouponVO"
-			alias="changecouponVO" />		
+		<typeAlias type="kr.ac.kopo.vo.CouponVO"
+			alias="couponVO" />		
 	</typeAliases>
 </configuration>

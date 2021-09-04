@@ -1,9 +1,13 @@
 package kr.ac.kopo.waggle.servie;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.ac.kopo.vo.AccountVO;
+import kr.ac.kopo.vo.AddHeartVO;
+import kr.ac.kopo.vo.CouponVO;
 import kr.ac.kopo.vo.MemberVO;
 import kr.ac.kopo.vo.WaggleJoinVO;
 import kr.ac.kopo.waggle.dao.WaggleDAO;
@@ -48,12 +52,22 @@ public class WaggleServiceImpl implements WaggleService{
 	}
 
 	
-	/* 하트 일회성 충전*/
-//	public void addheart(WaggleJoinVO waggle, AccountVO account, int heart, int money) {
-		//충전을 하면 account 계좌 잔액이 마이너스가 되고, waggle 하트가 증가된다.
-//		
-//	}
-//	
+	/* 하트추가충전 */
+	public void addHeart(AddHeartVO heart) {
+		waggleDAO.addHeart(heart);
+		
+	}
+	/*쿠폰으로 바꾸기*/
+	public void change(CouponVO couponvo) {
+		
+		waggleDAO.change(couponvo);
+		
+	}
 	
+	/*내쿠폰 조회하기*/
+	public List<CouponVO> selectcoupon(int no) {
+		List<CouponVO> list = waggleDAO.selectcoupon(no);
+		return list;
+	}
 
 }

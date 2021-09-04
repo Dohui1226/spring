@@ -16,9 +16,9 @@ public class AccountDAOImpl implements AccountDAO {
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	public List<AccountVO> myaccount(MemberVO member){
-		System.out.println("디에이오1");
+		
 		List<AccountVO> list = sqlSessionTemplate.selectList("account.AccountDAO.accountAll", member);
-		System.out.println("디에이오");
+		
 		return list;
 		
 	}

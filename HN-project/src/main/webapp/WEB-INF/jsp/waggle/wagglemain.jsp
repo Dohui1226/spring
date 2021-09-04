@@ -54,7 +54,7 @@
 												<h4>혜택 받아보기</h4>
 												<p>하트가 부족하다면 충전하거나 보유 하트로 혜택을 받아보세요.</p>
 												<a class="blog-btn"
-													href="${pageContext.request.contextPath}/waggle/coupon">교환소</a>
+													href="${pageContext.request.contextPath}/waggle/changecoupon">교환소</a>
 											</div>
 
 										</div>

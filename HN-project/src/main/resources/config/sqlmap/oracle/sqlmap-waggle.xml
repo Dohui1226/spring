@@ -26,23 +26,27 @@ select heart from hn_waggle where no=#{no}
 </select>
 
 <!-- 하트충전 -->
-<select id="addheart" parameterType="addheartVO">
-EXEC addheart(#{heart}, #{no},#{money}, #{anum})
+<select id="addheart" statementType="CALLABLE" parameterType="addheartVO">
+call addheart(#{heart}, #{no},#{money}, #{anum})
 </select>
 
 <!--하트 보내기(교환)-->
-<select id="changeheart" parameterType="changeheartVO">
-EXEC changeheart(#{tono},#{fromno},#{heart})
+<select id="changeheart" statementType="CALLABLE" parameterType="changeheartVO">
+call changeheart(#{tono},#{fromno},#{heart})
 </select>
 
-<!-- 쿠폰교환 -->
-<select id="changecoupon" parameterType="changecouponVO">
-EXEC changecoupon(#{coupontype},#{couponid},#{no},#{heart})
+<!--  쿠폰교환  -->
+<select id="change" statementType="CALLABLE" parameterType="couponVO">
+call changecoupon(#{coupontype},#{couponid},#{no},#{heart})
 </select>
 
-<!-- 쿠폰사용/삭제 -->
-<select id="deletecoupon" parameterType="changeCouponVO">
+<!-- 쿠폰삭제 -->
+<select id="deletecoupon" parameterType="couponVO">
 delete from hn_coupon where coupon_id=#{couponid}
+</select>
+<!-- 쿠폰조회 -->
+<select id="selectcoupon" parameterType="int" resultType="couponVO">
+select * from hn_coupon where no={no}
 </select>
 </mapper>
 

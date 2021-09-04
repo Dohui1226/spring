@@ -1,9 +1,13 @@
 package kr.ac.kopo.waggle.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.ac.kopo.vo.AddHeartVO;
+import kr.ac.kopo.vo.CouponVO;
 import kr.ac.kopo.vo.MemberVO;
 import kr.ac.kopo.vo.WaggleJoinVO;
 
@@ -38,4 +42,21 @@ public class WaggleDAOImpl implements WaggleDAO {
 		return waggleVO;
 	}
 	
+	
+	public void addHeart(AddHeartVO heartVO) {
+		sqlSessionTemplate.insert("waggle.WaggleDAO.addheart",heartVO);
+		
+	}
+	
+	
+	public void change(CouponVO couponvo) {
+		sqlSessionTemplate.insert("waggle.WaggleDAO.change",couponvo);
+		
+	}
+	
+	/* 쿠폰조회하기 */
+	public List<CouponVO> selectcoupon(int no) {
+		List<CouponVO> list = sqlSessionTemplate.selectList("waggle.WaggleDAO.selectcoupon",no);
+		return list;
+	}
 }

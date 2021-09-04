@@ -25,10 +25,7 @@ input[id="cb1"]:checked + label {
 
 </style>
 <script>
-	/* var openWin;
-	 function searchaccount(){
-	 window.name="parentForm"
-	 } */
+
 	function setaccount() {
 
 		document.getElementById("sus_email1").value = document
@@ -36,7 +33,7 @@ input[id="cb1"]:checked + label {
 
 	}
 </script>
-<!-- Mirrored from rockstheme.com/rocks/aievari-live/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Mar 2020 08:27:42 GMT -->
+
 <jsp:include page="../header.jsp" />
 <!-- header end -->
 <!-- Start breadcumb Area -->

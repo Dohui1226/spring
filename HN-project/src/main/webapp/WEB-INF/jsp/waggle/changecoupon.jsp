@@ -5,24 +5,24 @@
 <jsp:include page="../header.jsp"/>
 <script>
 
-$(document).on("click", "#paymodal", function () {
-    var myBookId = $(this).data('id');
-    $(".modal-body #addheartmodal").val( myBookId );
-    // As pointed out in comments, 
-    // it is superfluous to have to manually call the modal.
-    // $('#addBookDialog').modal('show');
+$(document).on("click", ".blue-button", function() {
+	var heart = $(this).attr('data-id');
+	var money = $(this).attr('data-value')
+
+	$(".modal-body #addheartmodal").val(heart);
+	$(".modal-body #addheartmodal2").val(money);
+
 });
 
 
+$(document).on("click", ".blue-button2", function() {
+	var type = $(this).attr('data-id');
+	var heart = $(this).attr('data-value')
+	$(".modal-body #changemodal").val(type);
+	$(".modal-body #changemodal2").val(heart);
 
+});
 
-
-
-function paymodal() {
-	document.getElementById("addheartmodal").value
-	 = document.getElementById("paymodal").value 
-	
-};
 </script>
 
         <!-- header end -->
@@ -63,17 +63,17 @@ function paymodal() {
                             <div class="pri_table_list">
                                 <div class="top-price-inner">
                                    <div class="rates">
-                                        <span class="prices" id="paymodal" value="50">50개</span>
+                                        <span class="prices">30개</span>
                                     </div>
-                                    <span class="per-day">월 정액권</span>
+                                    <span class="per-day">1회</span>
                                 </div>
                                 <ol class="pricing-text">
-                                    <li class="check">매월 1일 하트 50개 충전</li>
-                                    <li class="check">매월 1900원</li>
+                                    <li class="check">하트 30개 충전</li>
+                                    <li class="check">가격 1600원</li>
                                  
                                 </ol>
                                 <div class="price-btn blue">
-                                    <a class="blue" href="#">신청하기</a>
+                                    <a class="blue-button" data-id="30" data-value="1600" data-toggle="modal" href="#modal">신청하기</a>
                                 </div>
                             </div>
                         </div>
@@ -86,12 +86,12 @@ function paymodal() {
                                     <span class="per-day">1회</span>
                                 </div>
                                <ol class="pricing-text">
-                                    <input type="text" style="border:none" class="check" id="paymodal" value="50">하트 50개 충전</li>
+                                    <li class="check">하트 50개 충전</li>
                                     <li class="check">가격 2500원</li>
                                 	
                                 </ol>
                                 <div class="price-btn blue">
-                                    <a class="blue" onclick="paymodal()" data-toggle="modal" href="#modal">신청하기</a>
+                                    <a class="blue-button" data-id="50" data-value="2500" data-toggle="modal" href="#modal">신청하기</a>
                                 </div>
                             </div>
                         </div>
@@ -110,7 +110,7 @@ function paymodal() {
                                 
                                 </ol>
                                 <div class="price-btn blue">
-                                    <a class="blue" href="#">신청하기</a>
+                                    <a class="blue-button" data-id="100" data-value="3000" data-toggle="modal" href="#modal">신청하기</a>
                                 </div>
                             </div>
                         </div>
@@ -129,7 +129,7 @@ function paymodal() {
    
                                 </ol>
                                 <div class="price-btn blue">
-                                    <a class="blue" href="#">신청하기</a>
+                                     <a class="blue-button" data-id="200" data-value="5000" data-toggle="modal" href="#modal">신청하기</a>
                                 </div>
                             </div>
                         </div>
@@ -140,6 +140,7 @@ function paymodal() {
 						<div class="section-headline text-center">
                             <h3>하트 교환</h3>
                             <p>보유한 하트를 통하여 혜택을 받을 수 있습니다.</p>
+                            <a href="${pageContext.request.contextPath}/waggle/couponlist">쿠폰리스트</a>
 						</div>
 					</div>
                         
@@ -153,11 +154,11 @@ function paymodal() {
                                 </div>
                               <ol class="pricing-text">
                                     <li class="check">수수료 100% 절감 쿠폰</li>
-                                    <li class="check">필요 하트 500개</li>
+                                    <li class="check">필요 하트 100개</li>
                                 
                                 </ol>
                                 <div class="price-btn blue">
-                                    <a class="blue" href="#">교환하기</a>
+                                    <a class="blue-button2" data-id="1" data-value="300" data-toggle="modal" href="#modal2">교환하기</a>
                                 </div>
                             </div>
                         </div>
@@ -172,11 +173,11 @@ function paymodal() {
                                 </div>
                                  <ol class="pricing-text">
                                     <li class="check">수수료 100% 절감 쿠폰</li>
-                                    <li class="check">필요 하트 1000개</li>
+                                    <li class="check">필요 하트 300개</li>
                                 
                                 </ol>
                                 <div class="price-btn blue">
-                                    <a class="blue" href="#">교환하기</a>
+                                   <a class="blue-button2" data-id="5" data-value="300" data-toggle="modal" href="#modal2">교환하기</a>
                                 </div>
                             </div>
                         </div>
@@ -190,11 +191,11 @@ function paymodal() {
                                 </div>
                                 <ol class="pricing-text">
                                     <li class="check">수수료 100% 절감 쿠폰</li>
-                                    <li class="check">필요 하트 2000개</li>
+                                    <li class="check">필요 하트 1000개</li>
                                 
                                 </ol>
                                 <div class="price-btn blue">
-                                    <a class="blue" href="#">교환하기</a>
+                                    <a class="blue-button2" data-id="28" data-value="1000" data-toggle="modal" href="#modal2">교환하기</a>
                                 </div>
                             </div>
                         </div>
@@ -213,7 +214,7 @@ function paymodal() {
                                 
                                 </ol>
                                 <div class="price-btn blue">
-                                    <a class="blue" href="#">교환하기</a>
+                                  <a class="blue-button2" data-id="100" data-value="1000" data-toggle="modal" href="#modal2">교환하기</a>
                                 </div>
                             </div>
                         </div>
@@ -222,27 +223,55 @@ function paymodal() {
             </div>
         </div>
         <div class="modal fade" id="modal" role="dialog">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title">하트결제</h4>
-					
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-			</div>
-			<div class="modal-body">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+					<h4 class="modal-title">하트결제</h4>					
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+				<div class="modal-body">
 				<a class="support-images" href="#"><i class="flaticon-035-savings"></i></a>
 				<div class="support-content">	
-				보유 하트 갯수 : <input type="text" style="border:none" readonly value="${myheart}"><br>	
-				충전 하트 갯수 :<input type="text" id="addheartmodal" style="border:none" readonly>	<br>	
-				충전 후 하트 갯수 : 		</p>
+				<h6>결제하시겠습니까?</h6>
+				<form action="${pageContext.request.contextPath}/waggle/addheart" method="post">
+				<input type="text"  id="addheartmodal" name="heart" value="">
+				<input type="text" id="addheartmodal2" name="money" value="">
 				</div>
 			</div>
 			<div class="modal-footer">
-				<input type="button" id="button-modal" onclick="pay()" data-dismiss="modal" value="결제">
+				
+				<input type="submit" id="button-modal" value="결제">
 				<button id="button-modal2" data-dismiss="modal">닫기</button>
+				</form>
 			</div>
 		</div>
 	</div>
+	</div>
+	  <div class="modal fade" id="modal2" role="dialog">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+					<h4 class="modal-title">하트결제</h4>					
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+				<div class="modal-body">
+				<a class="support-images" href="#"><i class="flaticon-035-savings"></i></a>
+				<div class="support-content">	
+				<h6>결제하시겠습니까?</h6>
+				<form action="${pageContext.request.contextPath}/waggle/change" method="post">
+				<input type="text"  id="changemodal" name="coupontype" value="">
+				<input type="text" id="changemodal2" name="heart" value="">
+				</div>
+			</div>
+			<div class="modal-footer">
+				<input type="submit" id="button-modal" value="교환">
+				<button id="button-modal2" data-dismiss="modal">닫기</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	
 </div>
         
 		<!-- all js here -->

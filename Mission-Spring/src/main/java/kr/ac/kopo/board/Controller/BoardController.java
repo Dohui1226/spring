@@ -70,12 +70,15 @@ public class BoardController {
 		return mav;
 	}
 	/*
-	 * //새글등록폼 get방식만 //GetMapping 4.3버전이후 //@RequestMapping(value="/board/write",
+	 * //새글등록폼 get방식만 //GetMapping 4.3버전이후 //
+	 * @RequestMapping(value="/board/write",
 	 * method=RequestMethod.GET)
 	 * 
-	 * @GetMapping("/board/write") public String writeForm() {
+	 * @GetMapping("/board/write") 
+	 * public String writeForm() {
 	 * 
-	 * return "board/write"; } //리턴값이 보이드면 디스패쳐서블릿이 /board/write가 리턴되었다고 생각한다..??
+	 * return "board/write"; }
+	 *  //리턴값이 보이드면 디스패쳐서블릿이 /board/write가 리턴되었다고 생각한다..??
 	 * uri와 똑같은 jsp를 포워드 시킴 //GetMapping 4.3버전이후
 	 * 
 	 * @RequestMapping(value="/board/write", method=RequestMethod.POST)

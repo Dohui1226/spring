@@ -1,5 +1,6 @@
 package kr.ac.kopo.vo;
 
+
 public class AccountVO {
 	private int acc_type;
 	private String acc_name;
