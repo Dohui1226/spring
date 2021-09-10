@@ -7,7 +7,8 @@
 <!-- 가입하기 -->
 <select id="join" parameterType="wagglejoinVO">
  insert into hn_waggle(no, member_id, nickname, member_account)
-values(seq_waggle_id.nextval,#{member_id},#{nickname},#{member_account})
+ values(seq_waggle_id.nextval,#{member_id},#{nickname}, #{member_account})
+
 </select>
 
 <!-- 가입여부 ?? -->
@@ -37,7 +38,7 @@ call changeheart(#{tono},#{fromno},#{heart})
 
 <!--  쿠폰교환  -->
 <select id="change" statementType="CALLABLE" parameterType="couponVO">
-call changecoupon(#{coupontype},#{couponid},#{no},#{heart})
+call changecoupon(#{coupontype},#{couponid},#{no},#{heart},#{couponname})
 </select>
 
 <!-- 쿠폰삭제 -->
@@ -46,8 +47,34 @@ delete from hn_coupon where coupon_id=#{couponid}
 </select>
 <!-- 쿠폰조회 -->
 <select id="selectcoupon" parameterType="int" resultType="couponVO">
-select * from hn_coupon where no={no}
+select * from hn_coupon where no=#{no}
 </select>
+
+
+<!-- 와글와글 랭킹조회 -->
+<select id="wagglerank" resultType="ranklistVO">
+select a.rate ,a.stockvalue,b.no, b.nickname, b.hart from hn_waggle b , 
+(select * from (SELECT acc_num,rate, stockvalue,
+RANK() OVER (PARTITION BY acc_num ORDER BY no DESC) AS RANK
+FROM acc_daily) where rank=1) a
+where b.member_account = a.acc_num
+</select>
+
+<!-- 계좌번호조회 -->
+<select id="selectaccount" parameterType="waggleJoinVO" resultType="waggleJoinVO">
+select * from hn_waggle where no=#{no}
+</select>
+
+<!-- 계좌당 가지고 있는 종목타입별 가치 및 비중-->
+<select id="stockweight" resultType="stockweightVO" parameterType="wagglejoinVO">
+select value, stock_type, ratio_to_report(value) over() valuerate from (select sum(stock_value*stock_num)as value ,stock_type from (select a.stock_value, a.stock_num, 
+b.stock_type from buystock a join (select c.stock_code,c.stock_close,c.close_date, c.stock_name,
+k.stock_type from (select * from(select * from hn_stock_close order by close_date desc)
+where<![CDATA[rownum <=34]]>) c,hn_stock_code k where c. stock_code=k.stock_code) b
+on  a.acc_num='3757102100' and a.stock_code=b.stock_code) group by stock_type)
+</select>
+
+
 </mapper>
 
 

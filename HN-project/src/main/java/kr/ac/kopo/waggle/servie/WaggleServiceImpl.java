@@ -9,6 +9,8 @@ import kr.ac.kopo.vo.AccountVO;
 import kr.ac.kopo.vo.AddHeartVO;
 import kr.ac.kopo.vo.CouponVO;
 import kr.ac.kopo.vo.MemberVO;
+import kr.ac.kopo.vo.RankListVO;
+import kr.ac.kopo.vo.StockWeightVO;
 import kr.ac.kopo.vo.WaggleJoinVO;
 import kr.ac.kopo.waggle.dao.WaggleDAO;
 
@@ -52,14 +54,31 @@ public class WaggleServiceImpl implements WaggleService{
 	}
 
 	
-	/* 하트추가충전 */
+	/* 하트충전 */
 	public void addHeart(AddHeartVO heart) {
 		waggleDAO.addHeart(heart);
+		
+		System.out.println(heart);
 		
 	}
 	/*쿠폰으로 바꾸기*/
 	public void change(CouponVO couponvo) {
-		
+	
+		switch(couponvo.getCoupontype()) {
+	    case 1: 
+	    	couponvo.setCouponname("1일 수수료 100% 쿠폰");
+	         break;
+	    case 5: 
+	    	couponvo.setCouponname("5일 수수료 100% 쿠폰");
+	         break;
+	    case 28:
+	    	couponvo.setCouponname("4주 수수료 100% 쿠폰");
+	    	break;
+	    case 100:
+	    	couponvo.setCouponname("주식 뽑기 쿠폰");
+	         break;
+	}
+	
 		waggleDAO.change(couponvo);
 		
 	}
@@ -69,5 +88,30 @@ public class WaggleServiceImpl implements WaggleService{
 		List<CouponVO> list = waggleDAO.selectcoupon(no);
 		return list;
 	}
-
+	public List<RankListVO> wagglerank() {
+		List<RankListVO> list = waggleDAO.wagglerank();
+		return list;
+	}
+	
+	/* 회원번호로 정보가져오기 */
+	
+	public WaggleJoinVO selectaccount(int no) {
+			
+			WaggleJoinVO waggle = new WaggleJoinVO();
+			waggle.setNo(no);
+			
+			waggle = waggleDAO.selectaccount(waggle);
+		
+			return waggle;
+		}
+	
+	
+	/* 회원번호로 투자 분류 비중 조회하기 */
+	public List<StockWeightVO> wagglerankInfo(WaggleJoinVO waggle) {
+			
+		List<StockWeightVO> list =waggleDAO.stockweigth(waggle);
+		
+		return list;
+	}
+	
 }

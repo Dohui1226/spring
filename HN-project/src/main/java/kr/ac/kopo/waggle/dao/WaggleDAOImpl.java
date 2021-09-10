@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import kr.ac.kopo.vo.AddHeartVO;
 import kr.ac.kopo.vo.CouponVO;
 import kr.ac.kopo.vo.MemberVO;
+import kr.ac.kopo.vo.RankListVO;
+import kr.ac.kopo.vo.StockWeightVO;
 import kr.ac.kopo.vo.WaggleJoinVO;
 
 @Repository
@@ -59,4 +61,22 @@ public class WaggleDAOImpl implements WaggleDAO {
 		List<CouponVO> list = sqlSessionTemplate.selectList("waggle.WaggleDAO.selectcoupon",no);
 		return list;
 	}
+	
+	/* 와글 랭킹 리스트 뽑기 */
+	public List<RankListVO> wagglerank() {
+		List<RankListVO> list =sqlSessionTemplate.selectList("waggle.WaggleDAO.wagglerank");
+		return list;
+	}
+	
+	
+	public WaggleJoinVO selectaccount(WaggleJoinVO waggle) {
+		waggle =sqlSessionTemplate.selectOne("waggle.WaggleDAO.selectaccount",waggle);
+		
+		return waggle;
+	}
+	
+	public List<StockWeightVO> stockweigth(WaggleJoinVO waggle) {
+		List<StockWeightVO> list =sqlSessionTemplate.selectList("waggle.WaggleDAO.stockweight",waggle);
+			return list;
+		}
 }

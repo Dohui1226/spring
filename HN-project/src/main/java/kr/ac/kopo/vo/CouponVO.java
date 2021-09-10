@@ -6,6 +6,7 @@ public class CouponVO {
 	private long couponid;
 	private int no;
 	private int heart;
+	private String couponname;
 	
 	public int getCoupontype() {
 		return coupontype;
@@ -30,6 +31,12 @@ public class CouponVO {
 	
 	
 	
+	public String getCouponname() {
+		return couponname;
+	}
+	public void setCouponname(String couponname) {
+		this.couponname = couponname;
+	}
 	public int getHeart() {
 		return heart;
 	}
@@ -39,8 +46,9 @@ public class CouponVO {
 	@Override
 	public String toString() {
 		return "CouponVO [coupontype=" + coupontype + ", couponid=" + couponid + ", no=" + no + ", heart=" + heart
-				+ "]";
+				+ ", couponname=" + couponname + "]";
 	}
+	
 	
 	
 

@@ -136,11 +136,14 @@ $(document).on("click", ".blue-button2", function() {
                         <br>
                         <br>
                         <br>
+                        <hr>
                         <div class="col-md-12 col-sm-12 col-xs-12">
 						<div class="section-headline text-center">
-                            <h3>하트 교환</h3>
+						<br>
+						<br>
+                            <h3>쿠폰구매</h3>
                             <p>보유한 하트를 통하여 혜택을 받을 수 있습니다.</p>
-                            <a href="${pageContext.request.contextPath}/waggle/couponlist">쿠폰리스트</a>
+                            <a href="${pageContext.request.contextPath}/waggle/listcoupon">쿠폰리스트</a>
 						</div>
 					</div>
                         

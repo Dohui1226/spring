@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!doctype html>
 <html class="no-js" lang="en">
 	
@@ -32,8 +35,18 @@
                <div class="row">
 					<div class="col-md-12 col-sm-12 col-xs-12">
 						<div class="section-headline text-center">
-                            <h3>Deposite and withdrawals history</h3>
-                            <p>Help agencies to define their new business objectives and then create professional software.</p>
+                            <h3>종목조회</h3>
+                        
+                          
+                           <c:forEach items="${requestScope.stocklist}" var="stocklist" varStatus="loop" end="0"> 
+                        
+  						    <p>기준 날짜 : &nbsp;${stocklist.close_date} &nbsp; 종가</p> 
+							</c:forEach>
+
+
+                         
+                      
+                            
 						</div>
 					</div>
 				</div>
@@ -59,58 +72,51 @@
                               
                                 <div class="deposite-table">
                                     <table>
+                                
                                         <tr>
                                             <th>종목명</th>                                          
                                             <th>현재가</th>
-                                            <th>전일비</th>
+                                            <th>전일대비</th>
                                             <th>보고서</th>
                                             <th>주문</th>
                                         </tr>
+                                          <c:forEach items="${requestScope.stocklist}" var="stocklist" varStatus="loop"> 
                                         <tr>
-                                            <td>${company.name}</td>                                           
-                                            <td>${company.price}</td>
-                                            <td>${company.diff}</td>
-                               <td>	 <a class="blue" href="${pageContext.request.contextPath}/stock/report?code=${company.code}">바로가기</a>
+                                            <td>${stocklist.stock_name}</td>                                           
+                                           <%--  <td><fmt:formatNumber value="${stocklist.stock_close}" pattern="###,###,###,###"/></td> --%>
+                                            
+                                            <c:if test="${stocklist.stock_diff lt 0}" >
+                                            <td style="color:blue"><fmt:formatNumber value="${stocklist.stock_close}" pattern="###,###,###,###"/></td>
+                                            </c:if>
+                                             <c:if test="${stocklist.stock_diff gt 0}" >
+                                          		 <td style="color:red"><fmt:formatNumber value="${stocklist.stock_close}" pattern="###,###,###,###"/></td>
+                                            </c:if>
+                                             <c:if test="${stocklist.stock_diff eq 0}" >
+                                        	    <td><fmt:formatNumber value="${stocklist.stock_close}" pattern="###,###,###,###"/></td>
+                                            </c:if>
+                                            
+                                            
+                                  
+                                  
+                                  
+                                  
+                                            <c:if test="${stocklist.stock_diff lt 0}" >
+                                            <td style="color:blue">▼<fmt:formatNumber value="${Math.abs(stocklist.stock_diff)}" pattern="###,###,###,###"/></td>
+                                            </c:if>
+                                             <c:if test="${stocklist.stock_diff gt 0}" >
+                                          		 <td style="color:red">▲ <fmt:formatNumber value="${stocklist.stock_diff}" pattern="###,###,###,###"/></td>
+                                            </c:if>
+                                             <c:if test="${stocklist.stock_diff eq 0}" >
+                                        	    <td>${stocklist.stock_diff}</td>
+                                            </c:if>
+                                           
+                               <td>	 <a class="blue" href="${pageContext.request.contextPath}/stock/report/${stocklist.stock_code}">바로가기</a>
                                		</td>
                                             <td><div class="price-btn blue">
-                                    <a class="blue" href="${pageContext.request.contextPath}/stock/buysell">주문</a>
+                                    <a class="blue" href="${pageContext.request.contextPath}/stock/buysell/${stocklist.stock_code}">주문</a>
                                </div></td>
                                         </tr>
-                                        <tr>
-                                             <td>LG전자</td>                                           
-                                            <td>820000</td>
-                                             <td>바로가기</td>
-                                            <td>바로가기</td>
-                                            <td><button>매수</button> <button>매도</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>엑시콘</td>
-                                            <td>18000</td>
-                                             <td>바로가기</td>
-                                            <td>바로가기</td>                                         
-                                            <td><button>매수</button> <button>매도</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Admond sayhel</td>
-                                            <td>Jan 02, 2020</td>
-                                            <td>바로가기</td>
-                                             <td>바로가기</td>                                   
-                                            <td>Bitcoin</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Anjel july</td>
-                                            <td>Jan 05, 2020</td>
-                                            <td>바로가기</td>
-                                             <td>바로가기</td>                                        
-                                            <td>USD</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Lagisha</td>
-                                            <td>Jan 12, 2020</td>
-                                             <td>바로가기</td>
-                                            <td>$5000</td>
-                                            <td>Bitcoin</td>                                        
-                                        </tr>
+                                      </c:forEach>
                                     </table>
                                 </div>
                             </div>

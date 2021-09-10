@@ -17,5 +17,20 @@
 			alias="changeheartVO" />		
 		<typeAlias type="kr.ac.kopo.vo.CouponVO"
 			alias="couponVO" />		
+		<typeAlias type="kr.ac.kopo.vo.AccountDailyVO"
+			alias="accountdailyVO" />	
+		<typeAlias type="kr.ac.kopo.vo.StockTodayVO"
+			alias="stocktodayVO" />	
+		<typeAlias type="kr.ac.kopo.vo.StockCodeVO"
+			alias="stockcodeVO" />	
+		<typeAlias type="kr.ac.kopo.vo.StockBuySellVO"
+			alias="buysellVO" />	
+		<typeAlias type="kr.ac.kopo.vo.MyStockVO"
+			alias="mystockVO" />	
+		<typeAlias type="kr.ac.kopo.vo.RankListVO"
+			alias="ranklistVO" />	
+		<typeAlias type="kr.ac.kopo.vo.StockWeightVO"
+			alias="stockweightVO" />					
+		
 	</typeAliases>
 </configuration>

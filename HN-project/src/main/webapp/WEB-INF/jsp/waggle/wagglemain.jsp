@@ -48,7 +48,7 @@
 												<a class="blog-btn"
 													href="${pageContext.request.contextPath}/waggle/join">가입하기</a>
 											</div>
-											<br> <br> <br><br> <a class="support-images"
+											<br> <br><br> <a class="support-images"
 												href="#"><i class="flaticon-042-wallet"></i></a>
 											<div class="support-content">
 												<h4>혜택 받아보기</h4>
@@ -79,16 +79,12 @@
 								<h4>Rank</h4>
 								<ul>
 									<li><span>1</span><a
-										href="${pageContext.request.contextPath}/waggle/rankInfo">박박박</a></li>
+										href="${pageContext.request.contextPath}/waggle/ranking">박박박</a></li>
 									<li><span>2</span><a href="#">김도희 </a></li>
 									<li><span>3</span><a href="#">김말자</a></li>
 									<li><span>4</span><a href="#">김영자</a></li>
 									<li><span>5</span><a href="#">김길동</a></li>
-									<li><span>6</span><a href="#">development</a></li>
-									<li><span>7</span><a href="#">Design</a></li>
-									<li><span>8</span><a href="#">Design</a></li>
-									<li><span>9</span><a href="#">Design</a></li>
-									<li><span>10</span><a href="#">Design</a></li>
+								
 								</ul>
 							</div>
 						</div>

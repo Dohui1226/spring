@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -37,9 +39,8 @@
 
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="section-headline text-center">
-					<h3>Deposite and withdrawals history</h3>
-					<p>Help agencies to define their new business objectives and
-						then create professional software.</p>
+					<h3>내 자산</h3>
+					<p>주식/현금 및 보유종목을 확인할 수 있습니다.</p>
 				</div>
 			</div>
 		</div>
@@ -65,21 +66,31 @@
 							<div class="email-statis-wrap">
 								<div class="email-round-nock" style="float:left">
 
-									<input type="text" class="knob" value="0" data-rel="91"
+									<input type="text" class="knob" value="0" data-rel="${adaily.stock_value/(adaily.tcash+adaily.stock_value) *100}"
 										data-linecap="round" data-width="130" data-bgcolor="#E4E4E4"
-										data-fgcolor="#00c292" data-thickness=".10"
+										data-fgcolor="#27B2A5" data-thickness=".15"
 										data-readonly="true">
 									<!-- <div style="float: right"></div> -->
 
 									<div style="float: right">
 							
-										&nbsp;&nbsp;&nbsp;&nbsp;계좌번호 : 110-4545-1313
-										<br>
-										<br>
+										&nbsp;&nbsp;&nbsp;&nbsp; 계좌번호 :&nbsp;${waggleVO.member_account}
+										<%-- <fmt:formatNumber value="${waggleVO.member_account}" pattern="###-###-####"/> --%>
+										
 										<br>&nbsp;&nbsp;&nbsp;&nbsp;
-										주식 : 841,595
+										매입원금 :&nbsp;<fmt:formatNumber value="${adaily.stock_value}" pattern="###,###,###,###"/><br>&nbsp;&nbsp;&nbsp;&nbsp;
+										평가금액 :&nbsp;<fmt:formatNumber value="${adaily.stock_value}" pattern="###,###,###,###"/>
 										<br>&nbsp;&nbsp;&nbsp;&nbsp;
-										총 예탁금 : 945,333
+										현금/예수금 :&nbsp;<fmt:formatNumber value="${adaily.tcash}" pattern="###,###,###,###"/>
+										  <c:if test="${adaily.stock_value-adaily.stock_value gt 0}" >
+										손익금액<div style="color:red"> : ▼&nbsp;<fmt:formatNumber value="${adaily.stock_value-adaily.stock_value}" pattern="###,###,###,###"/></div>
+											 </c:if>
+											 <c:if test="${adaily.stock_value-adaily.stock_value lt 0}" >
+											 손익금액 	<div style="color:blue">: &nbsp;▲<fmt:formatNumber value="${adaily.stock_value-adaily.stock_value}" pattern="###,###,###,###"/></div>
+											</c:if>
+										<br>&nbsp;&nbsp;&nbsp;&nbsp;
+										총 예탁금 : &nbsp;<fmt:formatNumber value="${adaily.stock_value+adaily.tcash}" pattern="###,###,###,###"/>
+									
 									</div>
 								</div>
 							</div>
@@ -88,65 +99,38 @@
 									<th>종목명</th>
 									<th>보유수량</th>
 									<th>매입단가</th>
-									<th>매입금액</th>
 									<th>현재가</th>
+									<th>손익</th>
 									<th>손익률</th>
 									<th>평가금액</th>
 								</tr>
+								  <c:forEach items="${requestScope.stocklist}" var="stocklist" varStatus="loop"> 
 								<tr>
-									<td>삼성전자</td>
-									<td>100</td>
-									<td>52000</td>
-									<td>5200000</td>
-									<td>75000</td>
-									<td>44.23%</td>
-									<td>7500000</td>
+									<td>${stocklist.stock_name}</td>
+									<td>${stocklist.stock_num}</td>
+									<td><fmt:formatNumber value="${stocklist.buyprice}" pattern="###,###,###,###"/></td>
+									<td><fmt:formatNumber value="${stocklist.stock_close}" pattern="###,###,###,###"/></td>
+								  <c:if test="${(stocklist.stock_close-stocklist.buyprice) lt 0}" >
+                                           		 <td style="color:blue">▼<fmt:formatNumber value="${Math.abs((stocklist.stock_close-stocklist.buyprice))}" pattern="###,###,###,###"/></td>
+                                           		  <td style="color:blue">-<fmt:formatNumber value="${(stocklist.stock_close-stocklist.buyprice)/stocklist.buyprice*100}" pattern=".##"/>%</td>
+                                           		 <td style="color:blue"><fmt:formatNumber value="${stocklist.stock_num*stocklist.stock_close}" pattern="###,###,###,###"/></td>
+                                            </c:if>
+                                             <c:if test="${(stocklist.stock_close-stocklist.buyprice) gt 0}" >
+                                          		 <td style="color:red">▲<fmt:formatNumber value="${Math.abs((stocklist.stock_close-stocklist.buyprice))}" pattern="###,###,###,###"/></td>                                		 
+                                          		<%--  <td style="color:red">${stocklist.stock_diff_rate}%</td> --%>
+                                          		  <td style="color:red">+<fmt:formatNumber value="${(stocklist.stock_close-stocklist.buyprice)/stocklist.buyprice*100}" pattern=".##"/>%</td>
+                                          		 <td style="color:red"><fmt:formatNumber value="${stocklist.stock_num*stocklist.stock_close}" pattern="###,###,###,###"/></td>
+                                            </c:if>
+                                        
+                                             <c:if test="${(stocklist.stock_close-stocklist.buyprice) eq 0}" >
+                                        	    <td>0</td>
+                                        	    <td>${(stocklist.stock_close-stocklist.buyprice)/stocklist.stock_num*100}%</td>
+                                        	    <td><fmt:formatNumber value="${stocklist.stock_num*stocklist.stock_close}" pattern="###,###,###,###"/></td>
+                                            </c:if>			
+				
 								</tr>
-								<tr>
-									<td>Jonshon</td>
-									<td>Dec 12, 2019</td>
-									<td>$5000</td>
-									<td>USD</td>
-									<td>USD</td>
-									<td>USD</td>
-									<td>USD</td>
-								</tr>
-								<tr>
-									<td>Hopper</td>
-									<td>Dec 22, 2019</td>
-									<td>$4000</td>
-									<td>Ripple</td>
-									<td>Ripple</td>
-									<td>Ripple</td>
-									<td>Ripple</td>
-								</tr>
-								<tr>
-									<td>Admond sayhel</td>
-									<td>Jan 02, 2020</td>
-									<td>$3000</td>
-									<td>Bitcoin</td>
-									<td>Bitcoin</td>
-									<td>Bitcoin</td>
-									<td>Bitcoin</td>
-								</tr>
-								<tr>
-									<td>Anjel july</td>
-									<td>Jan 05, 2020</td>
-									<td>$500</td>
-									<td>USD</td>
-									<td>USD</td>
-									<td>USD</td>
-									<td>USD</td>
-								</tr>
-								<tr>
-									<td>Lagisha</td>
-									<td>Jan 12, 2020</td>
-									<td>$5000</td>
-									<td>Bitcoin</td>
-									<td>Bitcoin</td>
-									<td>Bitcoin</td>
-									<td>Bitcoin</td>
-								</tr>
+								</c:forEach>
+								
 							</table>
 						</div>
 					</div>

@@ -1,23 +1,35 @@
 package kr.ac.kopo.waggle;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.ac.kopo.account.service.AccountService;
 import kr.ac.kopo.vo.AccountVO;
 import kr.ac.kopo.vo.AddHeartVO;
 import kr.ac.kopo.vo.CouponVO;
 import kr.ac.kopo.vo.MemberVO;
+import kr.ac.kopo.vo.MyStockVO;
+import kr.ac.kopo.vo.RankListVO;
+import kr.ac.kopo.vo.StockWeightVO;
 import kr.ac.kopo.vo.WaggleJoinVO;
 import kr.ac.kopo.waggle.servie.WaggleService;
 
@@ -70,7 +82,7 @@ public class WaggleController {
 	
 		service.addHeart(heartvo);
 		 
-		return "waggle/changecoupon";
+		return "waggle/comcoupon";
 	}
 	
 	/* 와글와글 가입 데이터 넘기기 */
@@ -90,14 +102,64 @@ public class WaggleController {
 	
 
 	/* 와글와글 랭킹 개인정보 */
-	@GetMapping("/waggle/rankInfo")
-	public String wagglerankInfo() {
-		System.out.println("와글와글개인 랭킹정보");
+	
+	@GetMapping("/waggle/rankInfo/{no}")
+	public String wagglerankInfo(@PathVariable("no") int no, Model model) {
+		WaggleJoinVO waggle = service.selectaccount(no);
+		List<StockWeightVO> value = service.wagglerankInfo(waggle);
+	
+		for(StockWeightVO st :value) {
+			System.out.println(st);
+		};
+		model.addAttribute("waggle", waggle);
+		model.addAttribute("value", value);
+		
 		return "waggle/rankInfo";
+	}
+
+	/* 주식비중구하기 */
+	@ResponseBody
+	@PostMapping("/waggle/rankInfo/piechart")
+	public Map<String, Object> piechart(@RequestParam(value="no") int no){
+	
+		WaggleJoinVO waggle = service.selectaccount(no);
+		
+		List<StockWeightVO> valuelist = service.wagglerankInfo(waggle);
+	
+	
+		Map<String, Object> map = new HashMap<String, Object>();		
+		map.put("valuelist",valuelist);
+		return map;
+		
+	}
+	
+	/* 계좌번호로 수익률 매일 조회하기 */
+	@ResponseBody
+	@PostMapping("/waggle/rankInfo/linechart")
+	public Map<String, Object> linechart(@RequestParam(value="no") int no){
+		WaggleJoinVO waggle = service.selectaccount(no);
+		
+		List<StockWeightVO> ratelist = service.wagglerankInfo(waggle);
+		Map<String, Object> map = new HashMap<String, Object>();		
+		
+		map.put("ratelist",ratelist);
+		return map;
+		
 	}
 	
 	
-	/* 쿠폰교환하기 */
+	
+	/* 와글와글 랭킹 순위 */
+	@GetMapping("waggle/ranking")
+	public String waggleranking(Model model) {
+		System.out.println("와글와글 랭킹페이지");
+		List<RankListVO> list = service.wagglerank();
+		model.addAttribute("ranklist", list);
+		return "waggle/ranking";
+	}
+	
+	
+	/* 쿠폰사기 */
 	@PostMapping("/waggle/change")
 	public String change(HttpSession session,CouponVO couponvo) {
 
@@ -105,20 +167,25 @@ public class WaggleController {
 		couponvo.setNo(waggleVO.getNo());
 	
 		service.change(couponvo);		 
-		return "waggle/changecoupon";
+		return "waggle/comcoupon";
 	}
 	
 	/*쿠폰조회하기*/
-	@GetMapping("/waggle/couponlist")
-	public String couponlist(Model modal, HttpSession session) {
+	@GetMapping("/waggle/listcoupon")
+	public String couponlist(Model modal,CouponVO couponvo, HttpSession session) {
 		WaggleJoinVO waggleVO = (WaggleJoinVO) session.getAttribute("waggleVO");
-	
+
 		List<CouponVO> couponlist = service.selectcoupon(waggleVO.getNo());
-		System.out.println("완료");
+		
 		modal.addAttribute("mycoupon", couponlist);
-	return "waggle/couponlist";
+	return "waggle/listcoupon";
 	}
 	
 	
-	
+	/*쿠폰선물하기*/
+	@GetMapping("/waggle/giftcoupon")
+	public String giftcoupon() {
+		System.out.println("쿠폰선물");
+		return "waggle/giftcoupon";
+	}
 }

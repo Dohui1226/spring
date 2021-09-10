@@ -223,8 +223,9 @@ input[id="cb1"]:checked + label {
 			<div class="modal-body">
 				<a class="support-images" href="#"><i class="flaticon-035-savings"></i></a>
 				<div class="support-content">	
+				종합계좌로 연결해주세요.
 				<c:forEach items="${requestScope.accountlist}" var="accountlist" varStatus="loop"> 
-					<input type="radio" name="accountinfo" id="accountinfo" value="${accountlist.acc_num}">&nbsp${accountlist.acc_num} <br>
+					<input type="radio" name="accountinfo" id="accountinfo" value="${accountlist.acc_num}">&nbsp;${accountlist.acc_num}&nbsp; &nbsp; ${accountlist.acc_name} <br>
 					</c:forEach>
 				</div>
 			</div>
