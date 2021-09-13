@@ -8,35 +8,39 @@
 		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="button-modal"/>
+		<item key="selection" value="dash"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="button-modal"/>
-			<item value="button"/>
-			<item value="btn"/>
-			<item value="support"/>
-			<item value="조회"/>
-			<item value="sus"/>
-			<item value="contact-form"/>
-			<item value="add-btn"/>
-			<item value="susc"/>
-			<item value="single-blog"/>
-			<item value="single"/>
-			<item value="scribe-input"/>
-			<item value="subscribe-input"/>
-			<item value="subscribe"/>
-			<item value="form-control"/>
+			<item value="dash"/>
+			<item value="flot"/>
+			<item value="entries"/>
+			<item value="Show"/>
+			<item value="show"/>
+			<item value="tal/css"/>
+			<item value="/css"/>
+			<item value="css/"/>
+			<item value="airi"/>
+			<item value="basic example"/>
+			<item value="js/"/>
+			<item value="setTimout"/>
+			<item value="setTimeout"/>
+			<item value="setTime"/>
+			<item value="time"/>
 		</list>
 		<list key="replacehistory">
+			<item value="tal/css/"/>
+			<item value="/css/"/>
+			<item value="${pageContext.request.contextPath}/resources/green-horizotal/css"/>
+			<item value="${pageContext.request.contextPath}/resources/green-horizotal/js/"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="109"/>
-		<item key="DIALOG_Y_ORIGIN" value="121"/>
+		<item key="DIALOG_X_ORIGIN" value="630"/>
+		<item key="DIALOG_Y_ORIGIN" value="187"/>
 		<item key="DIALOG_WIDTH" value="288"/>
 		<item key="DIALOG_HEIGHT" value="391"/>
 		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>

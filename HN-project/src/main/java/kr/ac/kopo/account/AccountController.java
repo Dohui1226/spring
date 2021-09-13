@@ -3,6 +3,7 @@ package kr.ac.kopo.account;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,11 +18,15 @@ import kr.ac.kopo.vo.AccountDailyVO;
 import kr.ac.kopo.vo.MyStockVO;
 import kr.ac.kopo.vo.StockBuySellVO;
 import kr.ac.kopo.vo.WaggleJoinVO;
+import kr.ac.kopo.waggle.servie.WaggleService;
 @Controller
 public class AccountController {
 	
 	@Autowired
 	private AccountService service;
+	
+	@Autowired
+	private WaggleService wservice;
 	
 	/* 내자산조회 */
 	@GetMapping("/myasset")
@@ -39,6 +44,24 @@ public class AccountController {
 		}
 		return "account/myasset";
 	}
+	
+	/* 회원번호 자산조회 */
+	@GetMapping("/stock/asset/{no}")
+	public String asset(@PathParam(value="no") int no, Model model) {
+		
+		WaggleJoinVO waggle = wservice.selectaccount(no);
+		
+		AccountDailyVO adailyVO = service.dailyaccount(waggle);
+		List<MyStockVO> mystocklist = service.mystocklist(waggle);
+	
+		model.addAttribute("adaily",adailyVO);
+		model.addAttribute("stocklist",mystocklist);
+		
+		return "stock/asset";
+	}
+	/* 회원번호로 거래내역 조회 */
+	
+	
 	
 	/* 보유종목 수량조회 */
 	@ResponseBody

@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="di.basic.KumgoTire"/>
-    <fullyQualifiedTypeName name="di.xml01.HankookTire"/>
     <fullyQualifiedTypeName name="org.springframework.context.support.GenericApplicationContext"/>
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Value"/>
-    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="aop.pojo.Programmer"/>
     <fullyQualifiedTypeName name="aop.pojo.Employee"/>
     <fullyQualifiedTypeName name="org.springframework.context.support.GenericXmlApplicationContext"/>
@@ -60,4 +57,7 @@
     <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
     <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
     <fullyQualifiedTypeName name="kr.ac.kopo.vo.MemberVO"/>
+    <fullyQualifiedTypeName name="javax.websocket.server.PathParam"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="kr.ac.kopo.waggle.servie.WaggleService"/>
 </qualifiedTypeNameHistroy>

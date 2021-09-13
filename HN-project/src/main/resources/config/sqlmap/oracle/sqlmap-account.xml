@@ -26,7 +26,7 @@ where acc_num=#{member_account} order by no desc) where rownum=1
 select a.stock_code, a.stock_num, a.stock_code, a.buyprice, a.stock_diff, a.stock_diff_rate,
 b.stock_close,b.stock_name
 from buystock a join (select * from(select * from hn_stock_close order by close_date desc)
-<![CDATA[where rownum <= 34]]>) b
+<![CDATA[where rownum <= 40]]>) b
 on  a.acc_num=#{member_account} and a.stock_code=b.stock_code
 </select>
 
@@ -43,5 +43,48 @@ select stock_num from buystock where acc_num=#{member_account} and stock_code=#{
 </select>
 
 
+
+
+<!-- 계좌번호별 최근 매수 5위 매도5위 -->
+<select id="5buysell" parameterType="buysellVO" resultType="buysellVO">
+select * from (select * from transaction
+where acc_num=#{member_account} and tra_type=#{tra_type} order by tra_date desc)<![CDATA[where rownum <= 5]]>
+
+</select> 
+
+
+
+
+
+<!-- 팔로우하기 -->
+<!-- <select id ="insertfollow">
+insert into follow(no, follower) values(#{no},#{follower})
+</select> -->
+
+<!--내가 좋아하는 숫자 -->
+<select id ="follow" parameterType= "followVO" resultType="int">
+select count(*) count from follow where me=#{me}  group by me
+</select> 
+
+
+<!-- 나를 좋아하는 사람 숫자보기 -->
+<select id ="follower" parameterType= "followVO" resultType="int">
+select count(*) count from follow where likeman=#{likeman} group by likeman
+</select> 
+
+<!-- 팔로우끊기 -->
+<!-- <select id ="deletefollow">
+delete from follow where no =#{no}
+</select> -->
+
+<!-- 팔로워보기 -->
+<!-- <select id = "selectfollow" resultType="followVO">
+select no from follow where follower=#{follower}
+</select> -->
+
+<!-- 팔로잉보기 -->
+<!-- <select id="selectfollowing" resultType="followVO">
+select follower from follow where no=#{no}
+</select> -->
 
 </mapper>

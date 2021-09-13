@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -26,9 +27,11 @@ import kr.ac.kopo.account.service.AccountService;
 import kr.ac.kopo.vo.AccountVO;
 import kr.ac.kopo.vo.AddHeartVO;
 import kr.ac.kopo.vo.CouponVO;
+import kr.ac.kopo.vo.FollowVO;
 import kr.ac.kopo.vo.MemberVO;
 import kr.ac.kopo.vo.MyStockVO;
 import kr.ac.kopo.vo.RankListVO;
+import kr.ac.kopo.vo.StockBuySellVO;
 import kr.ac.kopo.vo.StockWeightVO;
 import kr.ac.kopo.vo.WaggleJoinVO;
 import kr.ac.kopo.waggle.servie.WaggleService;
@@ -104,18 +107,44 @@ public class WaggleController {
 	/* 와글와글 랭킹 개인정보 */
 	
 	@GetMapping("/waggle/rankInfo/{no}")
-	public String wagglerankInfo(@PathVariable("no") int no, Model model) {
+	public String wagglerankInfo(@PathVariable("no") int no, Model model, StockBuySellVO buysell, FollowVO follow) {
 		WaggleJoinVO waggle = service.selectaccount(no);
+		buysell.setMember_account(waggle.getMember_account());
+		
+		List<StockBuySellVO> listsell = accountservice.transsell(buysell);
+		List<StockBuySellVO> listbuy = accountservice.transbuy(buysell);
+		
+		
+		follow.setMe(waggle.getNickname());
+		System.out.println(follow);
+		//좋아하는사람보기
+		int followlist =accountservice.follow(follow);
+		
+		follow.setLikeman(waggle.getNickname());
+		System.out.println(follow);
+		//팬보기
+		int followerlist =accountservice.follower(follow);
+		
+		
+		
 		List<StockWeightVO> value = service.wagglerankInfo(waggle);
-	
-		for(StockWeightVO st :value) {
-			System.out.println(st);
-		};
+		List<MyStockVO> stocklist = accountservice.mystocklist(waggle);
+		
+		
+		
+		model.addAttribute("follow", followlist);
+		model.addAttribute("follower", followerlist);
+		model.addAttribute("listbuy",listbuy);
+		model.addAttribute("listsell",listsell);
 		model.addAttribute("waggle", waggle);
 		model.addAttribute("value", value);
-		
+		model.addAttribute("stocklist",stocklist);
 		return "waggle/rankInfo";
 	}
+	
+	
+
+
 
 	/* 주식비중구하기 */
 	@ResponseBody
@@ -188,4 +217,24 @@ public class WaggleController {
 		System.out.println("쿠폰선물");
 		return "waggle/giftcoupon";
 	}
+	
+	
+	
+	/* 회원번호로 보유 종목 가격 알기 */
+	@ResponseBody
+	@PostMapping("stock/typecompany")
+	public  Map<String, Object> typecompany(@RequestParam(value="no") int no, @RequestParam(value="type") String type, StockBuySellVO buysell) {
+		WaggleJoinVO waggle = service.selectaccount(no);
+		buysell.setMember_account(waggle.getMember_account());
+		buysell.setStock_type(type);
+		List<MyStockVO> list = service.typecompany(buysell);
+		Map<String, Object> map = new HashMap<String, Object>();		
+		
+		map.put("list",list);
+		return map;
+	}
+	
+	/* 팔로우확인하기 */
+	
+	
 }

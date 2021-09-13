@@ -5,7 +5,9 @@ import java.util.List;
 import kr.ac.kopo.vo.AddHeartVO;
 import kr.ac.kopo.vo.CouponVO;
 import kr.ac.kopo.vo.MemberVO;
+import kr.ac.kopo.vo.MyStockVO;
 import kr.ac.kopo.vo.RankListVO;
+import kr.ac.kopo.vo.StockBuySellVO;
 import kr.ac.kopo.vo.StockWeightVO;
 import kr.ac.kopo.vo.WaggleJoinVO;
 
@@ -21,5 +23,6 @@ public interface WaggleDAO {
 	List<RankListVO> wagglerank();
 	WaggleJoinVO selectaccount(WaggleJoinVO waggle);
 	List<StockWeightVO> stockweigth(WaggleJoinVO waggle);
+	List<MyStockVO> typecompany(StockBuySellVO buysell);
 
 }

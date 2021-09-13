@@ -30,7 +30,9 @@
 		<typeAlias type="kr.ac.kopo.vo.RankListVO"
 			alias="ranklistVO" />	
 		<typeAlias type="kr.ac.kopo.vo.StockWeightVO"
-			alias="stockweightVO" />					
+			alias="stockweightVO" />
+		<typeAlias type="kr.ac.kopo.vo.FollowVO"
+			alias="followVO" />						
 		
 	</typeAliases>
 </configuration>

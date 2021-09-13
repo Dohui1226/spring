@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.ac.kopo.stock.service.StockService;
@@ -42,27 +44,27 @@ public class StockController {
 	public ModelAndView buysell(@PathVariable("code") String code, StockCodeVO stockcode, StockTodayVO stocktoday) {
 		stockcode.setStock_code(code);
 		stocktoday.setStock_code(code);
-		System.out.println(code);
+
 		stockcode = stockservice.companyinfo(stockcode);
 		stocktoday = stockservice.stockonetoday(stocktoday);
 		ModelAndView mav = new ModelAndView("stock/buysell");
-		System.out.println(stockcode);
-		System.out.println(stocktoday);
-		
+	
 		mav.addObject("stockcode", stockcode);
 		mav.addObject("stocktoday", stocktoday);
 		return mav;
 	}
-	
+
 	/*메수하기*/
 	@PostMapping("/stock/buy/{code}")
 	public ModelAndView stockbuy(@PathVariable("code") String code,HttpSession session, StockBuySellVO buysell) {
+		System.out.println(code);
 		WaggleJoinVO waggle = (WaggleJoinVO) session.getAttribute("waggleVO");
 		buysell.setMember_account(waggle.getMember_account());
 		buysell.setStock_code(code);
 		
-		
+		System.out.println("컨트롤러");
 		stockservice.stockbuy(buysell);
+		System.out.println("컨트롤러!");
 		ModelAndView mav = new ModelAndView("stock/buysell");
 	
 

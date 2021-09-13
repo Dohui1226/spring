@@ -10,6 +10,8 @@ public class MyStockVO {
 	private int buyprice; //매입단가
 	private int stock_diff;
 	private double stock_diff_rate;
+	private int stock_value;
+	
 	public String getAcc_num() {
 		return acc_num;
 	}
@@ -58,13 +60,25 @@ public class MyStockVO {
 	public void setStock_diff_rate(double stock_diff_rate) {
 		this.stock_diff_rate = stock_diff_rate;
 	}
+	
+	
+	
+	public int getStock_value() {
+		return stock_value;
+	}
+	public void setStock_value(int stock_value) {
+		this.stock_value = stock_value;
+	}
 	@Override
 	public String toString() {
 		return "MyStockVO [acc_num=" + acc_num + ", stock_name=" + stock_name + ", stock_code=" + stock_code
 				+ ", stock_close=" + stock_close + ", stock_num=" + stock_num + ", buyprice=" + buyprice
-				+ ", stock_diff=" + stock_diff + ", stock_diff_rate=" + stock_diff_rate + "]";
+				+ ", stock_diff=" + stock_diff + ", stock_diff_rate=" + stock_diff_rate + ", stock_value=" + stock_value
+				+ "]";
 	}
-
+	
+	
+	
 	
 	
 }

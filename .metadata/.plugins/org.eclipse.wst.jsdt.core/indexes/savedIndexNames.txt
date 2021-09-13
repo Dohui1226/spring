@@ -1,21 +1,14 @@
 INDEX VERSION 1.4+C:\Lecture\spring-workspace\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
 1387403737.index
-27149865.index
 2730531055.index
-2843665601.index
-3294358897.index
+1016568628.index
 2843665601.index
 11409522.index
 2877088477.index
-481710002.index
-1714358855.index
 3763409294.index
-2668627078.index
-597786715.index
+2877088477.index
 18995007.index
-718442593.index
 1341998397.index
 3683614333.index
-320500629.index
 98973051.index
 2824829174.index

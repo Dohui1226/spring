@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.ac.kopo.vo.AccountDailyVO;
 import kr.ac.kopo.vo.AccountVO;
+import kr.ac.kopo.vo.FollowVO;
 import kr.ac.kopo.vo.MemberVO;
 import kr.ac.kopo.vo.MyStockVO;
 import kr.ac.kopo.vo.StockBuySellVO;
@@ -45,10 +46,25 @@ public class AccountDAOImpl implements AccountDAO {
 	}
 	
 	public int maxsell(StockBuySellVO buysell) {
-		System.out.println("DAO1");
 		int stocknum = sqlSessionTemplate.selectOne("account.AccountDAO.maxsell", buysell);
-		System.out.println("DAO2");
 		return stocknum;
 	}
+	
+	public List<StockBuySellVO> trans(StockBuySellVO buysell) {
+			List<StockBuySellVO> list = sqlSessionTemplate.selectList("account.AccountDAO.5buysell",buysell);
+			return list;
+		}
+	
+		public int follow(FollowVO follow) {
+			 int fol =sqlSessionTemplate.selectOne("account.AccountDAO.follow",follow); 
+			return 0;
+	   	}
+   
+	   public int follower(FollowVO follow) {
+			/*
+			 * int fol =sqlSessionTemplate.selectOne("account.AccountDAO.follower",follow);
+			 */
+		return 0;
+	   }
 
 }

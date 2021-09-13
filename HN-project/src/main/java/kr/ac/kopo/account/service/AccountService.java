@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.ac.kopo.vo.AccountDailyVO;
 import kr.ac.kopo.vo.AccountVO;
+import kr.ac.kopo.vo.FollowVO;
 import kr.ac.kopo.vo.MemberVO;
 import kr.ac.kopo.vo.MyStockVO;
 import kr.ac.kopo.vo.StockBuySellVO;
@@ -22,5 +23,14 @@ public interface AccountService {
 	int maxsell(StockBuySellVO buysell); //최대 몇개 살수 있는지
 
 	int maxbuy(StockBuySellVO buysell);//최대 몇개 매도할 수 있는지
+
+	List<StockBuySellVO> transbuy(StockBuySellVO buysell); //최근매수목록
+
+	List<StockBuySellVO> transsell(StockBuySellVO buysell); //최근매도목록
+
+	int follow(FollowVO follow); //내가 팔로우하는 사람들 (팔로잉)
+	
+	int follower(FollowVO follow); //나의 팔로워들
+	
 
 }

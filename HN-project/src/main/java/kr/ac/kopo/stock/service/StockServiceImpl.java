@@ -33,11 +33,14 @@ public class StockServiceImpl implements StockService {
 	}
 	
 	public void stockbuy(StockBuySellVO buysell) {
+		System.out.println("서비스");
 		stockdao.stockbuy(buysell);
 		}
 			
 	public void stocksell(StockBuySellVO buysell) {
+		
 		stockdao.stocksell(buysell);
+		System.out.println("서비스!");
 		}	
 
 }

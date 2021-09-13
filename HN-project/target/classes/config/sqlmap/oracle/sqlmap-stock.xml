@@ -25,7 +25,7 @@ where no=#{no} order by wdate desc
 <select id="stocktoday" resultType="stocktodayVO">
 select * from 
 (select * from hn_stock_close order by close_date desc) 
-where <![CDATA[rownum <=34]]>
+where <![CDATA[rownum <=40]]>
 </select>
 
 <!-- 종목조회 하나 -->

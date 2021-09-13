@@ -81,7 +81,8 @@
                                     <tr>
                                         <td>${ranklist.nickname}</td>
                                         <td>${ranklist.hart}</td>
-                                        <td>${ranklist.rate}%</td>
+                                        
+                                       <td> <fmt:formatNumber value="${ranklist.rate}" pattern="#.##"/>%</td>
                                         <td><fmt:formatNumber value="${ranklist.stockvalue}" pattern="###,###,###,###"/></td>
                                       	<td><a href="${pageContext.request.contextPath}/waggle/rankInfo/${ranklist.no}">확인하기</a></td>
                                     </tr>

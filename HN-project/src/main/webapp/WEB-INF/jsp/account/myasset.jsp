@@ -78,8 +78,8 @@
 										<%-- <fmt:formatNumber value="${waggleVO.member_account}" pattern="###-###-####"/> --%>
 										
 										<br>&nbsp;&nbsp;&nbsp;&nbsp;
-										매입원금 :&nbsp;<fmt:formatNumber value="${adaily.stock_value}" pattern="###,###,###,###"/><br>&nbsp;&nbsp;&nbsp;&nbsp;
-										평가금액 :&nbsp;<fmt:formatNumber value="${adaily.stock_value}" pattern="###,###,###,###"/>
+									<%-- 	매입원금 :&nbsp;<fmt:formatNumber value="${adaily.stock_value}" pattern="###,###,###,###"/><br>&nbsp;&nbsp;&nbsp;&nbsp; --%>
+									<%-- 	평가금액 :&nbsp;<fmt:formatNumber value="${adaily.stock_value}" pattern="###,###,###,###"/> --%>
 										<br>&nbsp;&nbsp;&nbsp;&nbsp;
 										현금/예수금 :&nbsp;<fmt:formatNumber value="${adaily.tcash}" pattern="###,###,###,###"/>
 										  <c:if test="${adaily.stock_value-adaily.stock_value gt 0}" >
@@ -104,6 +104,7 @@
 									<th>손익률</th>
 									<th>평가금액</th>
 								</tr>
+								<c:set var = "total" value = "0" />
 								  <c:forEach items="${requestScope.stocklist}" var="stocklist" varStatus="loop"> 
 								<tr>
 									<td>${stocklist.stock_name}</td>
@@ -112,12 +113,13 @@
 									<td><fmt:formatNumber value="${stocklist.stock_close}" pattern="###,###,###,###"/></td>
 								  <c:if test="${(stocklist.stock_close-stocklist.buyprice) lt 0}" >
                                            		 <td style="color:blue">▼<fmt:formatNumber value="${Math.abs((stocklist.stock_close-stocklist.buyprice))}" pattern="###,###,###,###"/></td>
-                                           		  <td style="color:blue">-<fmt:formatNumber value="${(stocklist.stock_close-stocklist.buyprice)/stocklist.buyprice*100}" pattern=".##"/>%</td>
+                                           		  <td style="color:blue"><fmt:formatNumber value="${(stocklist.stock_close-stocklist.buyprice)/stocklist.buyprice*100}" pattern="#.##"/>%</td>
                                            		 <td style="color:blue"><fmt:formatNumber value="${stocklist.stock_num*stocklist.stock_close}" pattern="###,###,###,###"/></td>
                                             </c:if>
                                              <c:if test="${(stocklist.stock_close-stocklist.buyprice) gt 0}" >
                                           		 <td style="color:red">▲<fmt:formatNumber value="${Math.abs((stocklist.stock_close-stocklist.buyprice))}" pattern="###,###,###,###"/></td>                                		 
                                           		<%--  <td style="color:red">${stocklist.stock_diff_rate}%</td> --%>
+                                          		
                                           		  <td style="color:red">+<fmt:formatNumber value="${(stocklist.stock_close-stocklist.buyprice)/stocklist.buyprice*100}" pattern=".##"/>%</td>
                                           		 <td style="color:red"><fmt:formatNumber value="${stocklist.stock_num*stocklist.stock_close}" pattern="###,###,###,###"/></td>
                                             </c:if>
@@ -129,9 +131,21 @@
                                             </c:if>			
 				
 								</tr>
+								<c:set var= "total" value="${total + stocklist.stock_num*stocklist.stock_close}"/>
 								</c:forEach>
 								
 							</table>
+							<br>
+							평가금액 <fmt:formatNumber value="${total}" pattern="###,###,###,###"/>
+							<br>
+							매입원금 :&nbsp;<fmt:formatNumber value="${adaily.stock_value}" pattern="###,###,###,###"/><br>
+							
+							  <c:if test="${(total-adaily.stock_value) lt 0}" >
+								총 손익률 :<label style="color:blue"> <fmt:formatNumber value="${(total-adaily.stock_value)/adaily.stock_value*100}" pattern="#.##"/>%<br></label>
+								</c:if>
+								<c:if test="${(total-adaily.stock_value) gt 0}" >
+								총 손익률 :<label style="color:red"> +<fmt:formatNumber value="${(total-adaily.stock_value)/adaily.stock_value*100}" pattern="#.##"/>%<br></label>
+								</c:if>
 						</div>
 					</div>
 

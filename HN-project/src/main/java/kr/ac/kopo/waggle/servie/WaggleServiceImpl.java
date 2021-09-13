@@ -9,7 +9,9 @@ import kr.ac.kopo.vo.AccountVO;
 import kr.ac.kopo.vo.AddHeartVO;
 import kr.ac.kopo.vo.CouponVO;
 import kr.ac.kopo.vo.MemberVO;
+import kr.ac.kopo.vo.MyStockVO;
 import kr.ac.kopo.vo.RankListVO;
+import kr.ac.kopo.vo.StockBuySellVO;
 import kr.ac.kopo.vo.StockWeightVO;
 import kr.ac.kopo.vo.WaggleJoinVO;
 import kr.ac.kopo.waggle.dao.WaggleDAO;
@@ -114,4 +116,9 @@ public class WaggleServiceImpl implements WaggleService{
 		return list;
 	}
 	
-}
+	
+	public List<MyStockVO> typecompany(StockBuySellVO buysell) {
+			List<MyStockVO> list =waggleDAO.typecompany(buysell);
+			return list;
+		}
+	}
