@@ -12,6 +12,9 @@ public class MyStockVO {
 	private double stock_diff_rate;
 	private int stock_value;
 	
+	
+	
+	
 	public String getAcc_num() {
 		return acc_num;
 	}
@@ -74,8 +77,9 @@ public class MyStockVO {
 		return "MyStockVO [acc_num=" + acc_num + ", stock_name=" + stock_name + ", stock_code=" + stock_code
 				+ ", stock_close=" + stock_close + ", stock_num=" + stock_num + ", buyprice=" + buyprice
 				+ ", stock_diff=" + stock_diff + ", stock_diff_rate=" + stock_diff_rate + ", stock_value=" + stock_value
-				+ "]";
+				 +"]";
 	}
+	
 	
 	
 	

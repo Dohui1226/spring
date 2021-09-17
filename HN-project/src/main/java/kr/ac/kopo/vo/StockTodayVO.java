@@ -8,12 +8,32 @@ public class StockTodayVO {
 	private String close_date;
 	private String stock_name;
 	private int stock_amount;  //거래량 미정
+	private int value;
+	private double valuediffrate;
+	private String stock_type;
 	
 	
 	
 	
 	
-	
+	public String getStock_type() {
+		return stock_type;
+	}
+	public void setStock_type(String stock_type) {
+		this.stock_type = stock_type;
+	}
+	public int getValue() {
+		return value;
+	}
+	public void setValue(int value) {
+		this.value = value;
+	}
+	public double getValuediffrate() {
+		return valuediffrate;
+	}
+	public void setValuediffrate(double valuediffrate) {
+		this.valuediffrate = valuediffrate;
+	}
 	public String getStock_name() {
 		return stock_name;
 	}
@@ -53,9 +73,10 @@ public class StockTodayVO {
 	@Override
 	public String toString() {
 		return "StockTodayVO [stock_code=" + stock_code + ", stock_close=" + stock_close + ", stock_diff=" + stock_diff
-				+ ", close_date=" + close_date + ", stock_name=" + stock_name + ", stock_amount=" + stock_amount + "]";
+				+ ", close_date=" + close_date + ", stock_name=" + stock_name + ", stock_amount=" + stock_amount
+				+ ", value=" + value + ", valuediffrate=" + valuediffrate + ", stock_type=" + stock_type + "]";
 	}
-
+	
 	
 	
 	

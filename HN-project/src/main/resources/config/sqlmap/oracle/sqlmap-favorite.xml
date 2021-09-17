@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="favorite.FavoriteDAO">
+
+
+
+
+<!-- 관심등록기업버전 -->
+<select id="insertlike" parameterType="likecompanyVO">
+insert into likecompany(no,stock_code) values(#{no},#{stock_code}) 
+</select>
+
+<!-- 관심기업리스트 -->
+<select id="companylist" parameterType="wagglejoinVO" resultType="stocktodayVO">
+select a.no,a.stock_code,b.stock_name,b.stock_type,c.stock_close,b.value, c.valuediffrate from likecompany a, hn_stock_code b 
+,(select * from (select * from hn_stock_close order by close_date desc)where <![CDATA[rownum <=40]]>)c
+where no=#{no} and a.stock_code=c.stock_code and a.stock_code=b.stock_code
+</select>
+
+<!-- 팔로우하기 -->
+<select id="likeman" parameterType="followVO">
+insert into follow(me, likeman) values(#{me},#{likeman})
+</select>
+<!-- 그 사람의 팔로워들 보기 -->
+<select id="selectfollower" parameterType="followVO" resultType="followVO">
+select * from follow where likeman=#{likeman}
+</select>
+
+<!-- 포트폴리오 관심등록 -->
+<select id="likeport" parameterType="portfolioVO">
+insert into portfolio(seq_no,me,no,percent,stock_type,regdate)
+values(PORTFOLIO_SEQ.nextval,#{me},#{no},#{percent},#{stock_type},sysdate)
+</select>
+
+<!-- 그사람이 팔로잉하는 사람들 보기 -->
+<select id="selectfollow" parameterType="followVO" resultType="followVO">
+select * from follow where me=#{me}
+</select>
+
+<!-- 이사람 팔로우 그만두기 -->
+<select id="deletefollow">
+delete from follow where me=#{me} and likeman=#{likeman}
+</select>
+
+<!-- 누구의포트폴리오인지 몇개항목이 있는지 -->
+<select id="selectportname" parameterType="portfolioVO" resultType="portfolioVO">
+select nickname, count(nickname) count from 
+(select p.me,p.no,p.percent,p.stock_type,p.regdate,w.nickname from portfolio p, hn_waggle w
+where p.no=w.no and me=#{me} and to_char(regdate, 'yyyy-mm-dd') = #{regdate}) group by nickname
+</select>
+
+<!-- 내가 관심등록한 포트폴리오 조회하기 -->
+<select id="selectport" parameterType="portfolioVO" resultType="portfolioVO">
+select p.percent,p.stock_type,p.regdate,w.nickname from portfolio p, hn_waggle w
+where p.no=w.no and me=#{me} and to_char(regdate, 'yyyy-mm-dd') = #{regdate}
+</select>
+
+<!-- 조합할 포트폴리오 가져오기 -->
+<select id="selectport2" parameterType="portfolioVO" resultType="portfolioVO">
+select p.percent,p.stock_type,p.regdate,w.nickname from portfolio p, hn_waggle w
+where p.no=w.no and me=#{me} and to_char(regdate, 'yyyy-mm-dd') = #{regdate} and nickname=#{nickname}
+</select>
+</mapper>

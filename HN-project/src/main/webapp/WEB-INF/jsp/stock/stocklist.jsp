@@ -14,17 +14,15 @@
             <div class="breadcumb-overlay"></div>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="breadcrumb text-center">
-                            <div class="section-headline white-headline">
-                                <h3>종목조회</h3>
-                            </div>
-                            <ul class="breadcrumb-bg">
-                                <li class="home-bread">STOCK</li>
-                                <li>종목조회</li>
-                            </ul>
-                        </div>
-                    </div>
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="breadcrumb text-center">
+					
+					<ul class="breadcrumb-bg">
+						<li >종목조회</li>
+						
+					</ul>
+				</div>
+			</div>
                 </div>
             </div>
         </div>
@@ -77,6 +75,7 @@
                                             <th>종목명</th>                                          
                                             <th>현재가</th>
                                             <th>전일대비</th>
+                                            <th>목표가격</th>                    
                                             <th>보고서</th>
                                             <th>주문</th>
                                         </tr>
@@ -109,7 +108,7 @@
                                              <c:if test="${stocklist.stock_diff eq 0}" >
                                         	    <td>${stocklist.stock_diff}</td>
                                             </c:if>
-                                           
+                                           <td></td>
                                <td>	 <a class="blue" href="${pageContext.request.contextPath}/stock/report/${stocklist.stock_code}">바로가기</a>
                                		</td>
                                             <td><div class="price-btn blue">

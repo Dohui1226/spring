@@ -45,6 +45,7 @@
                                 <span><i class="flaticon-005-savings"></i></span>
                                 <div class="deposite-table">
                                     <table>
+                                    
                                         <tr>
                                             <th>Name</th>
                                             <th>Date</th>

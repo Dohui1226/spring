@@ -43,4 +43,12 @@ public class StockDAOImpl implements StockDAO {
 		sqlSessionTemplate.selectOne("stock.StockDAO.stocksell",buysell);
 		System.out.println("dao");
 	}
+	public String[] selectcode() {
+		List<String> list = sqlSessionTemplate.selectList("stock.StockDAO.selectcode");
+		String[] aa = list.toArray(new String[list.size()]);;
+		return aa;
+	}
+	
+	
+	
 }

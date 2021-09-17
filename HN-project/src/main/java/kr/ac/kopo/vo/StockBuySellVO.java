@@ -11,11 +11,19 @@ public class StockBuySellVO {
 	private String tra_type;
 	private String acc_num;
 	private String stock_name;
+	private double rate;
 	
 	
 	
 	
 	
+	
+	public double getRate() {
+		return rate;
+	}
+	public void setRate(double rate) {
+		this.rate = rate;
+	}
 	public String getStock_name() {
 		return stock_name;
 	}
@@ -54,7 +62,6 @@ public class StockBuySellVO {
 	}
 	
 	
-	
 	public String getStock_type() {
 		return stock_type;
 	}
@@ -84,7 +91,7 @@ public class StockBuySellVO {
 		return "StockBuySellVO [member_account=" + member_account + ", stock_code=" + stock_code + ", stock_num="
 				+ stock_num + ", fee=" + fee + ", stock_price=" + stock_price + ", stock_type=" + stock_type
 				+ ", tra_date=" + tra_date + ", tra_type=" + tra_type + ", acc_num=" + acc_num + ", stock_name="
-				+ stock_name + "]";
+				+ stock_name + ", rate=" + rate + "]";
 	}
 	
 	

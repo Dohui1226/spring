@@ -17,12 +17,10 @@
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="breadcrumb text-center">
-					<div class="section-headline white-headline">
-						<h3>주문하기</h3>
-					</div>
+					
 					<ul class="breadcrumb-bg">
-						<li class="home-bread">Waggle</li>
-						<li>매수 매도</li>
+						<li >매수/매도</li>
+						
 					</ul>
 				</div>
 			</div>
@@ -42,7 +40,10 @@
 					<a class="blue-button" style="background: #E00400; border: none;"
 						data-toggle="modal" href="#modal">매수</a> <a class="blue-button"
 						style="background: #003ace; border: none;" data-toggle="modal"
-						href="#modal2">매도</a>
+						href="#modal2">매도</a><br>
+						
+                       <button id="button-modal" onclick="likecompany()">관심등록</button>
+                               
 					<hr>
 				</div>
 			</div>
@@ -161,7 +162,7 @@
 		</div>
 	</div>
 </div>
-</div>
+
 
 
 <!-- all js here -->
@@ -229,6 +230,19 @@ function order2(param){
 		}
 	})		
 }
+
+function likecompany(){
+	
+	$.ajax({
+		type:"get",
+		url:"${pageContext.request.contextPath}/like/"+'${stockcode.stock_code}',		
+		success:function(){
+			alert("관심등록이 완료되었습니다.")
+			
+		}
+	})		
+}
+
 
 
 

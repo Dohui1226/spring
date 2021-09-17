@@ -11,17 +11,15 @@
             <div class="breadcumb-overlay"></div>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="breadcrumb text-center">
-                            <div class="section-headline white-headline">
-                                <h3>보고서조회</h3>
-                            </div>
-                            <ul class="breadcrumb-bg">
-                                <li class="home-bread">STOCK</li>
-                                <li>종목조회</li>
-                            </ul>
-                        </div>
-                    </div>
+                   <div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="breadcrumb text-center">
+					
+					<ul class="breadcrumb-bg">
+						<li >매수/매도</li>
+						
+					</ul>
+				</div>
+			</div>
                 </div>
             </div>
         </div>

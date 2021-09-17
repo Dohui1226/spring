@@ -56,15 +56,25 @@ public class AccountDAOImpl implements AccountDAO {
 		}
 	
 		public int follow(FollowVO follow) {
-			 int fol =sqlSessionTemplate.selectOne("account.AccountDAO.follow",follow); 
-			return 0;
+			int fol=0;
+			   try{ 
+				   fol =sqlSessionTemplate.selectOne("account.AccountDAO.follow",follow); 
+			   
+			   }catch(NullPointerException e) {
+				    fol =0;
+			   }
+			return fol;
 	   	}
    
 	   public int follower(FollowVO follow) {
-			/*
-			 * int fol =sqlSessionTemplate.selectOne("account.AccountDAO.follower",follow);
-			 */
-		return 0;
+		  int fol=0;
+		   try{ 
+			   fol =sqlSessionTemplate.selectOne("account.AccountDAO.follower",follow); 
+		   
+		   }catch(NullPointerException e) {
+			    fol =0;
+		   }
+		return fol;
 	   }
 
 }

@@ -61,15 +61,16 @@ where acc_num=#{member_account} and tra_type=#{tra_type} order by tra_date desc)
 insert into follow(no, follower) values(#{no},#{follower})
 </select> -->
 
-<!--내가 좋아하는 숫자 -->
+<!--내가 좋아하는 사람의 숫자 -->
 <select id ="follow" parameterType= "followVO" resultType="int">
-select count(*) count from follow where me=#{me}  group by me
+select nvl(count,0) count from (select count(*) count from follow where me=#{me} group by me)
+
 </select> 
 
 
 <!-- 나를 좋아하는 사람 숫자보기 -->
 <select id ="follower" parameterType= "followVO" resultType="int">
-select count(*) count from follow where likeman=#{likeman} group by likeman
+select nvl(count,0) count from(select count(*) count from follow where likeman=#{likeman} group by likeman)
 </select> 
 
 <!-- 팔로우끊기 -->

@@ -32,7 +32,13 @@
 		<typeAlias type="kr.ac.kopo.vo.StockWeightVO"
 			alias="stockweightVO" />
 		<typeAlias type="kr.ac.kopo.vo.FollowVO"
-			alias="followVO" />						
+			alias="followVO" />	
+		<typeAlias type="kr.ac.kopo.vo.LikeCompanyVO"
+			alias="likecompanyVO" />
+		<typeAlias type="kr.ac.kopo.vo.PortfolioVO"
+			alias="portfolioVO" />	
+			<typeAlias type="kr.ac.kopo.vo.Portfolio2VO"
+			alias="portfolio2VO" />								
 		
 	</typeAliases>
 </configuration>

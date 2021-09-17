@@ -24,5 +24,6 @@ public interface WaggleDAO {
 	WaggleJoinVO selectaccount(WaggleJoinVO waggle);
 	List<StockWeightVO> stockweigth(WaggleJoinVO waggle);
 	List<MyStockVO> typecompany(StockBuySellVO buysell);
+	RankListVO wagglemyrank(WaggleJoinVO waggle);
 
 }

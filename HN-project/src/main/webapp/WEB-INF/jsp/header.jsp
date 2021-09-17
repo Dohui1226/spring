@@ -14,6 +14,24 @@
 
 <!-- all css here -->
 
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/green-horizotal/css/bootstrap.min.css">
+   
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/green-horizotal/css/font-awesome.min.css">
+   
+   
+  
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/green-horizotal/css/animate.css">
+   
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/green-horizotal/css/normalize.css">
+
+   
+   
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/green-horizotal/css/jquery.dataTables.min.css">
+   
+   
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/green-horizotal/style.css">
+  
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/green-horizotal/css/responsive.css">
 <!-- bootstrap v3.3.6 css -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
@@ -74,6 +92,16 @@
 <script src="${pageContext.request.contextPath}/resources/js/plugins.js"></script>
 <!-- main js -->
 <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/green-horizotal/js/vendor/jquery-1.12.4.min.js"></script>
+  
+    <script src="${pageContext.request.contextPath}/resources/green-horizotal/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/green-horizotal/js/counterup/jquery.counterup.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/green-horizotal/js/counterup/waypoints.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/green-horizotal/js/counterup/counterup-active.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/green-horizotal/js/data-table/jquery.dataTables.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/green-horizotal/js/data-table/data-table-act.js"></script>
+     <script src="${pageContext.request.contextPath}/resources/green-horizotal/js/main.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/green-horizotal/js/tawk-chat.js"></script>
 </head>
 <body>
 
@@ -109,10 +137,9 @@
 
 							<!-- logo start -->
 							<div class="col-md-3 col-sm-3">
-								<div class="logo">
-									<img
-										src="${pageContext.request.contextPath}/resources/img/logo/hanalogo.png"
-										height="80">
+								<div class="logo" align="center">
+									<a href="${pageContext.request.contextPath}"">
+									<img src="${pageContext.request.contextPath}/resources/img/logo/hanalogo.png" style="position:absolute;top:-13px;max-width:28%" ></a>
 									<div>
 										<!-- Brand -->
 										<a class="navbar-brand page-scroll white-logo"
@@ -145,10 +172,18 @@
 									<div class="collapse navbar-collapse" id="navbar-example">
 										<div class="main-menu">
 											<ul class="nav navbar-nav navbar-right">
-												<li><a class="pages"href="${pageContext.request.contextPath}">Home</a></li>
+												
 												<li><a class="pages"
 													href="${pageContext.request.contextPath}/waggle">와글와글</a></li>
-												<li><a href="investment.html">관심종목</a></li>
+												<li><a class="pages">관심</a>
+												<ul class="sub-menu">
+                                                            <li><a href="${pageContext.request.contextPath}/like/company">관심 종목</a></li>
+                                                             <li><a href="${pageContext.request.contextPath}/like/follow">관심 유저</a></li>
+                                                            <li><a href="${pageContext.request.contextPath}/like/port/select">관심 포트폴리오</a></li>
+
+                                                        </ul>
+												
+											
 												<li><a class="pages"
 													href="${pageContext.request.contextPath}/stocklist">종목조회</a></li>
 												<li><a class="pages"

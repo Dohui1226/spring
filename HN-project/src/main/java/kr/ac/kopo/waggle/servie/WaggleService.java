@@ -24,5 +24,6 @@ public interface WaggleService {
 	List<StockWeightVO> wagglerankInfo(WaggleJoinVO waggle);
 	public WaggleJoinVO selectaccount(int no); //회원번호로 가져오기
 	List<MyStockVO> typecompany(StockBuySellVO buysell);//회원번호로 가져온 보유종목..등 
+	RankListVO wagglemyrank(WaggleJoinVO waggle); //나의랭킹정보
 	
 }

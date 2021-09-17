@@ -153,7 +153,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="C:\Lecture\spring-workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="C:\Lecture\spring-workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Mission-Spring" path="/Mission-Spring" reloadable="true" source="org.eclipse.jst.jee.server:Mission-Spring"/><Context docBase="C:\Lecture\spring-workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\HN-project" path="/HN-project" reloadable="true" source="org.eclipse.jst.jee.server:HN-project"/></Host>
+      <Context docBase="C:\Lecture\spring-workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="C:\Lecture\spring-workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Mission-Spring" path="/Mission-Spring" reloadable="true" source="org.eclipse.jst.jee.server:Mission-Spring"/><Context docBase="C:\Lecture\spring-workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\HN-project" path="/HN-project" reloadable="true" source="org.eclipse.jst.jee.server:HN-project"/><Context docBase="C:\Lecture\spring-workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\spring-mvc" path="/spring-mvc" reloadable="true" source="org.eclipse.jst.jee.server:spring-mvc"/></Host>
     </Engine>
   </Service>
 </Server>

@@ -61,10 +61,9 @@ public class StockController {
 		WaggleJoinVO waggle = (WaggleJoinVO) session.getAttribute("waggleVO");
 		buysell.setMember_account(waggle.getMember_account());
 		buysell.setStock_code(code);
-		
-		System.out.println("컨트롤러");
+	
 		stockservice.stockbuy(buysell);
-		System.out.println("컨트롤러!");
+	
 		ModelAndView mav = new ModelAndView("stock/buysell");
 	
 

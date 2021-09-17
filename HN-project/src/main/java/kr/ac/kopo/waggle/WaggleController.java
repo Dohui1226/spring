@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.ac.kopo.account.service.AccountService;
+import kr.ac.kopo.favorite.service.FavoriteService;
 import kr.ac.kopo.vo.AccountVO;
 import kr.ac.kopo.vo.AddHeartVO;
 import kr.ac.kopo.vo.CouponVO;
@@ -32,6 +33,7 @@ import kr.ac.kopo.vo.MemberVO;
 import kr.ac.kopo.vo.MyStockVO;
 import kr.ac.kopo.vo.RankListVO;
 import kr.ac.kopo.vo.StockBuySellVO;
+import kr.ac.kopo.vo.StockTodayVO;
 import kr.ac.kopo.vo.StockWeightVO;
 import kr.ac.kopo.vo.WaggleJoinVO;
 import kr.ac.kopo.waggle.servie.WaggleService;
@@ -44,6 +46,9 @@ public class WaggleController {
 	
 	@Autowired
 	private AccountService accountservice;
+	
+	@Autowired
+	private FavoriteService favoriteservice;
 	
 	/* 와글와글메인 */
 	@GetMapping("/waggle")
@@ -110,28 +115,28 @@ public class WaggleController {
 	public String wagglerankInfo(@PathVariable("no") int no, Model model, StockBuySellVO buysell, FollowVO follow) {
 		WaggleJoinVO waggle = service.selectaccount(no);
 		buysell.setMember_account(waggle.getMember_account());
-		
+	
 		List<StockBuySellVO> listsell = accountservice.transsell(buysell);
 		List<StockBuySellVO> listbuy = accountservice.transbuy(buysell);
-		
+
 		
 		follow.setMe(waggle.getNickname());
-		System.out.println(follow);
-		//좋아하는사람보기
+	
+		//좋아하는사람 숫자보기
 		int followlist =accountservice.follow(follow);
-		
+
 		follow.setLikeman(waggle.getNickname());
-		System.out.println(follow);
-		//팬보기
+	
+		//팬숫자보기
 		int followerlist =accountservice.follower(follow);
 		
-		
+		List<StockTodayVO> lc = favoriteservice.likecomapnylist(waggle);
 		
 		List<StockWeightVO> value = service.wagglerankInfo(waggle);
 		List<MyStockVO> stocklist = accountservice.mystocklist(waggle);
 		
 		
-		
+		model.addAttribute("likecompany", lc);
 		model.addAttribute("follow", followlist);
 		model.addAttribute("follower", followerlist);
 		model.addAttribute("listbuy",listbuy);
@@ -180,10 +185,13 @@ public class WaggleController {
 	
 	/* 와글와글 랭킹 순위 */
 	@GetMapping("waggle/ranking")
-	public String waggleranking(Model model) {
-		System.out.println("와글와글 랭킹페이지");
+	public String waggleranking(Model model,HttpSession session) {
+		WaggleJoinVO waggle = (WaggleJoinVO)session.getAttribute("waggleVO");
+		
 		List<RankListVO> list = service.wagglerank();
+		RankListVO mylist= service.wagglemyrank(waggle);//나의리스트 작성하기
 		model.addAttribute("ranklist", list);
+		model.addAttribute("mylist",mylist);
 		return "waggle/ranking";
 	}
 	

@@ -19,17 +19,15 @@ function checkForm(){
             <div class="breadcumb-overlay"></div>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="breadcrumb text-center">
-                            <div class="section-headline white-headline">
-                                <h3>Login</h3>
-                            </div>
-                            <ul class="breadcrumb-bg">
-                                <li class="home-bread">Home</li>
-                                <li>Login</li>
-                            </ul>
-                        </div>
-                    </div>
+                   <div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="breadcrumb text-center">
+					
+					<ul class="breadcrumb-bg">
+						<li >로그인</li>
+						
+					</ul>
+				</div>
+			</div>
                 </div>
             </div>
         </div>

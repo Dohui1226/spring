@@ -32,16 +32,14 @@ $(document).on("click", ".blue-button2", function() {
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="breadcrumb text-center">
-                            <div class="section-headline white-headline">
-                                <h3>Coupon</h3>
-                            </div>
-                            <ul class="breadcrumb-bg">
-                                <li class="home-bread">Waggle</li>
-                                <li>Coupon</li>
-                            </ul>
-                        </div>
-                    </div>
+				<div class="breadcrumb text-center">
+					
+					<ul class="breadcrumb-bg">
+						<li >교환소</li>
+						
+					</ul>
+				</div>
+			</div>
                 </div>
             </div>
         </div>

@@ -7,7 +7,16 @@ public class RankListVO {
 	private int hart;
 	private double rate;
 	private int stockvalue;
+	private int rank;
 	
+	
+	
+	public int getRank() {
+		return rank;
+	}
+	public void setRank(int rank) {
+		this.rank = rank;
+	}
 	public String getNickname() {
 		return nickname;
 	}
@@ -40,9 +49,10 @@ public class RankListVO {
 	}
 	@Override
 	public String toString() {
-		return "RankListVO [nickname=" + nickname + ", hart=" + hart + ", rate=" + rate + ", stockvalue=" + stockvalue
-				+ "]";
+		return "RankListVO [no=" + no + ", nickname=" + nickname + ", hart=" + hart + ", rate=" + rate + ", stockvalue="
+				+ stockvalue + ", rank=" + rank + "]";
 	}
+	
 	
 	
 

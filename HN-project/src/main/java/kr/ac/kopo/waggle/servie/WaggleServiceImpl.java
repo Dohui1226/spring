@@ -121,4 +121,12 @@ public class WaggleServiceImpl implements WaggleService{
 			List<MyStockVO> list =waggleDAO.typecompany(buysell);
 			return list;
 		}
+	
+	public RankListVO wagglemyrank(WaggleJoinVO waggle) {
+		RankListVO my = waggleDAO.wagglemyrank(waggle);
+		return my;
 	}
+	}
+
+
+

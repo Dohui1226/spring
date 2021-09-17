@@ -13,12 +13,10 @@
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="breadcrumb text-center">
-					<div class="section-headline white-headline">
-						<h3>시작하기</h3>
-					</div>
+					
 					<ul class="breadcrumb-bg">
-						<li class="home-bread">Home</li>
-						<li>와글와글</li>
+						<li >와글와글</li>
+						
 					</ul>
 				</div>
 			</div>
@@ -62,7 +60,7 @@
 											<img src=""> <img
 												src="${pageContext.request.contextPath}/resources/img/about/waggle.png">
 										</div>
-
+</div>
 									</div>
 								</div>
 							</div>
@@ -71,10 +69,17 @@
 				</div>
 				<div class="col-md-4 col-sm-4 col-xs-12">
 
-
+					
 
 					<div class="left-head-blog right-side">
 						<div class="left-blog-page">
+						<div style="background-color:rgb(224, 224, 224);border-radius:1em;">
+						<div class="left-blog blog-category">
+								<h5>오늘 나의 순위는?</h5>
+								</div>
+						<br>
+						<br>
+						</div>
 							<div class="left-blog blog-category">
 								<h4>Rank</h4>
 								<ul>
@@ -92,8 +97,44 @@
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
+	<div class="container">
+<div class="fun-content">
+					<div class="col-md-3 col-sm-6 col-xs-12">
+						<!-- fun_text  -->
+						<div class="fun_text">
+							<span class="counter-icon"><i class="flaticon-035-savings" style="background-color: #5d6471;"></i></span>
+							<span class="counter">$5974544</span>
+							<h4>Total Deposited</h4>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-6 col-xs-12">
+						<!-- fun_text  -->
+						<div class="fun_text">
+							<span class="counter-icon"><i style="background-color: #5d6471;" class="flaticon-034-reward"></i></span>
+							<span class="counter">2209</span>
+							<h4>Total Members</h4>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-6 col-xs-12">
+						<!-- fun_text  -->
+						<div class="fun_text">
+							<span class="counter-icon"><i style="background-color: #5d6471;" class="flaticon-016-graph"></i></span>
+							<span class="counter">$3974544</span>
+							<h4>Total Payments</h4>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-6 col-xs-12">
+						<!-- fun_text  -->
+						<div class="fun_text">
+							<span class="counter-icon"><i style="background-color: #5d6471;" class="flaticon-043-world"></i></span>
+							<span class="counter">80</span>
+							<h4>World Country</h4>
+						</div>
+					</div>
+				</div>
+				</div>
+				</div>
+			
 <!-- all js here -->
 <!-- Start Footer Area -->
 <jsp:include page="../footer.jsp" />

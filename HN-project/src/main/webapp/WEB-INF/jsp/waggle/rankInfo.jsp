@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/green-horizotal/style.css">
+	href="${pageContext.request.contextPath}/resources/green-horizotal/style.css"/>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/jqbar.css" />
 <!doctype html>
@@ -26,12 +26,10 @@
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="breadcrumb text-center">
-					<div class="section-headline white-headline">
-						<h3>와글와글</h3>
-					</div>
+					
 					<ul class="breadcrumb-bg">
-						<li class="home-bread">Waggle</li>
-						<li>가입하기</li>
+						<li >포트폴리오 정보</li>
+						
 					</ul>
 				</div>
 			</div>
@@ -51,9 +49,9 @@
 							src="${pageContext.request.contextPath}/resources/img/heart.png">&nbsp;<span
 							class="counter">${waggle.hart}</span>
 					</h5>
-					<i class="fa fa-envelope-o">&nbsp;<a
-						href="${pageContext.request.contextPath}/chat">메세지</a></i>&nbsp;&nbsp;&nbsp;
-					<i class="ti-layers">;&nbsp;<a onclick="copy()">복사</a></i>
+					<i class="fa fa-user"></i>&nbsp;<a
+						href="javascript:likeman()" style="color:#646464;" >팔로우</a></i>&nbsp;&nbsp;&nbsp;
+					<i class="ti-layers">;&nbsp;<a href="javascript:copy()" style="color:#646464;">복사</a></i>
 				</div>
 			</div>
 		</div>
@@ -67,67 +65,108 @@
 							<div class="blog-left-content">
 								<!-- Start single blog -->
 								<div class="col-md-12 col-sm-12 col-xs-12">
+								<div class="widget-tabs-list">
 									<div class="single-blog ">
 										<div class="blog-image">
+									
+										<div class="tab-hd">
 											<!-- <h6 align="center">수익률 비교</h6> -->
-											<h6 align="center">포트폴리오 확인</h6>
+											<h6 align="center" style="padding-bottom: 19px">포트폴리오 확인</h6>
 											<%--    <canvas align="middle" height="140vh" width="180vw"
 											id="linechart"></canvas> --%>
-											<div class="chart">
-												<canvas id="myPieChart" height="380vh" width="420vw"></canvas>
 											</div>
-										</div>
-										<br> <br>
-										<div class="left-head-blog right-side">
+											<div class="sidget-tabs-list">
+											<ul class="nav nav-tabs">
+											
+											<li class="active" >
+											<a  data-toggle="tab" href="#home"style="width: 150;text-align:center;color:#646464;">
+											비중
+										
+											</a>
+											</li>
+											<li class>
+											<a  data-toggle="tab" href="#menu1" aria-epended="false" style="width: 150;text-align: center;color:#646464;">
+											수익률
+										
+											</a>
+											</li>
+										
+											
+											</ul>
+											<div class="tab-content tab-custom-st">
+												<div class="tab-pane fade in active "id="home">
+													<div class="tab-ctn">
 
-											<div class="left-blog-page">
-												<div class="left-blog blog-category">
-													<h4>보유 섹터 순위</h4>
-													<ul>
-														<c:forEach items="${requestScope.value}" var="ranklist" varStatus="status">
-															<li><span>${status.count}</span> 
+														<div class="chart">
+														<canvas id="myPieChart" height="300vh" width="350vw"></canvas>
+														</div>
+													</div>
+										<br>
+										 <br>
+													<div class="left-head-blog right-side">
+
+														<div class="left-blog-page">
+															<div class="left-blog blog-category">
+															<h4>보유 섹터 순위</h4>
+															<ul>
+															<c:forEach items="${requestScope.value}" var="ranklist" varStatus="status">
+																<li><span>${status.count}</span> 
 																<a data-toggle="collapse" id="type" href ="#" value="${ranklist.stock_type}" onclick="company()">${ranklist.stock_type}&nbsp;&nbsp;&nbsp; 
 																<fmt:formatNumber value="${ranklist.value}"  pattern="###,###,###,###" />원
 																<label text-align="right">
-																<fmt:formatNumber value="${ranklist.valuerate*100}" pattern="##.##" />%	
+																<fmt:formatNumber value="${ranklist.valuerate*100}" pattern="##.##" />%
+																<input type="hidden" class="portname" value="${ranklist.stock_type}">	
+																<input type="hidden" class="portrate" value="${ranklist.valuerate*100}">
 																</a>
-															<div >
+															<div>
 																<div id="bb" class="index"></div>
 															</div>
 															</li>
 														</c:forEach>	
-													</ul>
-												</div>
-											</div>
+														</ul>
+														</div>
+													</div>
 											<div class="left-blog-page">
 												<div class="left-tags blog-tags">
 													<div class="popular-tag left-side-tags left-blog">
 														<h4>관심 종목</h4>
 														<ul>
-
-															<li><a href="#">Business</a></li>
-															<li><a href="#">Agency </a></li>
-															<li><a href="#">Media</a></li>
-															<li><a href="#">Social</a></li>
-															<li><a href="#">Photoshop</a></li>
-															<li><a href="#">Seo</a></li>
-															<li><a href="#">development</a></li>
-															<li><a href="#">Search</a></li>
-															<li><a href="#">Design</a></li>
-
+															<c:forEach items="${requestScope.likecompany}" var="likecompany" varStatus="status">
+															<li><a href="${pageContext.request.contextPath}/stock/buysell/${likecompany.stock_code}">${likecompany.stock_name}</a></li>
+															</c:forEach>
 														</ul>
 													</div>
 												</div>
 											</div>
 										</div>
+										
 									</div>
+									<div id="menu1" class="tap-pane fade">
+									<div class="tab-ctn">
+									  <canvas align="middle" style="height:400px;width:700px;" id="linechart"></canvas>
+									  	<br>
+										 <br>
+													<div class="left-head-blog right-side">
 
+														<div class="left-blog-page">
+															<div class="left-blog blog-category">
+															<h4>최저 수익률</h4>
+															</div>
+															</div>
+															</div>
+													
+									</div>
+									</div>
+									</div>
+									</div>
+								
 								</div>
 							</div>
 						</div>
 					</div>
+					</div>
 				</div>
-
+</div>
 				<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
 					<div
 						class="statistic-right-area notika-shadow mg-tb-30 sm-res-mg-t-0">
@@ -140,35 +179,30 @@
 						<div class="past-statistic-an">
 							<div class="past-statistic-ctn">
 								<h3>
-									<span class="counter">${follower}</span>
-								</h3>
-								<p>팔로워</p>
+									<a href="${pageContext.request.contextPath}/like/follow" style="color:#646464"><i class="fa fa-user"></i>&nbsp; &nbsp;<span class="counter">${follower}</span>
+								</a></h3>
+								<a href="${pageContext.request.contextPath}/like/follow" style="color:#646464"><p>팔로워</p></a>
 							</div>
-							<div class="past-statistic-graph">
-								<div class="stats-line"></div>
-							</div>
+						
 						</div>
 						<div class="past-statistic-an">
 							<div class="past-statistic-ctn">
 								<h3>
-									<span class="counter">${follow}</span>
+									<a href="${pageContext.request.contextPath}/like/follow" style="color:#646464"><i class="fa fa-user"></i>&nbsp; &nbsp;<span class="counter">${follow}</span>
+								</a>
 								</h3>
-								<p>팔로잉</p>
+								<a href="${pageContext.request.contextPath}/like/follow" style="color:#646464"><p>팔로잉</p></a>
 							</div>
-							<div class="past-statistic-graph">
-								<div class="stats-line"></div>
-							</div>
+							
 						</div>
 						<div class="past-statistic-an">
 							<div class="past-statistic-ctn">
 								<h3>
-									<span class="counter"></span>
+									<i class="ti-layers"></i>&nbsp; &nbsp;<span class="counter"></span>
 								</h3>
 								<p>포트폴리오 복사</p>
 							</div>
-							<div class="past-statistic-graph">
-								<div class="stats-bar-2"></div>
-							</div>
+							
 						</div>
 					</div>
 					<div class="recent-items-wp notika-shadow sm-res-mg-t-30">
@@ -328,8 +362,7 @@
 		$.ajax({
 				url : '${pageContext.request.contextPath}/waggle/rankInfo/piechart',
 				type : 'post',
-				data : {
-				no : "${waggle.no}"},
+				data : {no : "${waggle.no}"},
 				dataType : "json",
 				success : function(map) {
 				$.each(map.valuelist, function(index,item) {
@@ -431,10 +464,6 @@
 
 	}
 	
-	function copy(){
-		alert('포트폴리오 복사완료')
-	}
-	
 	
 	function company(){
 		var stockname=[];
@@ -461,6 +490,33 @@
 				}
 			})		
 		})				
+	}
+	
+	function likeman(){
+		$.ajax({
+			type:"get",
+			url:"${pageContext.request.contextPath}/like/follow/"+${waggle.no},		
+			success:function(){
+				alert("팔로우가 완료되었습니다.")
+				
+			}
+		})		
+	}
+	
+
+	function copy(){
+		console.log($(".portname").val())
+		console.log($(".portrate").val())
+		
+		$.ajax({
+			 type:"get",
+			url:"${pageContext.request.contextPath}/like/port", 
+			 data:{no : "${waggle.no}"}, 
+			success:function(){
+				alert("포트폴리오 복사가 완료되었습니다.")
+				
+			}
+		})		
 	}
 	
 		

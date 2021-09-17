@@ -18,5 +18,7 @@ public interface StockDAO {
 	public void stockbuy(StockBuySellVO buysell); //매수
 	
 	public void stocksell(StockBuySellVO buysell); //매도
+	
+	public String[] selectcode();
 
 }

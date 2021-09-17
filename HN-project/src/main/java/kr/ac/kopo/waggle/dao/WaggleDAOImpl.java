@@ -43,6 +43,7 @@ public class WaggleDAOImpl implements WaggleDAO {
 	public WaggleJoinVO waggle(MemberVO member) {
 		WaggleJoinVO waggleVO =
 				sqlSessionTemplate.selectOne("waggle.WaggleDAO.waggle", member);	
+		System.out.println(3);
 		return waggleVO;
 	}
 	
@@ -73,18 +74,26 @@ public class WaggleDAOImpl implements WaggleDAO {
 	
 	public WaggleJoinVO selectaccount(WaggleJoinVO waggle) {
 		waggle =sqlSessionTemplate.selectOne("waggle.WaggleDAO.selectaccount",waggle);
-		
+		System.out.println("waggleDAO");
 		return waggle;
 	}
 	
 	public List<StockWeightVO> stockweigth(WaggleJoinVO waggle) {
 		List<StockWeightVO> list =sqlSessionTemplate.selectList("waggle.WaggleDAO.stockweight",waggle);
-			return list;
+		System.out.println(1);	
+		return list;
+			
 		}
 	
 	
 	public List<MyStockVO> typecompany(StockBuySellVO buysell) {
 		List<MyStockVO> list = sqlSessionTemplate.selectList("waggle.WaggleDAO.typecompany",buysell);
+		System.out.println(2);
 		return list;
+	}
+	
+	public RankListVO wagglemyrank(WaggleJoinVO waggle) {
+		RankListVO my =sqlSessionTemplate.selectOne("waggle.WaggleDAO.myrank",waggle);
+		return my;
 	}
 }

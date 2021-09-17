@@ -109,7 +109,7 @@ input[id="cb1"]:checked + label {
 												</div>
 												<div id="check2" class="panel-collapse collapse">
 													<div class="panel-body">
-														<p>전문 PB가 부담스러운 고객님들은 랭킹 투자자에게 코인을 지불하고, 메세지를 통하여
+														<p>전문 PB가 부담스러운 고객님들은 랭킹 투자자에게 하트를 지불하고, 메세지를 통하여
 															커뮤니케이션하면서 투자안목을 넓힐 수 있습니다.</p>
 													</div>
 												</div>
@@ -224,7 +224,7 @@ input[id="cb1"]:checked + label {
 				<a class="support-images" href="#"><i class="flaticon-035-savings"></i></a>
 				<div class="support-content">	
 				종합계좌로 연결해주세요.
-				<c:forEach items="${requestScope.accountlist}" var="accountlist" varStatus="loop"> 
+				<c:forEach items="${requestScope.accountlist}" var="accountlist" varStatus="loop"><br> 
 					<input type="radio" name="accountinfo" id="accountinfo" value="${accountlist.acc_num}">&nbsp;${accountlist.acc_num}&nbsp; &nbsp; ${accountlist.acc_name} <br>
 					</c:forEach>
 				</div>

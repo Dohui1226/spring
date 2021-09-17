@@ -5,9 +5,9 @@
 <mapper namespace="waggle.WaggleDAO">
 
 <!-- 가입하기 -->
-<select id="join" parameterType="wagglejoinVO">
- insert into hn_waggle(no, member_id, nickname, member_account)
- values(seq_waggle_id.nextval,#{member_id},#{nickname}, #{member_account})
+<select id="join" statementType="CALLABLE" parameterType="wagglejoinVO">
+ call join( #{member_id},#{nickname}, #{member_account})
+
 
 </select>
 
@@ -51,14 +51,30 @@ select * from hn_coupon where no=#{no}
 </select>
 
 
-<!-- 와글와글 랭킹조회 -->
+<!-- 와글와글 수익률 기준 랭킹조회 -->
 <select id="wagglerank" resultType="ranklistVO">
-select a.rate ,a.stockvalue,b.no, b.nickname, b.hart from hn_waggle b , 
+select rate, stockvalue,no,nickname,hart,
+rank() over(order by rate desc) rank from(select a.rate ,a.stockvalue,b.no, b.nickname, b.hart from hn_waggle b , 
 (select * from (SELECT acc_num,rate, stockvalue,
 RANK() OVER (PARTITION BY acc_num ORDER BY no DESC) AS RANK
 FROM acc_daily) where rank=1) a
-where b.member_account = a.acc_num
+where b.member_account = a.acc_num) order by rank
 </select>
+
+<!-- 나의등수및 수익률과 포트폴리오보기 -->
+<select id="myrank" resultType="ranklistVO" parameterType="wagglejoinVO">
+select rate, stockvalue,no,nickname,hart,rank from(select rate, stockvalue,no,nickname,hart,
+rank() over(order by rate desc) rank from(select a.rate ,a.stockvalue,b.no, b.nickname, b.hart from hn_waggle b , 
+(select * from (SELECT acc_num,rate, stockvalue,
+RANK() OVER (PARTITION BY acc_num ORDER BY no DESC) AS RANK
+FROM acc_daily) where rank=1) a
+where b.member_account = a.acc_num) order by rank) where no=#{no}
+</select>
+
+
+
+
+
 
 <!-- 계좌번호조회 -->
 <select id="selectaccount" parameterType="waggleJoinVO" resultType="waggleJoinVO">
@@ -74,13 +90,27 @@ where<![CDATA[rownum <=40]]>) c,hn_stock_code k where c. stock_code=k.stock_code
 on  a.acc_num=#{member_account} and a.stock_code=b.stock_code) group by stock_type) order by value desc
 </select>
 
+<!-- 계좌번호와 타입입력하면 금액이랑 종목코드 매입가격알려줌 -->
 <select id="typecompany" resultType="mystockVO" parameterType="buysellVO">
 select b.stock_name, a.stock_value, a.stock_num, a.buyprice from hn_stock_code b,
 (select *from buystock where acc_num =#{member_account} order by bdate desc) a where b.stock_type=#{stock_type}
 and b.stock_code=a.stock_code
 </select>
 
+<!-- 계좌별 -100일치 수익률 -->
+<select id="selectrateaccount">
+select wdate,rate from acc_daily where no in 
+(select max(no) from (select * from acc_daily where dayupdate='t' and acc_num=#{member_account} and wdate between sysdate-100 and sysdate)
+group by wdate)
+</select>
 
+
+
+<!-- 100일전까지 날짜조회하기 -->
+<select id="selectdate">
+select close_date from hn_stock_close where close_date between sysdate-100 and sysdate
+group by close_date order by close_date
+</select>
 </mapper>
 
 

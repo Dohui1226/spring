@@ -5,6 +5,15 @@ public class StockCodeVO {
 	private String stock_name;
 	private String stock_index;
 	private String stock_type;
+	private int value;
+	
+	
+	public int getValue() {
+		return value;
+	}
+	public void setValue(int value) {
+		this.value = value;
+	}
 	public String getStock_code() {
 		return stock_code;
 	}
@@ -32,9 +41,9 @@ public class StockCodeVO {
 	@Override
 	public String toString() {
 		return "StockCodeVO [stock_code=" + stock_code + ", stock_name=" + stock_name + ", stock_index=" + stock_index
-				+ ", stock_type=" + stock_type + "]";
+				+ ", stock_type=" + stock_type + ", value=" + value + "]";
 	}
-
+	
 	
 	
 }
