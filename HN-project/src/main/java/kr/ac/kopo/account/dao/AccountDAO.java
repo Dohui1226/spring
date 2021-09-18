@@ -28,4 +28,6 @@ public interface AccountDAO {
 	
 	int follower(FollowVO follow); //내가 팔로우하는 사람들
 
+	boolean selectfollow(FollowVO follow); //내가 그사람 팔로우 하나요?
+
 }

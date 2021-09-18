@@ -31,6 +31,8 @@ public interface AccountService {
 	int follow(FollowVO follow); //내가 팔로우하는 사람들 (팔로잉)
 	
 	int follower(FollowVO follow); //나의 팔로워들
+
+	boolean selectfollow(FollowVO follow); //내가 그사람 팔로우하나여??
 	
 
 }

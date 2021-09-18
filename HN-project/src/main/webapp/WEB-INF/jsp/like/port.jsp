@@ -6,7 +6,9 @@
 
 <!doctype html>
 <html class="no-js" lang="en">
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/green-horizotal/css/wave/waves.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/green-horizotal/css/dialog/sweetalert2.min.css">
+ <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/green-horizotal/css/dialog/dialog.css">
 <jsp:include page="../header.jsp" />
 <!-- header end -->
 <!-- Start breadcumb Area -->
@@ -37,7 +39,7 @@
 				<p> <div align="center" class="basic-tb-hd">
                             <label for="start">날짜선택:</label>  
                             <input type="date" id="day" name="day" value="2021-09-18">
-                          	<input id="daysubmit" type="submit" onclick="dayinput()" value="선택">
+                          	<input id="daysubmit"  class="button-modal" type="submit" onclick="dayinput()" value="선택">
                         </div></p>
 				</div>
 			</div>
@@ -53,25 +55,27 @@
                             <table width="70%" class="table table-striped">
                          	<thead>
                          	<tr>
-                         	<th width="15%" align="center">닉네임</th>
+                         	<th width="15%" align="center">포트폴리오</th>
                          	<th width="15%" align="center">종목타입</th>
-  							<th width="15%" align="center">비중</th>
+  							<th width="15%" align="center">비중(%)</th>
   						
                          	</tr>
                          	</thead>
                                 <tbody>
                                  <c:forEach items="${requestScope.port}" var="ranklist" varStatus="loop"> 
                                     <tr>
-                                        <td style="vertical-align:middle" rowspan="${fn:length(ranklist.value)}" >
+                                        <td style="vertical-align:middle;align:center" rowspan="${fn:length(ranklist.value)}" >
                                         <strong>${ranklist.key}</strong><br><br>&nbsp;&nbsp;
-                                        <button class="gut" value="${ranklist.key}" onclick="cc(this.value)">추천</button></td>
-                                   			
+                                        <div class="dialog-pro dialog">
+                                        <button class="btn btn-info waves-effect" id="sa-close" value="${ranklist.key}" onclick="cc(this.value)">종목추천</button></td>
+                                   			</div>
                                    		 <c:forEach items="${ranklist.value}" var="ranklist1" varStatus="loop"> 
                                    			 <td>${ranklist1.key}</td>
-                                   			 <td>${ranklist1.value*100}%</td> </tr> 
-                                   		
+                                   			 <td>
+                                   		<fmt:formatNumber value="${ranklist1.value*100}" pattern="##.##"/>
+                                   		</td></tr>
                                    		</c:forEach>
-                                   			<%-- //<td rowspan="${fn:length(ranklist.value)}">dd</td> --%>
+                                   			
                                     
                                     </c:forEach>
                                 </tbody>
@@ -82,13 +86,67 @@
                     </div>
                 </div>
             </div>
-			</div>
+					<div class="col-lg-6 col-md-6 col-sm-8 col-xs-12">
+					<br>
+					<br>
+					 <div class="bsc-tbl-st">
+					<div id="tabl2">
+						<div class="accordion-stn">
 						
+                                    <div class="panel-group" data-collapse-color="nk-green" id="accordionGreen" role="tablist" aria-multiselectable="true">
+                                        <div class="panel panel-collapse notika-accrodion-cus">
+                                            <div class="panel-heading" role="tab">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" data-parent="#accordionGreen" href="#accordionGreen-one" aria-expanded="true">
+															Collapse Green #1
+														</a>
+                                                </h4>
+                                            </div>
+                                            <div id="accordionGreen-one" class="collapse in" role="tabpanel">
+                                                <div class="panel-body">
+                                                    <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry cry then richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf msr noontemporem, sunt aliqua put a bird on it squid single-origin coffee nullassumendan shoreditch et.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-collapse notika-accrodion-cus">
+                                            <div class="panel-heading" role="tab">
+                                                <h4 class="panel-title">
+                                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordionGreen" href="#accordionGreen-two" aria-expanded="false">
+															Collapse Green #2
+														</a>
+                                                </h4>
+                                            </div>
+                                            <div id="accordionGreen-two" class="collapse" role="tabpanel">
+                                                <div class="panel-body">
+                                                    <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry cry then richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf msr noontemporem, sunt aliqua put a bird on it squid single-origin coffee nullassumendan shoreditch et.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-collapse notika-accrodion-cus">
+                                            <div class="panel-heading" role="tab">
+                                                <h4 class="panel-title">
+                                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordionGreen" href="#accordionGreen-three" aria-expanded="false">
+															Collapse Green #3
+														</a>
+                                                </h4>
+                                            </div>
+                                            <div id="accordionGreen-three" class="collapse" role="tabpanel">
+                                                <div class="panel-body">
+                                                    <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry cry then richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf msr noontemporem, sunt aliqua put a bird on it squid single-origin coffee nullassumendan shoreditch et.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+						</div>
 					</div>
+					</div>
+			</div>
 	
 <jsp:include page="../footer.jsp" />
 	
 </body>
+<script src="${pageContext.request.contextPath}/resources/green-horizotal/js/wave/waves.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/green-horizotal/js/wave/wave-active.js"></script>
 <script>	
 
 var dayinfo;
@@ -101,33 +159,47 @@ function dayinput(){
 		data:{day :dayinfo}, 
 		dataType : "text"
 	}).done(function(result){
-		console.log("결과확인")
-		var html = jQuery('<div>').html(result)
-		var contents =html.find('div#ajax').html();
+		console.log(result)
+		let html = $('<div>').html(result)
+		console.log(html);
+		
+		let content =html.find('div#ajax');
+		let contents =content.html();
+		
 		console.log(contents)
-		console.log(html)
-		$("#tabl1").html(contents)
+		$("#tabl1").html(contents);
 	}).fail(function (jqXHR, textStatus, errorThrown) {
 		console.log("에러"); 
 		console.log(jqXHR);
 		console.log(textStatus);
 		console.log(errorThrown);
-		});
+	});
 
 	
 }
 
-	
+
 function cc(param){
-  
-	console.log(param)
+
+		
 	$.ajax({
 		type:"post",
 		url:"${pageContext.request.contextPath}/port/recom",
 		data:{day :dayinfo,nickname:param}, 
-		success:function(){
-		}
+		dataType:"text"
+	}).done(function(result){
+		console.log(result)
+		
+		let html = $('<div>').html(result)
+		console.log(html);
+		
+		let content= html.find('div#recc')
+		let contents =content.html();
+		
+		console.log(contents);
+		$("#tabl2").html(contents)
 	})
+	
 	
 }
 

@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.ac.kopo.favorite.service.FavoriteService;
 import kr.ac.kopo.stock.service.StockService;
+import kr.ac.kopo.vo.LikeCompanyVO;
 import kr.ac.kopo.vo.StockBuySellVO;
 import kr.ac.kopo.vo.StockCodeVO;
 import kr.ac.kopo.vo.StockTodayVO;
@@ -26,6 +28,8 @@ public class StockController {
 	@Autowired
 	private StockService stockservice;
 	
+	@Autowired
+	private FavoriteService favoriteservice;
 	
 	/* 모든종목조회 */
 	@GetMapping("/stocklist")
@@ -41,13 +45,24 @@ public class StockController {
 	
 	/* 매수매도페이지 */
 	@GetMapping("/stock/buysell/{code}")
-	public ModelAndView buysell(@PathVariable("code") String code, StockCodeVO stockcode, StockTodayVO stocktoday) {
+	public ModelAndView buysell(@PathVariable("code") String code, HttpSession session, StockCodeVO stockcode, StockTodayVO stocktoday) {
+		LikeCompanyVO lc = new LikeCompanyVO();
+		WaggleJoinVO waggle = (WaggleJoinVO)session.getAttribute("waggleVO");
+		lc.setNo(waggle.getNo());
+		lc.setStock_code(code);
+		
+		boolean bool = favoriteservice.selectcompany(lc);
+		ModelAndView mav = new ModelAndView("stock/buysell");
+		if(bool) {//존재할경우
+			mav.addObject("select",bool);
+		}
+		
 		stockcode.setStock_code(code);
 		stocktoday.setStock_code(code);
 
 		stockcode = stockservice.companyinfo(stockcode);
 		stocktoday = stockservice.stockonetoday(stocktoday);
-		ModelAndView mav = new ModelAndView("stock/buysell");
+		
 	
 		mav.addObject("stockcode", stockcode);
 		mav.addObject("stocktoday", stocktoday);
@@ -87,11 +102,7 @@ public class StockController {
 		return mav;
 	}
 	
-	
-	
-	
-	
-	
+
 	/* 기업보고서 */
 
 	@GetMapping("/stock/report/{code}")

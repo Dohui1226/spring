@@ -50,10 +50,11 @@ public class WaggleController {
 	@Autowired
 	private FavoriteService favoriteservice;
 	
+	
+	
 	/* 와글와글메인 */
 	@GetMapping("/waggle")
 	public String wagglemain() {
-		System.out.println("와글메인");
 		return "waggle/wagglemain";
 	}
 	
@@ -110,9 +111,8 @@ public class WaggleController {
 	
 
 	/* 와글와글 랭킹 개인정보 */
-	
 	@GetMapping("/waggle/rankInfo/{no}")
-	public String wagglerankInfo(@PathVariable("no") int no, Model model, StockBuySellVO buysell, FollowVO follow) {
+	public String wagglerankInfo(@PathVariable("no") int no,HttpSession session, Model model, StockBuySellVO buysell, FollowVO follow) {
 		WaggleJoinVO waggle = service.selectaccount(no);
 		buysell.setMember_account(waggle.getMember_account());
 	
@@ -121,14 +121,23 @@ public class WaggleController {
 
 		
 		follow.setMe(waggle.getNickname());
-	
-		//좋아하는사람 숫자보기
 		int followlist =accountservice.follow(follow);
 
 		follow.setLikeman(waggle.getNickname());
-	
-		//팬숫자보기
 		int followerlist =accountservice.follower(follow);
+		
+		WaggleJoinVO waggle2 =(WaggleJoinVO) session.getAttribute("waggleVO");
+		follow.setMe(waggle2.getNickname());
+		System.out.println(follow.getMe());
+		System.out.println(follow.getLikeman());
+		/*내가 이사람 follow를 하고 있는지*/
+		boolean bool = accountservice.selectfollow(follow);
+		
+		System.out.println(bool);
+		if(bool) {
+			model.addAttribute("selectf",bool);
+		}
+		
 		
 		List<StockTodayVO> lc = favoriteservice.likecomapnylist(waggle);
 		
@@ -148,9 +157,6 @@ public class WaggleController {
 	}
 	
 	
-
-
-
 	/* 주식비중구하기 */
 	@ResponseBody
 	@PostMapping("/waggle/rankInfo/piechart")
@@ -221,8 +227,7 @@ public class WaggleController {
 	
 	/*쿠폰선물하기*/
 	@GetMapping("/waggle/giftcoupon")
-	public String giftcoupon() {
-		System.out.println("쿠폰선물");
+	public String giftcoupon() {		
 		return "waggle/giftcoupon";
 	}
 	

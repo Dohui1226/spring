@@ -49,9 +49,15 @@
 							src="${pageContext.request.contextPath}/resources/img/heart.png">&nbsp;<span
 							class="counter">${waggle.hart}</span>
 					</h5>
-					<i class="fa fa-user"></i>&nbsp;<a
-						href="javascript:likeman()" style="color:#646464;" >팔로우</a></i>&nbsp;&nbsp;&nbsp;
-					<i class="ti-layers">;&nbsp;<a href="javascript:copy()" style="color:#646464;">복사</a></i>
+					<i class="fa fa-user"></i>&nbsp;
+					<c:if test="${not empty selectf}">
+					<a id="htmltag1" href="javascript:likeman()" style="color:#646464;" >팔로우</a></i>&nbsp;&nbsp;&nbsp;
+					</c:if>
+					<c:if test="${empty selectf}"> 
+					<a id="htmltag1" href="javascript:likemanback()" style="color:#646464;" >팔로우 끊기</a></i>&nbsp;&nbsp;&nbsp;
+					</c:if>	
+						
+					<i class="ti-layers">;&nbsp;<a id="htmltag2" class="dis" href="javascript:copy()" style="color:#646464;" >저장</a></i>
 				</div>
 			</div>
 		</div>
@@ -179,7 +185,7 @@
 						<div class="past-statistic-an">
 							<div class="past-statistic-ctn">
 								<h3>
-									<a href="${pageContext.request.contextPath}/like/follow" style="color:#646464"><i class="fa fa-user"></i>&nbsp; &nbsp;<span class="counter">${follower}</span>
+									<a href="${pageContext.request.contextPath}/like/follow" style="color:#646464"><i class="fa fa-user"></i>&nbsp; &nbsp;<span class="counter" id="follow">${follower}</span>
 								</a></h3>
 								<a href="${pageContext.request.contextPath}/like/follow" style="color:#646464"><p>팔로워</p></a>
 							</div>
@@ -198,9 +204,9 @@
 						<div class="past-statistic-an">
 							<div class="past-statistic-ctn">
 								<h3>
-									<i class="ti-layers"></i>&nbsp; &nbsp;<span class="counter"></span>
+									<i class="ti-layers"></i>&nbsp; &nbsp;<span class="counter" id="hit">${waggle.hit}</span>
 								</h3>
-								<p>포트폴리오 복사</p>
+								<p>포트폴리오 저장</p>
 							</div>
 							
 						</div>
@@ -357,7 +363,10 @@
 <script>
 	var pieLabels = [];
 	var piedata = [];
-
+	var varlabels = [];
+	var vardatame = [];
+	var vardataco = [];
+	
 	$(document).ready(function() {
 		$.ajax({
 				url : '${pageContext.request.contextPath}/waggle/rankInfo/piechart',
@@ -386,7 +395,7 @@
 		var linechart = new Chart(ctx, {
 			type : 'line',
 			data : {
-				labels : [ '1월', '2월', '3월', '4월', '5월', '6월' ],
+				labels :  varlabels ,
 				datasets : [ {
 					label : '상대방 수익률',
 					type : 'line', // 'line' type
@@ -478,7 +487,6 @@
 				dataType : "json",
 				success : function(list) {
 				
-					console.log(list.list)
 					$.each(list.list, function(index,item) {
 						
 					
@@ -492,15 +500,36 @@
 		})				
 	}
 	
+	
+	
+	
+	
+	
+	/* 팔로우하기 */
 	function likeman(){
 		$.ajax({
 			type:"get",
 			url:"${pageContext.request.contextPath}/like/follow/"+${waggle.no},		
-			success:function(){
-				alert("팔로우가 완료되었습니다.")
-				
+			success:function(result){
+				alert("팔로우를 완료하였습니다.")
+				$("#follow").text(result)
+				$("#htmltag1").html('<a id="htmltag1" href="javascript:likemanback()" style="color:#646464;" >팔로우 끊기</a>')
 			}
 		})		
+	}
+	
+	
+	function likemanback(){
+		$.ajax({
+			type:"get",
+			url:"${pageContext.request.contextPath}/like/followback/"+${waggle.no},		
+			success:function(result){
+				alert("팔로우 끊기를 완료하였습니다.")
+				$("#follow").text(result)
+				$("#htmltag1").html('<a id="htmltag1" href="javascript:likeman()" style="color:#646464;" >팔로우</a>')
+			}
+		})
+
 	}
 	
 
@@ -512,9 +541,10 @@
 			 type:"get",
 			url:"${pageContext.request.contextPath}/like/port", 
 			 data:{no : "${waggle.no}"}, 
-			success:function(){
+			success:function(result){
 				alert("포트폴리오 복사가 완료되었습니다.")
-				
+				$("#hit").text(result)
+				$("#htmltag2").html('<a id="htmltag2" href="javascript:back()" style="color:#646464;" >저장완료</a>')
 			}
 		})		
 	}

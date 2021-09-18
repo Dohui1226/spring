@@ -75,7 +75,7 @@
                                             <th>종목명</th>                                          
                                             <th>현재가</th>
                                             <th>전일대비</th>
-                                            <th>목표가격</th>                    
+                                                       
                                             <th>보고서</th>
                                             <th>주문</th>
                                         </tr>
@@ -108,7 +108,7 @@
                                              <c:if test="${stocklist.stock_diff eq 0}" >
                                         	    <td>${stocklist.stock_diff}</td>
                                             </c:if>
-                                           <td></td>
+                                         
                                <td>	 <a class="blue" href="${pageContext.request.contextPath}/stock/report/${stocklist.stock_code}">바로가기</a>
                                		</td>
                                             <td><div class="price-btn blue">

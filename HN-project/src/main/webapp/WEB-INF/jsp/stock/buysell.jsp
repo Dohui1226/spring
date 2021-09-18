@@ -36,22 +36,26 @@
 			<div class="section-headline text-center">
 				<h3>${stockcode.stock_name}</h3>
 				<h6>${stockcode.stock_index}&nbsp;${stockcode.stock_type}</h6>
-				<div align="center" class="price-btn">
-					<a class="blue-button" style="background: #E00400; border: none;"
+				 <div align="center" class="price-btn" id="dis">
+					<!-- <a class="blue-button" style="background: #E00400; border: none;"
 						data-toggle="modal" href="#modal">매수</a> <a class="blue-button"
 						style="background: #003ace; border: none;" data-toggle="modal"
-						href="#modal2">매도</a><br>
-						
-                       <button id="button-modal" onclick="likecompany()">관심등록</button>
-                               
-					<hr>
-				</div>
+						href="#modal2">매도</a><br> -->
+						<c:if test="${not empty select}">
+                       <button id="button-modal" class="lovecom" onclick="likecompany()">관심 등록</button>
+                        </c:if>
+                        <c:if test="${empty select}"> 
+                        <button id="button-modal2" class="lovecom" onclick="likecompback()">관심 취소</button>
+                        </c:if>     
+					
+				</div> 
+				<hr>
 			</div>
 		</div>
-	</div>
+	
 
 	<div class="pricing-content" align="center"">
-		<h4>${stocktoday.stock_close}</h4>
+		<h4><fmt:formatNumber value="${stocktoday.stock_close}" pattern="#,###" /></h4>
 		<c:if test="${stocklist.stock_diff lt 0}">
 				전일대비<td style="color: blue">▼${Math.abs(stocklist.stock_diff)}</td>
 		</c:if>
@@ -65,24 +69,64 @@
 	</div>
 
 	<div class="blog-left-content">
-		<div class="col-md-12 col-sm-12 col-xs-12">
-			<div class="single-blog">
+		<div class="col-md-8 col-sm-8 col-xs-8">
+		<div class="single-blog">
+			<div class="blog-image">
 				<div class="sale-statistic-inner notika-shadow mg-tb-30">
 					<div class="curved-inner-pro"></div>
 					<div id="dynamic-chart" class="flot-chart dyn-ctn-fr bar-hm-three"></div>
 				</div>
 			</div>
 		</div>
+		
 
 	</div>
-	
 	<div class="blog-sidebar-right">
-	<div class="col-md-8 col-sm-8 col-xs-12">
+	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+	<div class="support-services-red ">
+
+	<h6>매수 주문</h6>
+	<form
+						action="${pageContext.request.contextPath}/stock/buy/${stockcode.stock_code}"
+						method="post">
+						 <p><select id="buyorder"
+							onchange="order1(this.value)">
+							<option value="">가능</option>
+							<option value="1">100%</option>
+							<option value="2">50%</option>
+							<option value="4">25%</option>
+							<option value="10">10%</option>
+						</select> <input type="text" style="width: 70%;" id="changemodal1" name="stock_num"
+							placeholder="수량" value=""><br></p>
+						총 거래금액 :&nbsp;<input type="text" id="totalcost1" style="border: none;width:60%" value="" readonly><br><br> 
+							<input type="submit" data-toggle="modal" href="#modal" id="button-modal" style="border: none;background-color:#E00400;color:#FFF;width: 100%;" value="매수">	
+	
+	</div>
+	</div>
+	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+	<div  class="support-services-blue ">
+	
+	<h6 >매도 주문</h6>
+	<form
+						action="${pageContext.request.contextPath}/stock/sell/${stockcode.stock_code}" method="post">
+						<p><select name="sellorder" onchange="order2(this.value)">
+							<option value="">가능</option>
+							<option value="1">100%</option>
+							<option value="2">50%</option>
+							<option value="4">25%</option>
+							<option value="10">10%</option>
+						</select> <input type="text"  style="width: 70%;" id="changemodal2" name="stock_num"
+							placeholder="수량" value=""><br> </p>
+							총 거래금액 :&nbsp;<input  type="text" id="totalcost2" style="border: none;width:60%" value="" readonly><br><br> 
+							<input type="submit" id="button-modal2" style="border: none;background-color:#003ACE;width: 100%;" value="매도">
+								
 	</div>
 	
 	</div>
+	</div>
+	
 </div>
-
+</div>
 
 
 <div class="modal fade" id="modal" role="dialog">
@@ -97,7 +141,7 @@
 					class="flaticon-035-savings"></i></a>
 				<div class="support-content">
 					<h6>매수 정보를 입력하세요.</h6>
-					<form
+			<%-- 		<form
 						action="${pageContext.request.contextPath}/stock/buy/${stockcode.stock_code}"
 						method="post">
 						주문 금액 : ${stocktoday.stock_close}<br> <select id="buyorder"
@@ -109,7 +153,7 @@
 							<option value="10">10%</option>
 						</select> <input type="text" id="changemodal1" name="stock_num"
 							placeholder="수량" value=""><br>
-						총 거래금액:<input type="text" id="totalcost1" style="border: none;" value="" readonly><br> 
+						총 거래금액:<input type="text" id="totalcost1" style="border: none;" value="" readonly><br>  --%>
 						<br>*매수시 거래금액의 0.015% 수수료가 부과됩니다.&nbsp; <br>
 						<%-- 	<fmt:formatNumber id="fee1" value="" pattern="#,###" /> --%>
 						<!-- <input type="hidden" name="fee" id="feerate1" style="border:none;" value=""> <br> -->
@@ -123,7 +167,7 @@
 		</div>
 	</div>
 </div>
-</div>
+
 
 <div class="modal fade" id="modal2" role="dialog">
 	<div class="modal-dialog modal-lg">
@@ -137,7 +181,7 @@
 					class="flaticon-035-savings"></i></a>
 				<div class="support-content">
 					<h6>매도 정보를 입력하세요.</h6>
-					<form
+					<%-- <form
 						action="${pageContext.request.contextPath}/stock/sell/${stockcode.stock_code}" method="post">
 						주문 금액 : ${stocktoday.stock_close}<br> <select name="sellorder" onchange="order2(this.value)">
 							<option value="">가능</option>
@@ -147,7 +191,7 @@
 							<option value="10">10%</option>
 						</select> <input type="text" id="changemodal2" name="stock_num"
 							placeholder="수량" value=""><br> 
-							총 거래금액:<input type="text" id="totalcost2" style="border: none;" value="" readonly><br> 
+							총 거래금액:<input type="text" id="totalcost2" style="border: none;" value="" readonly><br>  --%>
 							<br>*매도시 증권거래세를 포함하여 거래금액의 0.25% 수수료가 부과됩니다.
 						<%-- 		<fmt:formatNumber id="fee2" value="" pattern="#,###" /> --%>
 						<input type="hidden" name="fee" id="feerate2"
@@ -163,7 +207,7 @@
 	</div>
 </div>
 
-
+</div>
 
 <!-- all js here -->
 <!-- Start Footer Area -->
@@ -238,6 +282,22 @@ function likecompany(){
 		url:"${pageContext.request.contextPath}/like/"+'${stockcode.stock_code}',		
 		success:function(){
 			alert("관심등록이 완료되었습니다.")
+			$(".lovecom#button-modal").remove()
+			$("#dis").append('<button id="button-modal2" class="lovecom" onclick="likecompback()">관심 취소</button>') 
+			
+		}
+	})		
+}
+
+function likecompback(){
+	
+	$.ajax({
+		type:"get",
+		url:"${pageContext.request.contextPath}/unlike/"+'${stockcode.stock_code}',		
+		success:function(){
+			alert("관심취소가 완료되었습니다.")
+			$(".lovecom#button-modal2").remove()
+			$("#dis").append('<button id="button-modal" class="lovecom" onclick="likecompany()">관심 등록</button>') 
 			
 		}
 	})		

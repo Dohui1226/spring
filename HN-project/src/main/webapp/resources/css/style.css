@@ -858,18 +858,44 @@ span.users {
     margin-bottom: 30px;
     border:1px solid #27B2A5;
 }
-.support-services::after {
+.support-services-red {
+    background: #fff;
+    position: relative;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    padding: 40px;
+    overflow: hidden;
+    border-radius: 3px;
+    transition: 0.4s;
+    z-index: 1;
+    margin-bottom: 30px;
+    border:1px solid #E00400;
+}
+.support-services-blue {
+    background: #fff;
+    position: relative;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    padding: 40px;
+    overflow: hidden;
+    border-radius: 3px;
+    transition: 0.4s;
+    z-index: 1;
+    margin-bottom: 30px;
+    border:1px solid #003ACE;
+}
+/* .support-services::after {
     position: absolute;
     content: "";
     left: 0px;
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(233,146,46,0.96);
+    background: #27B2A5;
     transition: 0.4s;
     opacity: 0;
     z-index: -1;
-}
+} */
 .support-images {
     float: left;
     font-size: 44px;
@@ -893,15 +919,15 @@ span.users {
 .support-content p {
     margin-bottom: 0px;
 }
-.support-services:hover::after {
+/* .support-services:hover::after {
     transition: 0.4s;
     opacity: 1;
-}
-.support-services:hover .support-images {
+} */
+/* .support-services:hover .support-images {
     transition: 0.4s;
     color: #fff;
      border: 1px solid #fff;
-}
+} */
 .support-services:hover .support-content h4, .support-services:hover .support-content p {
     color: #fff;
 }

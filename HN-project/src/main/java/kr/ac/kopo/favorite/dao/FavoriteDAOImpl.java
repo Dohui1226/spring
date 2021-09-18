@@ -53,5 +53,58 @@ public class FavoriteDAOImpl implements FavoriteDAO {
 		return list;
 	}
 	
+	/* 내가픽한 포트폴리오 */	
+	public List<PortfolioVO> selectport2(PortfolioVO pf) {
+		List<PortfolioVO> list= sqlSessionTemplate.selectList("favorite.FavoriteDAO.selectport2",pf);
+		for(PortfolioVO a : list) {
+			System.out.println(a);
+		}
+		return list;
+	}
+	
+	/* 매수해야할 항목3가지 */	
+	public List<StockTodayVO> recc(PortfolioVO pf) {
+		List<StockTodayVO> list= sqlSessionTemplate.selectList("favorite.FavoriteDAO.rec",pf);
+		return list;
+	}
+	
+	/* 포트폴리오 저장횟수 증가시키기 */
+	public void increport(WaggleJoinVO waggle2) {
+		sqlSessionTemplate.update("favorite.FavoriteDAO.increport", waggle2);
+		
+	}
+	
+	/* 그사람을 팔로우하는사람들 */
+	public List<FollowVO> selectfollow(FollowVO f2) {
+		List<FollowVO> list =sqlSessionTemplate.selectList("favorite.FavoriteDAO.selectfollower", f2);
+		return list;
+	}
+	
+	/* 그사람 그만좋아하기 팔로우 끊기 */
+	public void deletelikeman(FollowVO fl) {
+		sqlSessionTemplate.delete("favorite.FavoriteDAO.deletefollow",fl);
+		
+	}
+	
+	/* 관심등록취소 */
+	public void unlike(LikeCompanyVO lc) {
+		sqlSessionTemplate.delete("favorite.FavoriteDAO.unlike",lc);
+		
+	}
+	
+	/* 이기업 관심등록했는지 봐보기 */
+	public boolean selectcompany(LikeCompanyVO lc) {
+		
+		boolean flag= true;
+		try {
+			List<LikeCompanyVO> list =sqlSessionTemplate.selectOne("favorite.FavoriteDAO.selectcompany",lc);
+		}catch(Exception e){
+			flag=false;
+		}
+		
+		
+		return flag; 
+	}
+	
 
 }

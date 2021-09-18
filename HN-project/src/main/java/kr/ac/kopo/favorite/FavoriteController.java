@@ -44,25 +44,30 @@ public class FavoriteController {
 	@Autowired
 	private WaggleService wservice;
 	
+	@Autowired AccountService aservice;
+	
+	
 	/* 관심종목페이지 */
 	@GetMapping("/like/company")
 	public String myfavorite(HttpSession session, Model model) {
 		WaggleJoinVO waggle = (WaggleJoinVO)session.getAttribute("waggleVO");
 		List<StockTodayVO> st = service.likecomapnylist(waggle);
-	for(StockTodayVO a: st) {
-		System.out.println(a);
-	}
+	
 		model.addAttribute("companylist",st);
 		return "like/company";
 	}
 	
 	/*포트폴리오 등록*/
+	@ResponseBody
 	@GetMapping("/like/port")
-	public void myport(HttpSession session, Model model, @RequestParam(value="no") int no,PortfolioVO pf) {
+	public int myport(HttpSession session, Model model, @RequestParam(value="no") int no,PortfolioVO pf) {
 		WaggleJoinVO waggle =(WaggleJoinVO)session.getAttribute("waggleVO");
-		
+		//나의번호
 
 		WaggleJoinVO waggle2 = wservice.selectaccount(no);
+		//상대의 번호
+		//포티폴리오 저장횟수 증가시키기
+		service.increport(waggle2);
 		List<StockWeightVO> valuelist = wservice.wagglerankInfo(waggle2);
 		
 		for(StockWeightVO a:valuelist) {
@@ -72,61 +77,84 @@ public class FavoriteController {
 			pf.setPercent(a.getValuerate());
 			service.likeport(pf);
 		}
-			
+		WaggleJoinVO waggle3 = wservice.selectaccount(no);
+		return waggle3.getHit();
 	}
 
 	/* 포트폴리오로 추천종목뽑기 */
-	@ResponseBody
-	@PostMapping("port/recom")
-	public String portrecom(@RequestParam(value="day") String day,  @RequestParam(value="nickname") String nikname, PortfolioVO pf, HttpSession session) {
-		
-		WaggleJoinVO waggle = (WaggleJoinVO)session.getAttribute("waggleVO");
-		pf.setMe(waggle.getNo());
-		
-		SimpleDateFormat format1 = new SimpleDateFormat("yy/MM/dd");
-		String time1 = format1.format(day);
-		pf.setRegdate(day);
-		
-
-		List<PortfolioVO> list = service.selectport(pf);
-		
 	
-		return "";
+	@PostMapping("port/recom")
+	public String portrecom(@RequestParam(value="day",required=false) String day,Model model,
+			@RequestParam(value="nickname") String nickname, PortfolioVO pf, HttpSession session) {
+		WaggleJoinVO waggle = (WaggleJoinVO)session.getAttribute("waggleVO");
+	
+		StockBuySellVO bs = new StockBuySellVO();
+		bs.setMember_account(waggle.getMember_account());
+		double balance =aservice.maxbuy(bs);
+		model.addAttribute("balance",(int)balance);
+		model.addAttribute("nickname",waggle.getNickname());
+		
+		pf.setMe(waggle.getNo());
+		pf.setNickname(nickname);
+		Map<String,Map<String,Object>> portmap = new HashMap<String, Map<String,Object>>();	
+		
+		if(day ==null) {
+			Date time = new Date();
+			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+			String time1 = format1.format(time);
+			pf.setRegdate(time1);
+		}
+		else {
+			pf.setRegdate(day);
+		}
+		
+		//내가 선택한 포트폴리오
+		List<PortfolioVO> list = service.selectport2(pf);
+		PortfolioVO pf2 = new PortfolioVO();
+		
+		int rbalance=0;
+		for(PortfolioVO a :list) {
+			Map<String,Object> port =new HashMap<String,Object>();
+		
+			int tbalance = (int)(balance* a.getPercent());
+			
+			pf2.setStock_type(a.getStock_type());
+			List<StockTodayVO> na =service.recc(pf2);	
+			
+			for(StockTodayVO k: na) {
+				if(tbalance> k.getStock_close()) {
+					int stocknum =tbalance/k.getStock_close();
+					tbalance =tbalance-(stocknum*k.getStock_close());
+					port.put(k.getStock_name(), stocknum);
+				}
+				else {
+					
+					continue;
+				}
+				
+			}
+			portmap.put(a.getStock_type(), port);
+		}
+		
+		model.addAttribute("port2",portmap);
+		System.out.println(portmap);
+		return "/like/port3";
 	}
 
-	/* 한개 포트폴리오 선택하기 */
-	@ResponseBody
-	@PostMapping("port/recom")
-	public String selectport2(HttpSession session,PortfolioVO pf, Model model, @RequestParam(value="day") String day, @RequestParam(value="nickname") String nikname) {
-		WaggleJoinVO waggle = (WaggleJoinVO)session.getAttribute("waggleVO");
-		pf.setMe(waggle.getNo());
-		pf.setRegdate(day);
-		pf.setNickname(nikname);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		return null;
-	}
 	
 	
-	/* 날짜별 저장한 포트폴리오보기 */	
+	
+	/* 날짜별 저장한 포트폴리오보기 */
 	@PostMapping("/like/port/select")
 	public String selectport2(HttpSession session,PortfolioVO pf, @RequestParam(value="day",required=false) String day, Model model) {
 		WaggleJoinVO waggle = (WaggleJoinVO)session.getAttribute("waggleVO");
 		pf.setMe(waggle.getNo());	
 		pf.setRegdate(day);
-		System.out.println("컨트롤러");
+		
 		Map<String,Map<String,Object>> portmap = new HashMap<String, Map<String,Object>>();		
 		List<PortfolioVO> list = service.selectport(pf);	
 		List<PortfolioVO> list2 = service.selectportname(pf);
-		System.out.println("컨트롤러2");
+		
 		String nickname="" ;
 		String stock_type="";
 		double percent=0;
@@ -141,26 +169,15 @@ public class FavoriteController {
 						stock_type =a.getStock_type();
 						percent = a.getPercent();
 						port.put(stock_type,percent);
-						System.out.println(port);
 										
 				}				
 				portmap.put(nickname,port);	
-				
-			}
-		
-		}
-				
-		//Map<String, Object> map = new HashMap<String, Object>();		
-		//map.put("map",portmap);
+			}		
+		}	
 		model.addAttribute("port",portmap);
-		System.out.println("공유영역");
+		
 		return "/like/port2";
 	}
-	
-	
-	
-	
-	
 	
 	
 	
@@ -170,21 +187,15 @@ public class FavoriteController {
 		pf.setMe(waggle.getNo());
 		
 	
-			Date time = new Date();
-			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-			String time1 = format1.format(time);
-			pf.setRegdate(time1);
+		Date time = new Date();
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		String time1 = format1.format(time);
+		pf.setRegdate(time1);
 		
-		
-		
-		
-		
-
 		Map<String,Map<String,Object>> portmap = new HashMap<String, Map<String,Object>>();	
 		
 	
-		List<PortfolioVO> list = service.selectport(pf);
-		
+		List<PortfolioVO> list = service.selectport(pf);		
 		List<PortfolioVO> list2 = service.selectportname(pf);
 		
 		String nickname="" ;
@@ -194,28 +205,21 @@ public class FavoriteController {
 	
 		for(PortfolioVO b: list2) {
 			Map<String,Object> port =new HashMap<String,Object>();
-		nickname= b.getNickname();
-		
-			
+			nickname= b.getNickname();
+
 			for(PortfolioVO a: list) {
 					if(a.getNickname().equals(nickname)) {
 						stock_type =a.getStock_type();
 						percent = a.getPercent();
 						port.put(stock_type,percent);
-						System.out.println(port);
-										
+															
 				}				
-				portmap.put(nickname,port);	
-				
-			}
-		
-		}
-				
+				portmap.put(nickname,port);					
+			}		
+		}				
 		model.addAttribute("port",portmap);
 		return "/like/port";
 	}
-	
-	
 	
 	
 	/* 관심유저 */
@@ -228,8 +232,8 @@ public class FavoriteController {
 	/* 관심유저등록 */
 	@ResponseBody
 	@GetMapping("/like/follow/{no}")
-	public void insertfollow(HttpSession session,@PathVariable("no") int no, FollowVO fl) {
-		System.out.println("관심유저등록");
+	public int insertfollow(HttpSession session,@PathVariable("no") int no, FollowVO fl) {
+	
 		WaggleJoinVO waggle =(WaggleJoinVO)session.getAttribute("waggleVO");
 		fl.setMe(waggle.getNickname());
 		
@@ -237,19 +241,54 @@ public class FavoriteController {
 		fl.setLikeman(waggle2.getNickname());
 		
 		service.insertlikeman(fl);
+		FollowVO f2 = new FollowVO();
+		f2.setLikeman(waggle2.getNickname());
+		List<FollowVO> list = service.selectfollow(f2);
 		
+		return list.size();
 	}
 
+
+	/* 관심유저등록 취소 */
+	@ResponseBody
+	@GetMapping("/like/followback/{no}")
+	public int deletefollow(HttpSession session,@PathVariable("no") int no, FollowVO fl) {
+	
+		WaggleJoinVO waggle =(WaggleJoinVO)session.getAttribute("waggleVO");
+		fl.setMe(waggle.getNickname());
+		
+		WaggleJoinVO waggle2 = wservice.selectaccount(no);
+		fl.setLikeman(waggle2.getNickname());
+		
+		service.deletelikeman(fl);
+		FollowVO f2 = new FollowVO();
+		f2.setLikeman(waggle2.getNickname());
+		List<FollowVO> list = service.selectfollow(f2);
+		
+		return list.size();
+	}
+	
+	
+	
+	
 	/* 기업관심등록 */
 	@ResponseBody
 	@GetMapping("/like/{code}")
 	public void insertlike(HttpSession session, @PathVariable("code") String code,LikeCompanyVO lc) {
 		WaggleJoinVO waggle = (WaggleJoinVO)session.getAttribute("waggleVO");
-		System.out.println(code);
 		lc.setNo(waggle.getNo());
 		lc.setStock_code(code);
 		service.insertlike(lc);
 		
-		
+	}
+	
+	/* 관심등록취소 */
+	@ResponseBody
+	@GetMapping("/unlike/{code}")
+	public void unlike(HttpSession session, @PathVariable("code") String code,LikeCompanyVO lc) {
+		WaggleJoinVO waggle = (WaggleJoinVO)session.getAttribute("waggleVO");
+		lc.setNo(waggle.getNo());
+		lc.setStock_code(code);
+		service.unlike(lc);
 	}
 }

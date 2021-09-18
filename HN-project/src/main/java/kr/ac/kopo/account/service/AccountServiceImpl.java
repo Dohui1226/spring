@@ -71,4 +71,10 @@ public class AccountServiceImpl implements AccountService {
 		int fol =dao.follower(follow);
 		return fol;
 	}
+	
+	/* 내가 그사람 팔로우 하는지 */
+	public boolean selectfollow(FollowVO follow) {
+		boolean bool= dao.selectfollow(follow);
+		return bool;
+	}
 }

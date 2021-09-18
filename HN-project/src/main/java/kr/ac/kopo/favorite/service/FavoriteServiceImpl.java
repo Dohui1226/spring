@@ -21,9 +21,15 @@ public class FavoriteServiceImpl implements FavoriteService {
 	@Autowired
 	private FavoriteDAO dao;
 	
-	
+	/* 관심종목 등록 */
 	public void insertlike(LikeCompanyVO lc) {
 		dao.insertlike(lc);
+		
+	}
+	
+	/* 관심등록 취소 */
+	public void unlike(LikeCompanyVO lc) {
+		dao.unlike(lc);
 		
 	}
 	
@@ -57,5 +63,45 @@ public class FavoriteServiceImpl implements FavoriteService {
 		List<PortfolioVO> list = dao.selectportname(pf);
 		return list;
 	}
+	
+	/* 내가픽한 포트폴리오 */
+	public List<PortfolioVO> selectport2(PortfolioVO pf) {
+		List<PortfolioVO> list = dao.selectport2(pf);
+
+		return list;
+	}
+	
+	/* 매수해야할 항목 */
+	public List<StockTodayVO> recc(PortfolioVO pf) {
+		List<StockTodayVO> list = dao.recc(pf);
+		return list;
+	}
+	
+	/* 포트폴리오 저장횟수 증가시키기 */
+	public void increport(WaggleJoinVO waggle2) {
+		dao.increport(waggle2);
+		
+	}
+	
+	/* 그사람을 팔로우하는사람들 */
+	public List<FollowVO> selectfollow(FollowVO f2) {
+		List<FollowVO> list =dao.selectfollow(f2);
+		return list;
+	}
+	
+	
+	/* 그사람 그만 좋아하기 (팔로워 끊기) */
+	public void deletelikeman(FollowVO fl) {
+		dao.deletelikeman(fl);
+		
+	}
+	
+	/* 이기업 관심등록했는지 봐보기 */
+	public boolean selectcompany(LikeCompanyVO lc) {
+		boolean bool =dao.selectcompany(lc);
+		
+		return bool;
+	}
+	
 	
 }

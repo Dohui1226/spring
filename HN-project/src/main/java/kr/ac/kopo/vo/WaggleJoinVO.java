@@ -8,7 +8,17 @@ public class WaggleJoinVO {
 	private String member_account;
 	private int hart;
 	private String info_open;
+	private int hit;
 	
+	
+	
+	
+	public int getHit() {
+		return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
 	public int getNo() {
 		return no;
 	}
@@ -48,8 +58,9 @@ public class WaggleJoinVO {
 	@Override
 	public String toString() {
 		return "WaggleJoinVO [no=" + no + ", member_id=" + member_id + ", nickname=" + nickname + ", member_account="
-				+ member_account + ", hart=" + hart + ", info_open=" + info_open + "]";
+				+ member_account + ", hart=" + hart + ", info_open=" + info_open + ", hit=" + hit + "]";
 	}
+	
 	
 	
 

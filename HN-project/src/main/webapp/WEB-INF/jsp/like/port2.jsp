@@ -55,7 +55,7 @@
                          	<tr>
                          	<th width="15%" align="center">닉네임</th>
                          	<th width="15%" align="center">종목타입</th>
-  							<th width="15%" align="center">비중</th>
+  							<th width="15%" align="center">비중(%)</th>
   						
                          	</tr>
                          	</thead>
@@ -64,14 +64,15 @@
                                     <tr>
                                         <td style="vertical-align:middle" rowspan="${fn:length(ranklist.value)}" >
                                         <strong>${ranklist.key}</strong><br><br>&nbsp;&nbsp;
-                                        <button class="gut" value="${ranklist.key}" onclick="cc(this.value)">추천</button></td>
+                                        <button class="gut" value="${ranklist.key}" onclick="cc(this.value)">종목추천</button></td>
                                    			
                                    		 <c:forEach items="${ranklist.value}" var="ranklist1" varStatus="loop"> 
                                    			 <td>${ranklist1.key}</td>
-                                   			 <td>${ranklist1.value*100}%</td> </tr> 
+                                   			 <td><fmt:formatNumber value="${ranklist1.value*100}" pattern="##.##"/>
+                                   		</td></tr>
                                    		
                                    		</c:forEach>
-                                   			<%-- //<td rowspan="${fn:length(ranklist.value)}">dd</td> --%>
+                                   			
                                     
                                     </c:forEach>
                                 </tbody>
@@ -82,82 +83,13 @@
                     </div>
                 </div>
             </div>
+            
+			</div>
 			
-						</div>
-					</div>
-	
 <jsp:include page="../footer.jsp" />
 	
 </body>
-<script>	
-
-var dayinfo;
-function dayinput(){
-	dayinfo =document.querySelector("#day").value;
-	$.ajax({
-		type:"post",
-		url:"${pageContext.request.contextPath}/like/port/select",
-		data:{day :dayinfo}, 
-		dataType : "json",
-		success:function(map){
-			console.log(map.map)
-				$.each(map.map, function(index,item) {
-					console.log(index)	
-					let temp = $('ajaxtemplate').text()
-										temp =temp.replace(\port\/g,index)
-						
-										html +=temp;
-								$.each(item, function(index1,item1) {
-	
-									console.log(index1)
-									console.log(item1)
-								})
-					})
-					$('#ajax').html(html)
-		}
-	})
-	
-}
-
-	
-function cc(param){
-  
-	console.log(param)
-	$.ajax({
-		type:"post",
-		url:"${pageContext.request.contextPath}/port/recom",
-		data:{day :dayinfo,nickname:param}, 
-		success:function(){
-		}
-	})
-	
-}
 
 
-</script>
 
-<script id="ajaxtemplate" type="text/template">
-<table width="70%" class="table table-striped">
-	<thead>
-	<tr>
-	<th width="15%" align="center">닉네임</th>
-	<th width="15%" align="center">종목타입</th>
-	<th width="15%" align="center">비중</th>
-
-	</tr>
-	</thead>
-    <tbody>
-     <c:forEach items="${requestScope.port}" var="ranklist" varStatus="loop"> 
-        <tr>
-            <td style="vertical-align:middle" rowspan="${fn:length(ranklist.value)}" >
-            <strong>${ranklist.key}</strong><br><br>&nbsp;&nbsp;
-            <button class="gut" value="${ranklist.key}" onclick="cc(this.value)">추천</button></td>  			
-       		 <c:forEach items="${ranklist.value}" var="ranklist1" varStatus="loop"> 
-       			 <td>${ranklist1.key}</td>
-       			 <td>${ranklist1.value*100}%</td> </tr>    		
-       		</c:forEach>       
-        </c:forEach>
-    </tbody>
-</table>
-</script>
 </html>

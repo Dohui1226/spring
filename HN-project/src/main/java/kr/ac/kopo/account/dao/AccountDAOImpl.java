@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import kr.ac.kopo.vo.AccountDailyVO;
 import kr.ac.kopo.vo.AccountVO;
 import kr.ac.kopo.vo.FollowVO;
+import kr.ac.kopo.vo.LikeCompanyVO;
 import kr.ac.kopo.vo.MemberVO;
 import kr.ac.kopo.vo.MyStockVO;
 import kr.ac.kopo.vo.StockBuySellVO;
@@ -76,5 +77,18 @@ public class AccountDAOImpl implements AccountDAO {
 		   }
 		return fol;
 	   }
+	 
+		/* 내가 그사람 팔로우하나요? */
+	   public boolean selectfollow(FollowVO follow) {
+		boolean bool=true;
+		try {
+			List<FollowVO> list =sqlSessionTemplate.selectOne("account.AccountDAO.selectfollow",follow);
+		}catch(Exception e) {
+			bool=false;
+		}
+		System.out.println(bool);   
+		   
+		return bool;
+	}
 
 }

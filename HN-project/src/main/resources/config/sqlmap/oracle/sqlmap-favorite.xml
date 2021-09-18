@@ -40,9 +40,9 @@ select * from follow where me=#{me}
 </select>
 
 <!-- 이사람 팔로우 그만두기 -->
-<select id="deletefollow">
+<delete id="deletefollow" parameterType="followVO">
 delete from follow where me=#{me} and likeman=#{likeman}
-</select>
+</delete>
 
 <!-- 누구의포트폴리오인지 몇개항목이 있는지 -->
 <select id="selectportname" parameterType="portfolioVO" resultType="portfolioVO">
@@ -61,5 +61,29 @@ where p.no=w.no and me=#{me} and to_char(regdate, 'yyyy-mm-dd') = #{regdate}
 <select id="selectport2" parameterType="portfolioVO" resultType="portfolioVO">
 select p.percent,p.stock_type,p.regdate,w.nickname from portfolio p, hn_waggle w
 where p.no=w.no and me=#{me} and to_char(regdate, 'yyyy-mm-dd') = #{regdate} and nickname=#{nickname}
+</select>
+
+<!-- 매수해야할 항목 3가지 -->
+<select id="rec" parameterType="portfolioVO" resultType="stocktodayVO">
+select * from(select a.stock_code,a.stock_close,a.stock_name,valuediffrate from
+(select * from(select * from hn_stock_close order by close_date desc)
+where <![CDATA[rownum <=40]]> )a, 
+(select * from hn_stock_code where stock_type=#{stock_type})b
+where a.stock_code =b.stock_code order by valuediffrate)where  <![CDATA[rownum <=3]]>
+</select>
+
+<!-- 포트폴리오 저장횟수 증가시키기 -->
+<update id="increport" parameterType="wagglejoinVO">
+update hn_waggle set hit = hit+1 where no=#{no}
+</update>
+
+<!-- 관심등록 취소하기 -->
+<delete id="unlike" parameterType="likecompanyVO">
+delete from likecompany where no=#{no} and stock_code=#{stock_code}
+</delete>
+
+
+<select id="selectcompany" parameterType="likecompanyVO" resultType="likecompanyVO">
+select * from likecompany where no=#{no} and stock_code=#{stock_code}
 </select>
 </mapper>

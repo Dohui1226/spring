@@ -53,13 +53,13 @@ where acc_num=#{member_account} and tra_type=#{tra_type} order by tra_date desc)
 </select> 
 
 
+<!-- 내가 그사람 팔로하는지? -->
+<select id="selectfollow" parameterType="followVO" resultType="followVO">
+select * from follow where me=#{me} and likeman=#{likeman} 
+
+</select>
 
 
-
-<!-- 팔로우하기 -->
-<!-- <select id ="insertfollow">
-insert into follow(no, follower) values(#{no},#{follower})
-</select> -->
 
 <!--내가 좋아하는 사람의 숫자 -->
 <select id ="follow" parameterType= "followVO" resultType="int">
@@ -73,19 +73,8 @@ select nvl(count,0) count from (select count(*) count from follow where me=#{me}
 select nvl(count,0) count from(select count(*) count from follow where likeman=#{likeman} group by likeman)
 </select> 
 
-<!-- 팔로우끊기 -->
-<!-- <select id ="deletefollow">
-delete from follow where no =#{no}
-</select> -->
 
-<!-- 팔로워보기 -->
-<!-- <select id = "selectfollow" resultType="followVO">
-select no from follow where follower=#{follower}
-</select> -->
 
-<!-- 팔로잉보기 -->
-<!-- <select id="selectfollowing" resultType="followVO">
-select follower from follow where no=#{no}
-</select> -->
+
 
 </mapper>

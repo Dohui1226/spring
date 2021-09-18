@@ -28,5 +28,28 @@ public interface FavoriteDAO {
 	
 	/* 누구의 포트폴리오인지 몇개종목인지 */
 	List<PortfolioVO> selectportname(PortfolioVO pf);
+	
+	
+	/* 내가 픽한 포트폴리오 */
+	List<PortfolioVO> selectport2(PortfolioVO pf);
+	
+	/* 매수해야할 3가지 항목 */
+	List<StockTodayVO> recc(PortfolioVO pf);
 
+	/* 포트폴리오 저장횟수 증가시키기 */
+	void increport(WaggleJoinVO waggle2);
+	
+	/* 그사람을 팔로우 하는 사람들 */
+	List<FollowVO> selectfollow(FollowVO f2);
+
+	/* 그사람 그만좋아하기 팔로우 끊기 */
+	void deletelikeman(FollowVO fl);
+	
+	/* 관심등록취소 */
+	void unlike(LikeCompanyVO lc);
+
+	/* 이기업 관심등록했는지 봐보기 */
+	boolean selectcompany(LikeCompanyVO lc); //false는 등록하지않은것.
+
+	
 }
