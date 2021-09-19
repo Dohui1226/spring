@@ -2,8 +2,10 @@ package kr.ac.kopo.waggle.servie;
 
 import java.util.List;
 
+import kr.ac.kopo.vo.AccountDailyVO;
 import kr.ac.kopo.vo.AddHeartVO;
 import kr.ac.kopo.vo.CouponVO;
+import kr.ac.kopo.vo.DetailStockTypeVO;
 import kr.ac.kopo.vo.MemberVO;
 import kr.ac.kopo.vo.MyStockVO;
 import kr.ac.kopo.vo.RankListVO;
@@ -23,7 +25,8 @@ public interface WaggleService {
 	List<RankListVO> wagglerank();//랭킹리스트 뽑기
 	List<StockWeightVO> wagglerankInfo(WaggleJoinVO waggle);
 	public WaggleJoinVO selectaccount(int no); //회원번호로 가져오기
-	List<MyStockVO> typecompany(StockBuySellVO buysell);//회원번호로 가져온 보유종목..등 
+	List<DetailStockTypeVO> typecompany(StockBuySellVO buysell);//회원번호로 가져온 보유종목..등 
 	RankListVO wagglemyrank(WaggleJoinVO waggle); //나의랭킹정보
+	List<AccountDailyVO> wagglerateInfo(WaggleJoinVO waggle);//날짜랑 수익률 조회
 	
 }

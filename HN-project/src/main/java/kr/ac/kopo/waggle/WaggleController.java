@@ -14,6 +14,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,9 +26,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.ac.kopo.account.service.AccountService;
 import kr.ac.kopo.favorite.service.FavoriteService;
+import kr.ac.kopo.vo.AccountDailyVO;
 import kr.ac.kopo.vo.AccountVO;
 import kr.ac.kopo.vo.AddHeartVO;
 import kr.ac.kopo.vo.CouponVO;
+import kr.ac.kopo.vo.DetailStockTypeVO;
 import kr.ac.kopo.vo.FollowVO;
 import kr.ac.kopo.vo.MemberVO;
 import kr.ac.kopo.vo.MyStockVO;
@@ -111,6 +114,7 @@ public class WaggleController {
 	
 
 	/* 와글와글 랭킹 개인정보 */
+	@Transactional
 	@GetMapping("/waggle/rankInfo/{no}")
 	public String wagglerankInfo(@PathVariable("no") int no,HttpSession session, Model model, StockBuySellVO buysell, FollowVO follow) {
 		WaggleJoinVO waggle = service.selectaccount(no);
@@ -128,12 +132,10 @@ public class WaggleController {
 		
 		WaggleJoinVO waggle2 =(WaggleJoinVO) session.getAttribute("waggleVO");
 		follow.setMe(waggle2.getNickname());
-		System.out.println(follow.getMe());
-		System.out.println(follow.getLikeman());
-		/*내가 이사람 follow를 하고 있는지*/
+	
+		
 		boolean bool = accountservice.selectfollow(follow);
 		
-		System.out.println(bool);
 		if(bool) {
 			model.addAttribute("selectf",bool);
 		}
@@ -157,32 +159,43 @@ public class WaggleController {
 	}
 	
 	
-	/* 주식비중구하기 */
+	/* 주식비중구하기 파이차트*/
+	@Transactional
 	@ResponseBody
 	@PostMapping("/waggle/rankInfo/piechart")
-	public Map<String, Object> piechart(@RequestParam(value="no") int no){
+	public Map<String, Object> piechart(@RequestParam(value="no") int no, HttpSession session){
 	
 		WaggleJoinVO waggle = service.selectaccount(no);
+		WaggleJoinVO waggle2 =(WaggleJoinVO)session.getAttribute("waggleVO");//나
 		
 		List<StockWeightVO> valuelist = service.wagglerankInfo(waggle);
-	
+		List<AccountDailyVO> ratelist = service.wagglerateInfo(waggle);//상대방 날짜:수익률
+		List<AccountDailyVO> ratelist2 = service.wagglerateInfo(waggle2);//나 날짜: 수익률	
 	
 		Map<String, Object> map = new HashMap<String, Object>();		
 		map.put("valuelist",valuelist);
+		map.put("rateme",ratelist);
+		map.put("rateanother",ratelist2);
 		return map;
 		
 	}
 	
+	
+	
+	
 	/* 계좌번호로 수익률 매일 조회하기 */
 	@ResponseBody
 	@PostMapping("/waggle/rankInfo/linechart")
-	public Map<String, Object> linechart(@RequestParam(value="no") int no){
-		WaggleJoinVO waggle = service.selectaccount(no);
+	public Map<String, Object> linechart(@RequestParam(value="no") int no,HttpSession session){
+		WaggleJoinVO waggle = service.selectaccount(no);//상대방
+		WaggleJoinVO waggle2 =(WaggleJoinVO)session.getAttribute("waggleVO");//나
 		
-		List<StockWeightVO> ratelist = service.wagglerankInfo(waggle);
+		List<AccountDailyVO> ratelist = service.wagglerateInfo(waggle);//상대방 날짜:수익률
+		List<AccountDailyVO> ratelist2 = service.wagglerateInfo(waggle2);//나 날짜: 수익률																	//나 날짜:수익률
 		Map<String, Object> map = new HashMap<String, Object>();		
 		
-		map.put("ratelist",ratelist);
+		map.put("rateme",ratelist);
+		map.put("rateanother",ratelist2);
 		return map;
 		
 	}
@@ -234,20 +247,20 @@ public class WaggleController {
 	
 	
 	/* 회원번호로 보유 종목 가격 알기 */
-	@ResponseBody
+	
 	@PostMapping("stock/typecompany")
-	public  Map<String, Object> typecompany(@RequestParam(value="no") int no, @RequestParam(value="type") String type, StockBuySellVO buysell) {
+	public String typecompany(@RequestParam(value="no") int no,Model model, @RequestParam(value="type") String type, StockBuySellVO buysell) {
 		WaggleJoinVO waggle = service.selectaccount(no);
 		buysell.setMember_account(waggle.getMember_account());
 		buysell.setStock_type(type);
-		List<MyStockVO> list = service.typecompany(buysell);
-		Map<String, Object> map = new HashMap<String, Object>();		
 		
-		map.put("list",list);
-		return map;
+		List<DetailStockTypeVO> list = service.typecompany(buysell);
+
+		model.addAttribute("list",list);
+		return "waggle/rankInfoDetail";
 	}
 	
-	/* 팔로우확인하기 */
+
 	
 	
 }

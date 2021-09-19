@@ -10,7 +10,6 @@
 <select id="accountAll" parameterType="memberVO" resultType="accountVO">
 select * from hn_acc
 where member_id=#{member_id}
-
 </select>
 
 
@@ -72,9 +71,6 @@ select nvl(count,0) count from (select count(*) count from follow where me=#{me}
 <select id ="follower" parameterType= "followVO" resultType="int">
 select nvl(count,0) count from(select count(*) count from follow where likeman=#{likeman} group by likeman)
 </select> 
-
-
-
 
 
 </mapper>

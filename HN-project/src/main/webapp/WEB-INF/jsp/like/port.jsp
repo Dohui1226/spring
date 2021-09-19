@@ -159,9 +159,7 @@ function dayinput(){
 		data:{day :dayinfo}, 
 		dataType : "text"
 	}).done(function(result){
-		console.log(result)
 		let html = $('<div>').html(result)
-		console.log(html);
 		
 		let content =html.find('div#ajax');
 		let contents =content.html();

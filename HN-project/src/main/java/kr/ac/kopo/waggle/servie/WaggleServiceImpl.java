@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.ac.kopo.vo.AccountDailyVO;
 import kr.ac.kopo.vo.AccountVO;
 import kr.ac.kopo.vo.AddHeartVO;
 import kr.ac.kopo.vo.CouponVO;
+import kr.ac.kopo.vo.DetailStockTypeVO;
 import kr.ac.kopo.vo.MemberVO;
 import kr.ac.kopo.vo.MyStockVO;
 import kr.ac.kopo.vo.RankListVO;
@@ -117,14 +119,20 @@ public class WaggleServiceImpl implements WaggleService{
 	}
 	
 	
-	public List<MyStockVO> typecompany(StockBuySellVO buysell) {
-			List<MyStockVO> list =waggleDAO.typecompany(buysell);
+	public List<DetailStockTypeVO> typecompany(StockBuySellVO buysell) {
+			List<DetailStockTypeVO> list =waggleDAO.typecompany(buysell);
 			return list;
 		}
 	
 	public RankListVO wagglemyrank(WaggleJoinVO waggle) {
 		RankListVO my = waggleDAO.wagglemyrank(waggle);
 		return my;
+	}
+	
+	/*계좌번호로 날짜랑 수익률 조회 */
+	public List<AccountDailyVO> wagglerateInfo(WaggleJoinVO waggle) {
+		List<AccountDailyVO> list = waggleDAO.wagglerateInfo(waggle);
+		return list;
 	}
 	}
 

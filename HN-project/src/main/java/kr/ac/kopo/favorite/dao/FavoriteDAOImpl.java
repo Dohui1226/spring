@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import kr.ac.kopo.vo.FollowVO;
 import kr.ac.kopo.vo.LikeCompanyVO;
-import kr.ac.kopo.vo.Portfolio2VO;
 import kr.ac.kopo.vo.PortfolioVO;
 import kr.ac.kopo.vo.StockTodayVO;
 import kr.ac.kopo.vo.WaggleJoinVO;

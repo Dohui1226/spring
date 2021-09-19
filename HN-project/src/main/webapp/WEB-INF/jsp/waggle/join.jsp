@@ -36,18 +36,18 @@ input[id="cb1"]:checked + label {
 
 <jsp:include page="../header.jsp" />
 <!-- header end -->
-<!-- Start breadcumb Area -->
+
+
+
 <div class="page-area">
 	<div class="breadcumb-overlay"></div>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="breadcrumb text-center">
-					<div class="section-headline white-headline">
-						<h3>와글와글</h3>
-					</div>
+				
 					<ul class="breadcrumb-bg">
-						<li class="home-bread">Waggle</li>
+					
 						<li>가입하기</li>
 					</ul>
 				</div>
@@ -185,7 +185,7 @@ input[id="cb1"]:checked + label {
 														id="sus_email1" name="member_account" placeholder="수익률 연결 및 결제 계좌">
 												</div>
 												<div class="price-btn blue">
-													<a class="blue" data-toggle="modal" href="#account1">계좌
+													<a class="blue" data-toggle="modal" href="#account1">
 														선택</a>
 												</div>
 												<div class="help-block with-errors"></div>
@@ -223,8 +223,8 @@ input[id="cb1"]:checked + label {
 			<div class="modal-body">
 				<a class="support-images" href="#"><i class="flaticon-035-savings"></i></a>
 				<div class="support-content">	
-				종합계좌로 연결해주세요.
-				<c:forEach items="${requestScope.accountlist}" var="accountlist" varStatus="loop"><br> 
+				<p>종합계좌로 연결을 추천합니다.</p>
+				<c:forEach items="${requestScope.accountlist}" var="accountlist" varStatus="loop"> 
 					<input type="radio" name="accountinfo" id="accountinfo" value="${accountlist.acc_num}">&nbsp;${accountlist.acc_num}&nbsp; &nbsp; ${accountlist.acc_name} <br>
 					</c:forEach>
 				</div>

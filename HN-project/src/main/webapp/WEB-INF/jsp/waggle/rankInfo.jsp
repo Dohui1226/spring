@@ -117,7 +117,7 @@
 															<ul>
 															<c:forEach items="${requestScope.value}" var="ranklist" varStatus="status">
 																<li><span>${status.count}</span> 
-																<a data-toggle="collapse" id="type" href ="#" value="${ranklist.stock_type}" onclick="company()">${ranklist.stock_type}&nbsp;&nbsp;&nbsp; 
+																<a data-toggle="modal" id="type" href ="#modal1" value="${ranklist.stock_type}" onclick="return company(this);">${ranklist.stock_type}; 
 																<fmt:formatNumber value="${ranklist.value}"  pattern="###,###,###,###" />원
 																<label text-align="right">
 																<fmt:formatNumber value="${ranklist.valuerate*100}" pattern="##.##" />%
@@ -290,7 +290,27 @@
 </div>
 </div>
 <!--End of Blog Area-->
-
+<div class="modal fade" id="modal1" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">보유 종목 정보</h4>
+					
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				
+				<div id="tab">	
+				
+				</div>
+			</div>
+			<div class="modal-footer">
+			
+				<button id="button-modal2" data-dismiss="modal">닫기</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 
 
@@ -380,6 +400,17 @@
 					piedata.push(round.toFixed(2));
 
 				})
+				$.each(map.rateme, function(index,item) {
+					varlabels.push(item.wdate);
+					var rate1 = item.rate* 100
+					vardatame.push(round.toFixed(2));
+
+				})
+				$.each(map.rateanother, function(index,item) {
+					var rate2 = item.rate * 100
+					vardataco.push(round.toFixed(2));
+
+				})
 					doughnut()
 					line()
 					},error : function() {
@@ -404,7 +435,7 @@
 					borderColor : '#00c292',
 					lineTension : 0, // 0이면 꺾은선 그래프, 숫자가 높을수록 둥글해짐
 					pointRadius : 0, // 각 지점에 포인트 주지 
-					data : [ 40, 50, 60, 70, 80, 90 ]
+					data : vardataco
 				}, {
 					label : '내 수익률',
 					type : 'line',
@@ -413,7 +444,7 @@
 					borderColor : '#fb9678',
 					lineTension : 0,
 					pointRadius : 0,
-					data : [ 100, 120, 150, 100, 180, 200 ]
+					data : vardatame
 				} ]
 			},
 
@@ -474,30 +505,29 @@
 	}
 	
 	
-	function company(){
+	function company(param){
 		var stockname=[];
 		var stockvalue=[];
-		$("#type").each(function(){
-			var typename= $(this).attr("value"); 
-		
-			$.ajax({
+		var pa =$(param).text();
+	
+		test = pa.split(";");
+		$.ajax({
 				url : '${pageContext.request.contextPath}/stock/typecompany',
 				type : 'post',
-				data : {no : "${waggle.no}", type: typename},
-				dataType : "json",
-				success : function(list) {
-				
-					$.each(list.list, function(index,item) {
-						
+				data : {no : "${waggle.no}", type: test[0]},
+				dataType : 'text',
+				success : function(result) {			
+					let html = $('<div>').html(result)
 					
-						$('#bb').append(item.stock_name+'&nbsp;'+item.stock_value+'<br>')
-												
-						
-					})
-
+					let content =html.find('div#detailhold');
+					let contents =content.html();
+					
+					$("#tab").html(contents);
+					
 				}
 			})		
-		})				
+	
+		return true;
 	}
 	
 	

@@ -5,12 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.ac.kopo.account.dao.AccountDAO;
 import kr.ac.kopo.favorite.dao.FavoriteDAO;
-import kr.ac.kopo.vo.AccountDailyVO;
 import kr.ac.kopo.vo.FollowVO;
 import kr.ac.kopo.vo.LikeCompanyVO;
-import kr.ac.kopo.vo.Portfolio2VO;
 import kr.ac.kopo.vo.PortfolioVO;
 import kr.ac.kopo.vo.StockTodayVO;
 import kr.ac.kopo.vo.WaggleJoinVO;

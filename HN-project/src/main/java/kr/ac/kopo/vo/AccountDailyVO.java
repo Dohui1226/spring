@@ -4,7 +4,7 @@ public class AccountDailyVO {
 	
 	private String acc_num;
 	private int no;
-	private float rate;
+	private double rate;
 	private int tstock;
 	private int tcash;
 	private String wdate;
@@ -21,10 +21,10 @@ public class AccountDailyVO {
 	public void setNo(int no) {
 		this.no = no;
 	}
-	public float getRate() {
+	public double getRate() {
 		return rate;
 	}
-	public void setRate(float rate) {
+	public void setRate(double rate) {
 		this.rate = rate;
 	}
 	public int getTstock() {

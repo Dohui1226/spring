@@ -12,10 +12,7 @@
  <div class="bsc-tbl-st">
 					<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 					<div id="recc">
-					<p>${nickname}</p>님<br>
-					 현재 현금/예수금 <fmt:formatNumber value="${balance}" pattern="###,###,###,###"/>원으로 <br>
-            
-					 해당 금액 및 포트폴리오와 알맞은 최적의 매수 종목 및 타입은 아래와 같습니다.
+		
 						 <table width="70%" class="table table-striped">
                          	<thead>
                          	<tr>
@@ -42,6 +39,10 @@
                                     </c:forEach>
                                 </tbody>
                             </table>
+                            <p>${nickname}</p>님<br>
+					 현재 현금/예수금 <fmt:formatNumber value="${balance}" pattern="###,###,###,###"/>원으로 <br>
+            
+					 해당 금액 및 포트폴리오와 알맞은 최적의 매수 종목 및 타입은 아래와 같습니다.
 						</div>
 					</div>
 					</div>

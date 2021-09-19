@@ -2,8 +2,10 @@ package kr.ac.kopo.waggle.dao;
 
 import java.util.List;
 
+import kr.ac.kopo.vo.AccountDailyVO;
 import kr.ac.kopo.vo.AddHeartVO;
 import kr.ac.kopo.vo.CouponVO;
+import kr.ac.kopo.vo.DetailStockTypeVO;
 import kr.ac.kopo.vo.MemberVO;
 import kr.ac.kopo.vo.MyStockVO;
 import kr.ac.kopo.vo.RankListVO;
@@ -23,7 +25,8 @@ public interface WaggleDAO {
 	List<RankListVO> wagglerank();
 	WaggleJoinVO selectaccount(WaggleJoinVO waggle);
 	List<StockWeightVO> stockweigth(WaggleJoinVO waggle);
-	List<MyStockVO> typecompany(StockBuySellVO buysell);
+	List<DetailStockTypeVO> typecompany(StockBuySellVO buysell);
 	RankListVO wagglemyrank(WaggleJoinVO waggle);
+	List<AccountDailyVO> wagglerateInfo(WaggleJoinVO waggle);//계좌번호로 날짜랑 수익률 조회
 
 }

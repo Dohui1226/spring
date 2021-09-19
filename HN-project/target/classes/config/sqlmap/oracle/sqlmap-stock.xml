@@ -56,8 +56,8 @@ call sell(#{member_account}, #{stock_code},#{stock_num},#{fee})
 update hn_stock_code set value=#{value} where stock_code=#{stock_code}
 </select>
 
-<!-- 매일종가 -->
-<select id="insertclose" statementType="CALLABLE" parameterType="stocktodayVO">
+<!-- 매일종가 입력 -->
+<select id="insertclose2" statementType="CALLABLE" parameterType="stocktodayVO">
 call dailyupdate(#{close_date}, #{stock_code},#{stock_close},#{stock_diff},#{stock_name})
 
 </select>

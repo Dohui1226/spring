@@ -129,7 +129,7 @@
                                             </c:if>			
 				
 								</tr>
-								<c:set var= "total" value="${total + stocklist.stock_num*stocklist.stock_close}"/>
+								<c:set var= "total" value="${total + (stocklist.stock_num*stocklist.stock_close)}"/>
 								</c:forEach>
 								
 							</table>

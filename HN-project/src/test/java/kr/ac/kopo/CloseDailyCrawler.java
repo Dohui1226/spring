@@ -27,7 +27,7 @@ public class CloseDailyCrawler {
 		
 		@Test
 		public void inserclose() throws Exception{
-			System.out.println(11);
+			
 			String[] aa = mapper.selectcode();
 			for(int i=0; i<aa.length;i++) {
 			
