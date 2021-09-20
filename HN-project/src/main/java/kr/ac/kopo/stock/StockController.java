@@ -1,6 +1,8 @@
 package kr.ac.kopo.stock;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -110,6 +112,18 @@ public class StockController {
 		System.out.println("리포트");
 	
 		return "stock/report/"+code;
+	}
+	
+	
+	@ResponseBody
+	@PostMapping("stock/close/line")
+	public Map<String, Object> stockline( @RequestParam(value="stock_code") String stock_code, StockTodayVO st){
+		st.setStock_code(stock_code);
+		List<StockTodayVO> list= stockservice.stockline(st);
+		
+		Map<String, Object> map = new HashMap<String, Object>();		
+		map.put("pricelist",list);
+		return map;
 	}
 
 }

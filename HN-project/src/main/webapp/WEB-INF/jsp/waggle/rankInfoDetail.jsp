@@ -16,6 +16,7 @@
 			$(document)
 					.ready(
 							function() {
+								
 								var hdata = new Array();
 								var hipeLabels = new Array();
 
@@ -102,10 +103,10 @@
 					<div style="height: 50px; padding-top: 15px;float: left;width:33%">
 						<strong><fmt:formatNumber value="${list.profit*100}" pattern="########.##" />%</strong>
 						<c:if test="${list.profit*100 lt 0.00}" >
-						<strong><span color="rgb(27, 104, 255)">↓</span></strong>
+						<strong><span>↓</span></strong>
 						</c:if>
 						<c:if test="${list.profit*100 gt 0.00}" >
-						<strong><span color="#DC3545">↑</span></strong>
+						<strong><span>↑</span></strong>
 						</c:if>
 					
 					</div>
@@ -121,10 +122,10 @@
 					<div class="col" style="color: #adb5bd !important;text-align: center">
 					<fmt:formatNumber value="${list.stock_num*(list.stock_close-list.buyprice)}" pattern="###,###,###,###" />원
 						<c:if test="${list.profit*100 lt 0.00}" >
-						<strong><span color="rgb(27, 104, 255)">↓</span></strong>
+						<strong><span>↓</span></strong>
 						</c:if>
 						<c:if test="${list.profit*100 gt 0.00}" >
-						<strong><span color="#DC3545">↑</span></strong>
+						<strong><span>↑</span></strong>
 						</c:if>
 						 
 					</div>

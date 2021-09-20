@@ -869,7 +869,7 @@ span.users {
     transition: 0.4s;
     z-index: 1;
     margin-bottom: 30px;
-    border:1px solid #E00400;
+    
 }
 .support-services-blue {
     background: #fff;
@@ -882,7 +882,7 @@ span.users {
     transition: 0.4s;
     z-index: 1;
     margin-bottom: 30px;
-    border:1px solid #003ACE;
+  
 }
 /* .support-services::after {
     position: absolute;

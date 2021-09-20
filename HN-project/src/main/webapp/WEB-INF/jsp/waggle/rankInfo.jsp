@@ -113,7 +113,7 @@
 
 														<div class="left-blog-page">
 															<div class="left-blog blog-category">
-															<h4>보유 섹터 순위</h4>
+															<h4>보유 섹터 순위 및 구성비</h4>
 															<ul>
 															<c:forEach items="${requestScope.value}" var="ranklist" varStatus="status">
 																<li><span>${status.count}</span> 
@@ -388,6 +388,7 @@
 	var vardataco = [];
 	
 	$(document).ready(function() {
+
 		$.ajax({
 				url : '${pageContext.request.contextPath}/waggle/rankInfo/piechart',
 				type : 'post',
@@ -398,18 +399,22 @@
 					pieLabels.push(item.stock_type);
 					var round = item.valuerate * 100
 					piedata.push(round.toFixed(2));
+				
 
 				})
 				$.each(map.rateme, function(index,item) {
-					varlabels.push(item.wdate);
+					let arr =item.wdate.split(' ');
+					varlabels.push(arr[0]);
 					var rate1 = item.rate* 100
-					vardatame.push(round.toFixed(2));
+					vardatame.push(rate1.toFixed(2));
+				
 
 				})
 				$.each(map.rateanother, function(index,item) {
+					
 					var rate2 = item.rate * 100
-					vardataco.push(round.toFixed(2));
-
+					vardataco.push(rate2.toFixed(2));
+				
 				})
 					doughnut()
 					line()
@@ -467,7 +472,7 @@
 	}
 
 	function doughnut() {
-
+	alert('!!')
 		var sum = Number("{100}");
 
 		var ctx3 = document.getElementById("myPieChart");

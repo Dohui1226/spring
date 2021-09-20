@@ -19,6 +19,8 @@ public interface StockDAO {
 	
 	public void stocksell(StockBuySellVO buysell); //매도
 	
-	public String[] selectcode();
+	public String[] selectcode();//하루종가입력하기 위한 내가가진 코드 가져오기
+
+	public List<StockTodayVO> stockline(StockTodayVO st); //주식 종가 그래프 그리기
 
 }

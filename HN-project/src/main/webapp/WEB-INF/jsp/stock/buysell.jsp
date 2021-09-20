@@ -17,10 +17,10 @@
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="breadcrumb text-center">
-					
+
 					<ul class="breadcrumb-bg">
-						<li >매수/매도</li>
-						
+						<li>매수/매도</li>
+
 					</ul>
 				</div>
 			</div>
@@ -36,112 +36,121 @@
 			<div class="section-headline text-center">
 				<h3>${stockcode.stock_name}</h3>
 				<h6>${stockcode.stock_index}&nbsp;${stockcode.stock_type}</h6>
-				 <div align="center" class="price-btn" id="dis">
-					<!-- <a class="blue-button" style="background: #E00400; border: none;"
-						data-toggle="modal" href="#modal">매수</a> <a class="blue-button"
-						style="background: #003ace; border: none;" data-toggle="modal"
-						href="#modal2">매도</a><br> -->
-						<c:if test="${not empty select}">
-                       <button id="button-modal" class="lovecom" onclick="likecompany()">관심 등록</button>
-                        </c:if>
-                        <c:if test="${empty select}"> 
-                        <button id="button-modal2" class="lovecom" onclick="likecompback()">관심 취소</button>
-                        </c:if>     
-					
-				</div> 
+				<div align="center" class="price-btn" id="dis">
+					<c:if test="${not empty select}">
+						<button id="button-modal" class="lovecom" onclick="likecompany()">관심
+							등록</button>
+					</c:if>
+					<c:if test="${empty select}">
+						<button id="button-modal2" class="lovecom"
+							onclick="likecompback()">관심 취소</button>
+					</c:if>
+
+				</div>
 				<hr>
 			</div>
 		</div>
-	
 
-	<div class="pricing-content" align="center"">
-		<h4><fmt:formatNumber value="${stocktoday.stock_close}" pattern="#,###" /></h4>
-		<c:if test="${stocklist.stock_diff lt 0}">
+
+		<div class="pricing-content" align="center"">
+			<h4>
+				<fmt:formatNumber value="${stocktoday.stock_close}" pattern="#,###" />
+			</h4>
+			<c:if test="${stocklist.stock_diff lt 0}">
 				전일대비<td style="color: blue">▼${Math.abs(stocklist.stock_diff)}</td>
-		</c:if>
-		<c:if test="${stocklist.stock_diff gt 0}">
+			</c:if>
+			<c:if test="${stocklist.stock_diff gt 0}">
 				전일대비<td style="color: red">▲ ${stocklist.stock_diff}</td>
-		</c:if>
-		<c:if test="${stocklist.stock_diff eq 0}">
+			</c:if>
+			<c:if test="${stocklist.stock_diff eq 0}">
 				전일대비<td>${stocklist.stock_diff}</td>
-		</c:if>
+			</c:if>
 
-	</div>
+		</div>
 
-	<div class="blog-left-content">
-		<div class="col-md-8 col-sm-8 col-xs-8">
-		<div class="single-blog">
-			<div class="blog-image">
-				<div class="sale-statistic-inner notika-shadow mg-tb-30">
-					<div class="curved-inner-pro"></div>
-					<div id="dynamic-chart" class="flot-chart dyn-ctn-fr bar-hm-three"></div>
+		<div class="blog-left-content">
+			<div class="col-md-8 col-sm-8 col-xs-8">
+				<div class="single-blog">
+					<div class="blog-image">
+						<div class="sale-statistic-inner notika-shadow mg-tb-30">
+							<div class="curved-inner-pro"></div>
+							<canvas align="middle" height="200px" id="linechart"></canvas>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+			<div class="blog-sidebar-right">
+				<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+					<div class="support-services-red ">
+
+						<h6>매수 주문</h6>
+						<form
+							action="${pageContext.request.contextPath}/stock/buy/${stockcode.stock_code}"
+							method="post">
+							<p>
+								<select id="buyorder" onchange="order1(this.value)">
+									<option value="">가능</option>
+									<option value="1">100%</option>
+									<option value="2">50%</option>
+									<option value="4">25%</option>
+									<option value="10">10%</option>
+								</select> <input type="text" style="width: 70%;" id="changemodal1"
+									name="stock_num" placeholder="수량" value=""><br>
+							</p>
+							총 거래금액 :&nbsp;<input type="text" id="totalcost1"
+								style="border: none; width: 60%" value="" readonly><br>
+							<br> <input type="submit" data-toggle="modal" href="#modal"
+								id="button-modal"
+								style="border: none; background-color: #E00400; color: #FFF; width: 100%;"
+								value="매수">
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+					<div class="support-services-blue ">
+
+						<h6>매도 주문</h6>
+						<form
+							action="${pageContext.request.contextPath}/stock/sell/${stockcode.stock_code}"
+							method="post">
+							<p>
+								<select name="sellorder" onchange="order2(this.value)">
+									<option value="">가능</option>
+									<option value="1">100%</option>
+									<option value="2">50%</option>
+									<option value="4">25%</option>
+									<option value="10">10%</option>
+								</select> <input type="text" style="width: 70%;" id="changemodal2"
+									name="stock_num" placeholder="수량" value=""><br>
+							</p>
+							총 거래금액 :&nbsp;<input type="text" id="totalcost2"
+								style="border: none; width: 60%" value="" readonly><br>
+							<br> <input type="submit" id="button-modal2"
+								style="border: none; background-color: #003ACE; width: 100%;"
+								value="매도">
+					</div>
+
 				</div>
 			</div>
+
 		</div>
-		
-
 	</div>
-	<div class="blog-sidebar-right">
-	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-	<div class="support-services-red ">
-
-	<h6>매수 주문</h6>
-	<form
-						action="${pageContext.request.contextPath}/stock/buy/${stockcode.stock_code}"
-						method="post">
-						 <p><select id="buyorder"
-							onchange="order1(this.value)">
-							<option value="">가능</option>
-							<option value="1">100%</option>
-							<option value="2">50%</option>
-							<option value="4">25%</option>
-							<option value="10">10%</option>
-						</select> <input type="text" style="width: 70%;" id="changemodal1" name="stock_num"
-							placeholder="수량" value=""><br></p>
-						총 거래금액 :&nbsp;<input type="text" id="totalcost1" style="border: none;width:60%" value="" readonly><br><br> 
-							<input type="submit" data-toggle="modal" href="#modal" id="button-modal" style="border: none;background-color:#E00400;color:#FFF;width: 100%;" value="매수">	
-	
-	</div>
-	</div>
-	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-	<div  class="support-services-blue ">
-	
-	<h6 >매도 주문</h6>
-	<form
-						action="${pageContext.request.contextPath}/stock/sell/${stockcode.stock_code}" method="post">
-						<p><select name="sellorder" onchange="order2(this.value)">
-							<option value="">가능</option>
-							<option value="1">100%</option>
-							<option value="2">50%</option>
-							<option value="4">25%</option>
-							<option value="10">10%</option>
-						</select> <input type="text"  style="width: 70%;" id="changemodal2" name="stock_num"
-							placeholder="수량" value=""><br> </p>
-							총 거래금액 :&nbsp;<input  type="text" id="totalcost2" style="border: none;width:60%" value="" readonly><br><br> 
-							<input type="submit" id="button-modal2" style="border: none;background-color:#003ACE;width: 100%;" value="매도">
-								
-	</div>
-	
-	</div>
-	</div>
-	
-</div>
-</div>
 
 
-<div class="modal fade" id="modal" role="dialog">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title">결제창</h4>
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-			</div>
-			<div class="modal-body">
-				<a class="support-images" href="#"><i
-					class="flaticon-035-savings"></i></a>
-				<div class="support-content">
-					<h6>매수 정보를 입력하세요.</h6>
-			<%-- 		<form
+	<div class="modal fade" id="modal" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">결제창</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<a class="support-images" href="#"><i
+						class="flaticon-035-savings"></i></a>
+					<div class="support-content">
+						<h6>매수 정보를 입력하세요.</h6>
+						<%-- 		<form
 						action="${pageContext.request.contextPath}/stock/buy/${stockcode.stock_code}"
 						method="post">
 						주문 금액 : ${stocktoday.stock_close}<br> <select id="buyorder"
@@ -157,31 +166,31 @@
 						<br>*매수시 거래금액의 0.015% 수수료가 부과됩니다.&nbsp; <br>
 						<%-- 	<fmt:formatNumber id="fee1" value="" pattern="#,###" /> --%>
 						<!-- <input type="hidden" name="fee" id="feerate1" style="border:none;" value=""> <br> -->
+					</div>
 				</div>
-			</div>
-			<div class="modal-footer">
-				<input type="submit" id="button-modal" value="매수">
-				<button id="button-modal2" data-dismiss="modal">닫기</button>
-				</form>
+				<div class="modal-footer">
+					<input type="submit" id="button-modal" value="매수">
+					<button id="button-modal2" data-dismiss="modal">닫기</button>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
 
-<div class="modal fade" id="modal2" role="dialog">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title">결제창</h4>
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-			</div>
-			<div class="modal-body">
-				<a class="support-images" href="#"><i
-					class="flaticon-035-savings"></i></a>
-				<div class="support-content">
-					<h6>매도 정보를 입력하세요.</h6>
-					<%-- <form
+	<div class="modal fade" id="modal2" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">결제창</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<a class="support-images" href="#"><i
+						class="flaticon-035-savings"></i></a>
+					<div class="support-content">
+						<h6>매도 정보를 입력하세요.</h6>
+						<%-- <form
 						action="${pageContext.request.contextPath}/stock/sell/${stockcode.stock_code}" method="post">
 						주문 금액 : ${stocktoday.stock_close}<br> <select name="sellorder" onchange="order2(this.value)">
 							<option value="">가능</option>
@@ -192,20 +201,20 @@
 						</select> <input type="text" id="changemodal2" name="stock_num"
 							placeholder="수량" value=""><br> 
 							총 거래금액:<input type="text" id="totalcost2" style="border: none;" value="" readonly><br>  --%>
-							<br>*매도시 증권거래세를 포함하여 거래금액의 0.25% 수수료가 부과됩니다.
+						<br>*매도시 증권거래세를 포함하여 거래금액의 0.25% 수수료가 부과됩니다.
 						<%-- 		<fmt:formatNumber id="fee2" value="" pattern="#,###" /> --%>
 						<input type="hidden" name="fee" id="feerate2"
 							style="border: none;" value=""> <br>
+					</div>
 				</div>
-			</div>
-			<div class="modal-footer">
-				<input type="submit" id="button-modal" value="매도">
-				<button id="button-modal2" data-dismiss="modal">닫기</button>
-				</form>
+				<div class="modal-footer">
+					<input type="submit" id="button-modal" value="매도">
+					<button id="button-modal2" data-dismiss="modal">닫기</button>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
 </div>
 
@@ -304,12 +313,86 @@ function likecompback(){
 }
 
 
+var varlabel= [];
+var vardata = [];
+
+$(document).ready(function() {
+	$.ajax({
+			url : '${pageContext.request.contextPath}/stock/close/line',
+			type : 'post',
+			data : {stock_code:'${stockcode.stock_code}'},
+			dataType : "json",
+			success : function(map) {
+		
+				$.each(map.pricelist, function(index,item) {
+					let close = item.close_date.split(' ')
+					varlabel.push(close[0]);
+					vardata.push(item.stock_close);
+				})
+				line()
+			}
+	})
+
+})
+
+
+function line() {
+
+	var ctxstock = document.getElementById('linechart').getContext('2d');
+	var linechart = new Chart(ctxstock, {
+		type : 'line',
+		data : {
+			labels :  varlabel ,
+			datasets : [ {
+				label : '주가',
+				type : 'line', // 'line' type
+				backgroundColor : '#00c292',
+				borderColor : '#00c292',
+				lineTension : 0, // 0이면 꺾은선 그래프, 숫자가 높을수록 둥글해짐
+				pointRadius : 0, // 각 지점에 포인트 주지 
+				data : vardata
+			} ]
+		},
+
+		options : {
+			responsive : true,
+			legend : {
+				display : true
+			},
+			tooltips : {
+				mode : 'index',
+				intersect : false
+			},
+
+			hover : {
+				mode : 'nearest',
+				intersect : true
+			},
+			 scales: {
+				    xAxes: [{
+				      gridLines: {
+				        display: false
+				   
+				      }
+				    }],
+				    yAxes: [{
+				      gridLines: {
+				    	  display: false,
+				        borderDash: [2, 5],
+				      }
+				    }]
+				  }
+		}
+	})
+}
+
 
 
 
 
 </script>
-
+<script
+	src="${pageContext.request.contextPath}/resources/green-horizotal/js/charts/Chart.js"></script>
 
 </html>
 

@@ -45,9 +45,10 @@
 			</div>
 		</div>
 	 <div class="row">
+	<!--   <div class="alert alert-info" role="alert">dd</div> -->
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     <div class="normal-table-list mg-t-30">
-                       
+                      
                         <div class="bsc-tbl-st">
                        <div id="tabl1">
                           
@@ -87,24 +88,27 @@
                 </div>
             </div>
 					<div class="col-lg-6 col-md-6 col-sm-8 col-xs-12">
+					
 					<br>
 					<br>
 					 <div class="bsc-tbl-st">
+					
 					<div id="tabl2">
 						<div class="accordion-stn">
-						
+						<h4 align="center">자주 하는 질문</h4>
+						<br>
                                     <div class="panel-group" data-collapse-color="nk-green" id="accordionGreen" role="tablist" aria-multiselectable="true">
                                         <div class="panel panel-collapse notika-accrodion-cus">
                                             <div class="panel-heading" role="tab">
                                                 <h4 class="panel-title">
                                                     <a data-toggle="collapse" data-parent="#accordionGreen" href="#accordionGreen-one" aria-expanded="true">
-															Collapse Green #1
+															추천 금액 기준
 														</a>
                                                 </h4>
                                             </div>
                                             <div id="accordionGreen-one" class="collapse in" role="tabpanel">
                                                 <div class="panel-body">
-                                                    <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry cry then richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf msr noontemporem, sunt aliqua put a bird on it squid single-origin coffee nullassumendan shoreditch et.</p>
+                                                    <p style="font-size:medium">현재 가용가능한 현금/예수금을 기준으로 해당 포트폴리오와 같이 분산투자하였을 경우 금액을 적절히 배분하여 추천을 제공합니다.</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -112,13 +116,15 @@
                                             <div class="panel-heading" role="tab">
                                                 <h4 class="panel-title">
                                                     <a class="collapsed" data-toggle="collapse" data-parent="#accordionGreen" href="#accordionGreen-two" aria-expanded="false">
-															Collapse Green #2
+															추천 종목 기준
 														</a>
                                                 </h4>
                                             </div>
                                             <div id="accordionGreen-two" class="collapse" role="tabpanel">
                                                 <div class="panel-body">
-                                                    <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry cry then richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf msr noontemporem, sunt aliqua put a bird on it squid single-origin coffee nullassumendan shoreditch et.</p>
+                                                    <p style="font-size:medium">기업이 현재의 재무상태를 유지할 경우, 해당 기업의 지속적인 초과이익을 현재가치로 계산하여 기업가치를 측정합니다.
+                                                    적정 기업가치를 산출 후, 현재 주가와 가장 큰 괴리율을 보이는 기업의 3순위 까지 출력합니다.
+                                                    1순위를 기준으로 최다 매수 후, 차등 순위를 순차적으로 매수합니다. </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -126,13 +132,15 @@
                                             <div class="panel-heading" role="tab">
                                                 <h4 class="panel-title">
                                                     <a class="collapsed" data-toggle="collapse" data-parent="#accordionGreen" href="#accordionGreen-three" aria-expanded="false">
-															Collapse Green #3
+															추천 방법
 														</a>
                                                 </h4>
                                             </div>
                                             <div id="accordionGreen-three" class="collapse" role="tabpanel">
                                                 <div class="panel-body">
-                                                    <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry cry then richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf msr noontemporem, sunt aliqua put a bird on it squid single-origin coffee nullassumendan shoreditch et.</p>
+                                                    <p style="font-size:medium">한번 저장한 포트폴리오는 언제든지 추천이 가능하며 비용은 포트폴리오 저장시 한번 지불됩니다.
+                                                    포트폴리오는 매순간 변화하여 한 사람의 포트폴리오를 여러번 저장할 수 있으며, 같은 사람의 포트폴리오를 저장하였을 경우
+                                                    포트폴리오 저장함은 가장 최신의 포트폴리오로 자동 저장됩니다.</p>
                                                 </div>
                                             </div>
                                         </div>

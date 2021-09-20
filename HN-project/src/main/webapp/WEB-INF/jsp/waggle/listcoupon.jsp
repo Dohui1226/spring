@@ -5,24 +5,6 @@
 <html class="no-js" lang="en">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-<script>
-
-function set(btn) {
-	var coupon = $("#couponname").attr('data-id') 
-	$("#couponmodal").val(coupon)
-	
-	var couponid = $("#couponid").attr('data-id') 
-
-	$("#bcTarget").barcode(couponid, "codabar");
-} 
-
-$(document).on("click", "#button-modal", function() {
-	location.href="${pageContext.request.contextPath}/waggle/gitfcoupon"
-});
-
- 
-</script>
-
 
 <jsp:include page="../header.jsp" />
 
@@ -33,12 +15,12 @@ $(document).on("click", "#button-modal", function() {
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="breadcrumb text-center">
-					<div class="section-headline white-headline">
+					<!-- <div class="section-headline white-headline">
 						<h3>쿠폰조회</h3>
-					</div>
+					</div> -->
 					<ul class="breadcrumb-bg">
-						<li class="home-bread">Home</li>
-						<li>와글와글</li>
+						
+						<li>쿠폰관리</li>
 					</ul>
 				</div>
 			</div>
@@ -66,13 +48,16 @@ $(document).on("click", "#button-modal", function() {
                                         <tr>
                                             <th>쿠폰명</th>                                          
                                          	<th>쿠폰번호</th>                                     
-                                            <th>쿠폰조회</th>                                        
+                                            <th>쿠폰 나누기</th>                                        
                                         </tr>
                                         <c:forEach items="${requestScope.mycoupon}" var="mycoupon" varStatus="loop"> 
                                         <tr>
-                                            <td id="couponname" data-id="${mycoupon.couponname}">${mycoupon.couponname}</td>                                           
-                                            <td id="couponid" data-id="${mycoupon.couponid}">${mycoupon.couponid}</td>
-                                       		<td><a href="#modalcode" onclick="set(this)" data-toggle="modal">보기</a></td>
+                                            <td >&nbsp;&nbsp;&nbsp;&nbsp;${mycoupon.couponname} <input type="hidden" id="couponname" value="${mycoupon.couponname}" /></td>                                           
+                                            <td >${mycoupon.couponid} <input type="hidden" id="couponcode" value="${mycoupon.couponid}" /></td>
+                                           
+                                       
+                                       		<td><a href="#modalcode" onclick="set()" data-toggle="modal">보기</a></td>
+                                       		
                                        	</tr>
                                        </c:forEach>
                          
@@ -102,8 +87,28 @@ $(document).on("click", "#button-modal", function() {
 			
 			</div>
 			<div class="modal-footer">
-				<button id="button-modal" onclick=""data-dismiss="modal">선물</button>
-				<button id="button-modal2" data-dismiss="modal">닫기</button>
+				<button id="button-modal" onclick="sendLinkCustom()">카카오톡 공유</button>
+				<button id="button-modal2" onclick="giftfollow()">선물하기</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="giftfollow" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">쿠폰확인하기</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body" align="center">
+				&nbsp;&nbsp;<input type="text" style="border:none;" id="couponmodal" value="" readonly>	
+			 	<div id="bcTarget" style="margin-top:30px;"></div> 
+
+			
+			</div>
+			<div class="modal-footer">
+				<button id="button-modal" onclick="giftfollow(id)">선물</button>
+				<button id="button-modal2" >닫기</button>
 			</div>
 		</div>
 	</div>
@@ -115,10 +120,42 @@ $(document).on("click", "#button-modal", function() {
 
 <!-- End Footer area -->
 
-<!-- all js here -->
-
 
 </body>
+<script>
+
+function giftfollow(id){
+	$.ajax({
+		url : '${pageContext.request.contextPath}/gift/coupon',
+		type : 'get',
+		data : {no : id},
+		success : function(result) {			
+			alert('쿠폰 선물을 완료하였습니다.')
+		}
+	})		
+	
+}
+
+function set() {
+	
+	let coupon = $("#couponname").val() 
+	$("#couponmodal").val(coupon)
+	alert(coupon)
+	let couponid = $("#couponcode").val()
+	$("#bcTarget").barcode(couponid, "codabar");
+} 
+
+
+function sendLinkCustom() {
+    Kakao.init("f54b29040061ba185ecba85fddaf2c24");
+    Kakao.Link.sendCustom({
+        templateId: 62031 
+    });
+}
+</script>
+
+<script type="text/JavaScript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-barcode.js">
 </script>
 <!-- Mirrored from rockstheme.com/rocks/aievari-live/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Mar 2020 08:27:42 GMT -->

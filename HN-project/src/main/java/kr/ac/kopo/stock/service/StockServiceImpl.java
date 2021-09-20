@@ -31,16 +31,21 @@ public class StockServiceImpl implements StockService {
 		stocktoday = stockdao.stockonetoday(stocktoday);
 		return stocktoday;
 	}
-	
+
+	/* 매수 */
 	public void stockbuy(StockBuySellVO buysell) {
-		System.out.println("서비스");
 		stockdao.stockbuy(buysell);
-		}
-			
+	}
+
+	/* 매도 */		
 	public void stocksell(StockBuySellVO buysell) {
-		
 		stockdao.stocksell(buysell);
-		System.out.println("서비스!");
-		}	
+	
+	}
+	
+	public List<StockTodayVO> stockline(StockTodayVO st) {
+		List<StockTodayVO> list =stockdao.stockline(st);
+		return list;
+	}
 
 }

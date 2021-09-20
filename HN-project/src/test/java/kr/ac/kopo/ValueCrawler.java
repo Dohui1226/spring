@@ -28,19 +28,19 @@ public class ValueCrawler{
 	@Autowired
 	private StockDAO mapper;
 	
-	@Ignore
+	
 	@Test
 	public void insertvalue() throws Exception{
 	
 
-	String[] aa = mapper.selectcode();
-	for(int i=0; i<aa.length;i++) {
+	//String[] aa = mapper.selectcode();
+	//for(int i=0; i<aa.length-1;i++) {
 		
 	//System.out.println(Arrays.toString(aa));
 	
 	
 	String code1="A";
-	String code2=aa[i];
+	String code2="010400";
 	String code=code1+code2;//회사코드
 	double roe; //최종roe
 	double roe1 = 0 ; //3년전 roe
@@ -96,14 +96,20 @@ public class ValueCrawler{
 		
 	
 		equity =Double.parseDouble(eles3.text().replaceAll(",",""))*100000000;
-
+	
 		doc4 = Jsoup.connect(URL3).get();
-		Elements eles4 =doc4.select("#highlight_D_Y > table > tbody > tr:nth-child(18) > td.r");
-		String [] roearr = eles4.text().split(" ");
-		
-		roe1 =Double.parseDouble(roearr[2].replaceAll("\\.", ""))/100;
-		roe2 =Double.parseDouble(roearr[3].replaceAll("\\.", ""))/100;
-		roe3 =Double.parseDouble(roearr[4].replaceAll("\\.", ""))/100;
+		Elements eles4 =doc4.select("#highlight_D_A > table > tbody > tr:nth-child(18) > td:nth-child(2)");
+		Elements eles5 =doc4.select("#highlight_D_A > table > tbody > tr:nth-child(18) > td:nth-child(3)");
+		Elements eles6 =doc4.select("#highlight_D_A > table > tbody > tr:nth-child(18) > td:nth-child(4)");
+		String roearr1 = eles4.text();
+		String roearr2 = eles5.text();
+		String roearr3 = eles6.text();
+		System.out.println(roearr1);
+		System.out.println(roearr2);
+		System.out.println(roearr3);
+		roe1 =Double.parseDouble(roearr1.replaceAll("\\.", ""))/100;
+		roe2 =Double.parseDouble(roearr2.replaceAll("\\.", ""))/100;
+		roe3 =Double.parseDouble(roearr3.replaceAll("\\.", ""))/100;
 		
 	}
 		
@@ -133,9 +139,10 @@ public class ValueCrawler{
 	
 	Thread.sleep(5000); 
 	
-	//sqlSessionTemplate.insert("stock.StockDAO.insertvalue",stc);
+	sqlSessionTemplate.insert("stock.StockDAO.insertvalue",stc);
+	
 	}
-	}
+	@Ignore
 	@Test
 	public void inserclose() throws Exception{
 		

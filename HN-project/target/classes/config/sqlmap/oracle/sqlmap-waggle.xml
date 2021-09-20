@@ -106,7 +106,7 @@ select rate,wdate from (
 select rate,wdate, no ,RANK() OVER (PARTITION BY wdate
     ORDER BY wdate,no desc) rank from acc_daily where acc_num=#{member_account}and dayupdate='t'
     and wdate between sysdate-100 and sysdate) where 
-    rank=1;
+    rank=1
 </select>
 
 

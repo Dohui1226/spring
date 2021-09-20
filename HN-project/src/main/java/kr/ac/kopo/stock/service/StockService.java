@@ -19,4 +19,6 @@ public interface StockService {
 	
 	public void stocksell(StockBuySellVO buysell); //매도하기
 
+	public List<StockTodayVO> stockline(StockTodayVO st); //주식 라인차트 가져오기
+
 }

@@ -16,32 +16,32 @@ public class StockDAOImpl implements StockDAO {
 
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
-	
-	
+
+
 	public List<StockTodayVO> stocktoday() {
 		List<StockTodayVO> list = sqlSessionTemplate.selectList("stock.StockDAO.stocktoday");
 		return list;
 	}
 	public StockCodeVO companyinfo(StockCodeVO stockcode) {
-			stockcode = sqlSessionTemplate.selectOne("stock.StockDAO.companyinfo",stockcode);
-			
-			return stockcode;
-		}
-	
-	
+		stockcode = sqlSessionTemplate.selectOne("stock.StockDAO.companyinfo",stockcode);
+
+		return stockcode;
+	}
+
+
 	public StockTodayVO stockonetoday(StockTodayVO stocktoday) {
 		stocktoday = sqlSessionTemplate.selectOne("stock.StockDAO.stockonetoday",stocktoday);
 		return stocktoday;
 	}
-	
+
 	public void stockbuy(StockBuySellVO buysell) {
 		sqlSessionTemplate.selectOne("stock.StockDAO.stockbuy",buysell);
-		
+
 	}
-	
+
 	public void stocksell(StockBuySellVO buysell) {
 		sqlSessionTemplate.selectOne("stock.StockDAO.stocksell",buysell);
-		System.out.println("dao");
+
 	}
 	public String[] selectcode() {
 		List<String> list = sqlSessionTemplate.selectList("stock.StockDAO.selectcode");
@@ -49,6 +49,12 @@ public class StockDAOImpl implements StockDAO {
 		return aa;
 	}
 	
+	/* 종가그래프 그리기 */
 	
-	
+	public List<StockTodayVO> stockline(StockTodayVO st) {
+		List<StockTodayVO> list =sqlSessionTemplate.selectList("stock.StockDAO.linestock", st);
+		return list;
+	}
+
+
 }
