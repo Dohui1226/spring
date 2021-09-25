@@ -116,7 +116,7 @@
 																<li><span>${status.count}</span> 
 																<a data-toggle="modal" id="type" href ="#modal1" value="${ranklist.stock_type}" onclick="return company(this);">${ranklist.stock_type}; 
 																<fmt:formatNumber value="${ranklist.value}"  pattern="###,###,###,###" />원
-																<label text-align="right">
+																<label style="text-align:right">
 																<fmt:formatNumber value="${ranklist.valuerate*100}" pattern="##.##" />%
 																<input type="hidden" class="portname" value="${ranklist.stock_type}">	
 																<input type="hidden" class="portrate" value="${ranklist.valuerate*100}">

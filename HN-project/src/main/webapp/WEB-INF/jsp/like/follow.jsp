@@ -18,13 +18,68 @@ keyframes done { 70% {
 }
 
 150
+
+
+
+
+
+
+
+
 %
 {
 transform
+
+
+
+
+
+
+
+
 :
-scale(
+
+
+
+
+
+
+
+
+scale
+
+
+
+
+
+
+(
+
+
+
+
+
+
+
+
 1
+
+
+
+
+
+
+
+
 )
+
+
+
+
+
+
+
+
 }
 }
 html {
@@ -179,8 +234,10 @@ body, div, button, h1 {
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="section-headline text-center">
 
-					<h3>관심 유저</h3>
-
+					<h3>Follow</h3>
+					<p>
+						<strong>${wj.nickname}</strong>
+					</p>
 				</div>
 			</div>
 		</div>
@@ -203,70 +260,23 @@ body, div, button, h1 {
 												<div class="sidget-tabs-list">
 													<ul class="nav nav-tabs">
 
-														<li class="active"><a data-toggle="tab" href="#home"
+														<li class="active"><a data-toggle="tab" href="#followerpage"
 															style="width: 150; text-align: center; color: #646464;">
 																팔로워 </a></li>
-														<li class><a data-toggle="tab" href="#menu1"
-															aria-epended="false"
+														<li class><a data-toggle="tab" href="#followpage"
+															
 															style="width: 150; text-align: center; color: #646464;">
 																팔로잉 </a></li>
 
 
 													</ul>
 													<div class="tab-content tab-custom-st">
-														<div class="tab-pane fade in active " id="home">
+														<div class="tab-pane fade in active " id="followerpage">
 															<div class="tab-ctn"></div>
 															<br> <br>
-															<div class="left-head-blog right-side">
-																<p>
-																	<strong>${wj.nickname}</strong>의 팔로워 목록
-																</p>
-																<table class="table table-hover">
-																	<thead style="background-color: cornsilk;"
-																		class="thead-dark">
-																		<tr>
-																			<th width="10%">순위</th>
-																			<th style="text-align: center">닉네임</th>
-																			<th style="text-align: center">하트 갯수</th>
-																			<th style="text-align: center">수익률</th>
-																			<th style="text-align: center">팔로워 삭제</th>
-																			<th style="text-align: center">포트폴리오</th>
-
-																		</tr>
-																	</thead>
-																	<tbody>
-																		<c:forEach items="${requestScope.myfollower}"
-																			var="followerlist" varStatus="loop">
-																			<tr>
-																				<td>${followerlist.rank}</td>
-																				<td style="text-align: center">${followerlist.nickname}</td>
-																				<td style="text-align: center">${followerlist.hart}
-																				</td>
-																				<td style="text-align: center">${followerlist.rate}
-																				</td>
-																				<td>삭제</td>
-																				<td>포트폴리오 보기</td>
-																			</tr>
-																		</c:forEach>
-																	</tbody>
-																</table>
-																<div class="left-blog-page">
-																	<br>
-																	<hr>
-
-
-																</div>
-
-															</div>
-
-														</div>
-														<div id="menu1" class="tap-pane fade">
-															<div class="tab-ctn">
-
-
+															<div id="pagefollower">
 																<div class="left-head-blog right-side">
-																	<br> <br>
-																	<h5>하트결제</h5>
+
 																	<table class="table table-hover">
 																		<thead style="background-color: cornsilk;"
 																			class="thead-dark">
@@ -274,75 +284,81 @@ body, div, button, h1 {
 																				<th width="10%">순위</th>
 																				<th style="text-align: center">닉네임</th>
 																				<th style="text-align: center">하트 갯수</th>
-																				<th style="text-align: center">수익률</th>
+																				<th style="text-align: center">수익률(%)</th>
 																				<th style="text-align: center">팔로워 삭제</th>
 																				<th style="text-align: center">포트폴리오</th>
 
 																			</tr>
 																		</thead>
-																		
-																			<tr>
-																												<th width="10%">순위</th>
-																				<th style="text-align: center">닉네임</th>
-																				<th style="text-align: center">하트 갯수</th>
-																				<th style="text-align: center">수익률</th>
-																				<th style="text-align: center">팔로워 삭제</th>
-																				<th style="text-align: center">포트폴리오</th>
-																				
-
-																			</tr>
-																	
+																		<tbody>
+																			<c:forEach items="${requestScope.myfollower}"
+																				var="followerlist" varStatus="loop">
+																				<tr>
+																					<td>${followerlist.rank}</td>
+																					<td style="text-align: center">${followerlist.nickname}</td>
+																					<td style="text-align: center">${followerlist.hart}
+																					</td>
+																					<td style="text-align: center">${followerlist.rate*100}%
+																					</td>
+																					<td style="text-align: center">
+																					<a data-id="${followerlist.no}"
+																						class="ialog2">삭제</a></td>
+																					<td style="text-align: center"><a
+																						href="${pageContext.request.contextPath}/waggle/rankInfo/${followerlist.no}">보기</a></td>
+																				</tr>
+																			</c:forEach>
+																		</tbody>
 																	</table>
-																	<hr>
-																	<br> <br>
-																	<h5>내 쿠폰함</h5>
-																	<div id="tab">
-																		<table class="table table-hover">
+																	<div class="left-blog-page">
+																		<br>
+																		<hr>
 
+																	</div>
+																</div>
+
+															</div>
+
+														</div>
+														<div id="followpage" class="tap-pane fade">
+															<div class="tab-ctn">
+
+																<div id="pagefollow">
+																	<div class="left-head-blog right-side">
+																		<br> <br>
+
+																		<table class="table table-hover">
 																			<thead style="background-color: cornsilk;"
 																				class="thead-dark">
 																				<tr>
-																					<th witdh="30%" style="text-align: center">쿠폰명</th>
-																					<th witdh="30%" style="text-align: center">쿠폰
-																						번호</th>
-																					<th witdh="20%" style="text-align: center">공유</th>
-																					<th witdh="20%" style="text-align: center">사용</th>
+																					<th width="10%">순위</th>
+																					<th style="text-align: center">닉네임</th>
+																					<th style="text-align: center">하트 갯수</th>
+																					<th style="text-align: center">수익률(%)</th>
+																					<th style="text-align: center">팔로잉 삭제</th>
+																					<th style="text-align: center">포트폴리오</th>
+
 																				</tr>
 																			</thead>
-																			<tbody>
+																			<c:forEach items="${requestScope.myfollow}"
+																				var="followlist" varStatus="loop">
+																				<tr>
+																					<th width="10%">${followlist.rank}
+																					</td>
+																					<td style="text-align: center">${followlist.nickname}</td>
+																					<td style="text-align: center">${followlist.hart}</td>
 
-																				<c:forEach items="${requestScope.mycoupon}"
-																					var="mycoupon" varStatus="loop">
-
-																					<tr>
-																						<td style="text-align: center">&nbsp;&nbsp;&nbsp;&nbsp;${mycoupon.couponname}
-																							<input type="hidden" id="couponname"
-																							value="${mycoupon.couponname}" />
-																						</td>
-																						<td style="text-align: center">${mycoupon.couponid}<input
-																							type="hidden" id="couponcode"
-																							value="${mycoupon.couponid}" /></td>
-
-
-																						<td style="text-align: center"><a
-																							href="#modalcode" onclick="set()"
-																							data-id="${mycoupon.couponid}"
-																							data-toggle="modal" class="ialog2">공유</a></td>
+																					<td style="text-align: center">
+																					<fmt:formatNumber value="${followlist.rate*100}" pattern="#.##" />%</td>
+																					<td style="text-align: center"><a
+																						data-id="${followlist.no}" class="ialog1">삭제</a></td>
+																					<td style="text-align: center"><a
+																						href="${pageContext.request.contextPath}/waggle/rankInfo/${followlist.no}">보기</a></td>
 
 
-																						<td style="text-align: center"><a
-																							data-id="${mycoupon.couponid}" href="#modal2"
-																							data-toggle="modal" class="ialog">사용</a></td>
-																					</tr>
-
-
-
-																				</c:forEach>
-
-																				<tr id="add">
 																				</tr>
-																			</tbody>
+																			</c:forEach>
 																		</table>
+
 
 																	</div>
 
@@ -371,9 +387,9 @@ body, div, button, h1 {
 								<div class="past-statistic-ctn">
 									<h3>
 										<a href="${pageContext.request.contextPath}/like/follow"
-											style="color: #646464"><i class="fa fa-person"
-											style="color: red"></i>&nbsp; &nbsp;<span class="counter"
-											id="heart">${follower}</span> </a>
+											style="color: #646464"><i class="fa fa-user"
+											style="color: yellowblue"></i>&nbsp; &nbsp;<span
+											class="counter" id="follower">${follower}</span> </a>
 									</h3>
 									<a href="${pageContext.request.contextPath}/like/follow"
 										style="color: #646464"><p>나의 팔로워</p></a>
@@ -384,9 +400,9 @@ body, div, button, h1 {
 								<div class="past-statistic-ctn">
 									<h3>
 										<a href="${pageContext.request.contextPath}/like/follow"
-											style="color: #646464"><i class="fa fa-person"
+											style="color: #646464"><i class="fa fa-user"
 											style="color: green"></i>&nbsp; &nbsp;<span class="counter"
-											id="balance">${follow}</span> </a>
+											id="follow">${follow}</span> </a>
 									</h3>
 									<a href="${pageContext.request.contextPath}/like/follow"
 										style="color: #646464"><p>나의 팔로잉</p></a>
@@ -446,7 +462,7 @@ body, div, button, h1 {
 		</div>
 	</div>
 </div>
-
+</div>
 <!-- End Right Sidebar -->
 </div>
 <!-- End row -->
@@ -503,7 +519,6 @@ body, div, button, h1 {
 	</div>
 </div>
 
-
 <!-- Start Footer Area -->
 <jsp:include page="../footer.jsp" />
 
@@ -552,234 +567,71 @@ body, div, button, h1 {
 
 
 <script>
-var coupon_id;
-var stockname;
 
-$(".ialog").click(function(){ //
+$(".ialog1").click(function(){ //팔로잉 삭제
 
-		coupon_id=$(this).data('id')
+	var no=$(this).data('id')
+	 deletefollow(no);
+})
+
+$(".ialog2").click(function(){ //
+	
+	var no=$(this).data('id')
+
+	 deletefollower(no); 
+})
+
+
+	  function deletefollow(no){
 		
-	})
-
-	$(".ialog2").click(function(){ //
-
-		coupon_id=$(this).data('id')
-		
-	})
-
-	/* 쿠폰사용 delete* 쿠폰아이디 구해야함...*/
-	 function couponuse(){
-		 stockname = (codes[codes.length-1])
-		 console.log(coupon_id)
 		$.ajax({
-			type : "post",
-			url : "${pageContext.request.contextPath}/couponuse",
-			data : {
-				coupon_id : coupon_id
-			},
-			success : function() {
-				couponlist();
-				insertstock();
-			}
+			type : 'post',
+			url : '${pageContext.request.contextPath}/like/deletefollow2',
+			data: {no :no},
+			dataType: 'text',
+			success : function(result) {
+				
+				alert('팔로잉 취소 완료')
+				let html = $('<div>').html(result)
+				let content =html.find('div#pagefollow2');
+				let contents =content.html();				
+				$("#pagefollow").html(contents);
+				var real= $('#follow').text()
+				
+				 $('#follow').text(real-1) 
+			}, error:function(request,status,error){
+		        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+		       }
+
+
+
 		}) 
 		
 	} 
-function couponuse2(){
-	console.log(coupon_id)
+function deletefollower(no){
+	
 	$.ajax({
 		type : "post",
-		url : "${pageContext.request.contextPath}/couponuse",
-		data : {
-			coupon_id : coupon_id
-		},
-		success : function() {
-			couponlist();
+		url : "${pageContext.request.contextPath}/like/deletefollower2",
+		data: {no :no},
+		dataType: 'text',
+		success : function(result) {
+			alert('팔로워 삭제 완료')
+		
+			let html = $('<div>').html(result)
+			let content =html.find('div#pagefollower2');
 			
+			let contents =content.html();	
+			
+			$("#pagefollower").html(contents);
+			var real= $('#follower').text()
+		
+			 $('#follower').text(real-1) 
+		
 		}
 	}) 
 	
-} 
-	
-	/* 이거 작동됨 */
-	function insertstock(){
-		console.log(stockname)
-		 $.ajax({
-			type : "post",
-			url : "${pageContext.request.contextPath}/insertstock",
-			data : {
-				stock_name : stockname
-			},
-			success : function() {
-				alert('쿠폰 1장으로 '+stockname+' 이(가) 매수되었습니다.')
-			}
-		})
-		 
-	}
-	
-
-	var numbers=[];
-	var codes=[];
-	function lottery() {
-	    document.querySelectorAll(".ball").forEach((element, index) => {
-	        element.classList.remove("done");
-	        decryptEffect(element, index);
-	        
-	    });
-	   
-	}
-	
-	
-	document.getElementById("btn").addEventListener("click", function () {
-		 $.ajax({
-				type : "post",
-				url : "${pageContext.request.contextPath}/selectcode",
-				dataType: 'json',
-				success : function(result) {
-						$.each(result, function(index,item) {	
-							numbers.push(item.stock_name); 
-					
-					        btn.classList.add("hide");
-					        lottery();
-					      
-						})
-						
-						
-						
-				}
-		 	
-			})
-     
-	});
-	
-	
-	function decryptEffect(element, time) {
-	    const effect = setInterval(() => {
-	    	 var random = Math.floor(Math.random() * numbers.length);
-	        element.innerText = numbers[random];//숫자올라가는거
-	        var modalvalue2= $('#result').text();
-	        codes.push(modalvalue2);
-	    }, 10);
-	    setTimeout(() => {
-	        clearInterval(effect);
-	        element.classList.add("done");
-	       /*  element.innerText = numbers[random]; */
-	        /* numbers.splice(random, 1); */
-	        
-	    }, time * 3000 + 1000);
-	 
-	
-	}
-	
-	
-	
-	
-	
-	function pay() {
-		var inputheart = $('input[name=total_sum]').val()
-		var inputprice = $('input[name=total_sum2]').val()
-		$.ajax({
-			type : "post",
-			url : "${pageContext.request.contextPath}/heart/pay",
-			data : {
-				heart : inputheart,
-				price : inputprice
-			},
-			dataType: 'json',
-			success : function(result) {
-				
-				alert("하트 충전이 완료되었습니다.")
-				$('#heart').text(result.myheart)
-				$('#balance').text(result.myprice)
-
-			}
-		})
-
-	}
-	
-	function use() {
-		$.ajax({
-			type : "post",
-			url : "${pageContext.request.contextPath}/use/heart",
-			data : {
-				heart : 1000	},
-			dataType: 'json',
-			success : function(result) {
-				alert("쿠폰으로 교환을 완료하였습니다.")
-				$('#heart').text(result.hheart)
-					couponlist();				
-
-				} 
-
-			})
-	}
-	
-	
-	
-	
-
-	function couponlist(){	
-		$.ajax({
-			type : "post",
-			url : "${pageContext.request.contextPath}/couponlist",
-			dataType: 'text',
-			success : function(result) {
-				let html = $('<div>').html(result)
-				let content =html.find('div#addcoupon');
-				let contents =content.html();				
-				$("#tab").html(contents);
-			
-		       }
-
-			}) 
-
-		}
-	
-
-	
-	function set() {
-		
-		let coupon = $("#couponname").val() 
-		$("#couponmodal").val(coupon)
-	
-		let couponid = $("#couponcode").val()
-		$("#bcTarget").barcode(couponid, "codabar");
-	} 
-
-	
-	
-	
-	
-	
-
-	function sendLinkCustom() {
-	    Kakao.init("f54b29040061ba185ecba85fddaf2c24");
-	    Kakao.Link.sendCustom({
-	        templateId: 62031 
-	    });
-	    couponuse2();
-	    
-	}
-
-	
-	
-	
-	
-	/* 하트계산 */
-	function heart(frm) {
-		var totalsum = [];
-		var heartsum = 0;
-		var pricesum = 0;
-		var heartcount = frm.chkbox.length;
-		for (var i = 0; i < heartcount; i++) {
-			if (frm.chkbox[i].checked == true) {
-				totalsum = frm.chkbox[i].value.split(';')
-				heartsum += parseInt(totalsum[0])
-				pricesum += parseInt(totalsum[1])
-			}
-		}
-		frm.total_sum.value = heartsum;
-		frm.total_sum2.value = pricesum;
-	}
+}  
 	
 	
 

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import kr.ac.kopo.account.service.AccountService;
 import kr.ac.kopo.favorite.service.FavoriteService;
@@ -288,9 +289,12 @@ public class FavoriteController {
 		model.addAttribute("follow",followlist);
 		model.addAttribute("follower",followerlist);
 
-		follow.setLikeman(wj.getNickname());
-		List<RankListVO> rank =service.myfollower(follow);
+	
+		List<RankListVO> rank =service.myfollower(wj);
+		
+		List<RankListVO> rank2 =service.myfollow(wj);
 		model.addAttribute("myfollower",rank);
+		model.addAttribute("myfollow",rank2);
 		model.addAttribute("wj",wj);
 		
 		System.out.println(list);
@@ -334,6 +338,44 @@ public class FavoriteController {
 		List<FollowVO> list = service.selectfollow(f2);
 		
 		return list.size();
+	}
+
+	/* 팔로잉관두기 */
+	
+	@PostMapping("/like/deletefollow2")
+	public String deletefollow2(HttpSession session, FollowVO fl,Model model, @RequestParam(value="no") int no) {
+	
+		WaggleJoinVO waggle =(WaggleJoinVO)session.getAttribute("waggleVO");
+		fl.setMe(waggle.getNickname());
+		
+		WaggleJoinVO waggle2 = wservice.selectaccount(no);//그만두려는 사람 닉네임가져와
+		fl.setLikeman(waggle2.getNickname()); 
+		
+		service.deletelikeman(fl);
+		List<RankListVO> rank2 =service.myfollow(waggle);
+		
+		model.addAttribute("myfollow",rank2);
+		return "/like/follow2";
+	}
+	
+	/* 팔로워차단하기 */
+	
+	@PostMapping("/like/deletefollower2")
+	public String deletefollower2(HttpSession session,@RequestParam(value="no") int no, FollowVO fl,Model model) {
+	System.out.println("컨트롤러");
+	System.out.println("deletefollower2컨트롤러");
+		WaggleJoinVO waggle =(WaggleJoinVO)session.getAttribute("waggleVO");
+		fl.setLikeman(waggle.getNickname());
+		
+		WaggleJoinVO waggle2 = wservice.selectaccount(no);
+		fl.setMe(waggle2.getNickname());
+		
+		service.deletelikeman(fl);
+		List<RankListVO> rank2 =service.myfollower(waggle);
+		System.out.println(rank2);
+		System.out.println("팔로우관두기");
+		model.addAttribute("myfollower",rank2);
+		return "like/follow2";
 	}
 	
 	

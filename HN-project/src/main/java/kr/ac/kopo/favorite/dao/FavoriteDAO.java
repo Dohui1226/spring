@@ -55,7 +55,11 @@ public interface FavoriteDAO {
 
 	List<FollowVO> follower3();/* 팔로워 최다 3순위 */
 
-	List<RankListVO> myfollower(FollowVO follow);
+	List<RankListVO> myfollower(WaggleJoinVO wj);
+	
+	List<RankListVO> myfollow(WaggleJoinVO wj);
+
+	void deleteme(FollowVO fl);
 
 	
 }

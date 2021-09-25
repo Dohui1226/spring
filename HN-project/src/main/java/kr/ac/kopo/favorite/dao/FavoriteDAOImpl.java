@@ -118,10 +118,27 @@ public class FavoriteDAOImpl implements FavoriteDAO {
 	}
 	
 	
-	public List<RankListVO> myfollower(FollowVO follow) {
-		System.out.println("DAO"+follow);
-		List<RankListVO> list = sqlSessionTemplate.selectList("favorite.FavoriteDAO.myfollower");
+	public List<RankListVO> myfollower(WaggleJoinVO wj) {
+	
+		List<RankListVO> list = sqlSessionTemplate.selectList("favorite.FavoriteDAO.myfollower",wj);
 		System.out.println("DAO"+list);
 		return list;
 	}
+	
+	@Override
+	public List<RankListVO> myfollow(WaggleJoinVO wj) {
+		List<RankListVO> list = sqlSessionTemplate.selectList("favorite.FavoriteDAO.myfollow",wj);
+		return list;
+	}
+	
+	
+	@Override
+	public void deleteme(FollowVO fl) {
+		sqlSessionTemplate.delete("favorite.FavoriteDAO.deleteme",fl);
+		
+	}
 }
+
+
+
+

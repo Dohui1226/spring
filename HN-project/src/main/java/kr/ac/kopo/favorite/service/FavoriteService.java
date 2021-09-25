@@ -43,6 +43,8 @@ public interface FavoriteService {
 	
 	/* 그사람 그만 좋아하기(팔로우 끊기) */
 	void deletelikeman(FollowVO fl);
+	
+	void deleteme(FollowVO fl);
 
 	/* 관심종목 취소 */
 	void unlike(LikeCompanyVO lc);
@@ -55,5 +57,7 @@ public interface FavoriteService {
 
 	List<FollowVO> follower3(); //팔로워 최다 3순위
 
-	List<RankListVO> myfollower(FollowVO follow);
+	List<RankListVO> myfollower(WaggleJoinVO wj);
+
+	List<RankListVO> myfollow(WaggleJoinVO wj);
 }

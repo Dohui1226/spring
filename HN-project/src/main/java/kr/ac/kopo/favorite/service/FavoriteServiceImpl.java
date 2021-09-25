@@ -113,11 +113,23 @@ public class FavoriteServiceImpl implements FavoriteService {
 		return list;
 	}
 	
-	public List<RankListVO> myfollower(FollowVO follow) {
-		System.out.println(follow);
-		List<RankListVO> list = dao.myfollower(follow);
-		System.out.println(list);
+	
+	public List<RankListVO> myfollower(WaggleJoinVO wj) {
+		
+		List<RankListVO> list = dao.myfollower(wj);
+	
 		return list;
 	}
 	
+
+	public List<RankListVO> myfollow(WaggleJoinVO wj) {
+		List<RankListVO> list = dao.myfollow(wj);
+		return list;
+	}
+	
+
+	public void deleteme(FollowVO fl) {
+		dao.deleteme(fl);
+		
+	}
 }

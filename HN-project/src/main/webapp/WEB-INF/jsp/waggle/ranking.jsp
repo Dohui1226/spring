@@ -15,7 +15,7 @@
 				<div class="breadcrumb text-center">
 					
 					<ul class="breadcrumb-bg">
-						<li >매수/매도</li>
+						<li >랭킹</li>
 						
 					</ul>
 				</div>
@@ -60,18 +60,18 @@
                                       
                                        <td width="10%"> 
                                        <c:if test="${ranklist.rank eq 1}">
-                                       <i class="ti-crown" style="color: brown"></i> </c:if>
-                                        <c:if test="${ranklist.rank eq 2}">
                                        <i class="ti-crown" style="color: burlywood"></i> </c:if>
-                                        <c:if test="${ranklist.rank eq 3}">
+                                        <c:if test="${ranklist.rank eq 2}">
                                        <i class="ti-crown" style="color: darkgrey"></i> </c:if>
+                                        <c:if test="${ranklist.rank eq 3}">
+                                       <i class="ti-crown" style="color: brown"></i> </c:if>
                                       ${ranklist.rank}</td>
-                                       
+                                      
                                         <td width="20%">${ranklist.nickname}</td>
                                         <td width="10%">${ranklist.hart}</td>
                                         <td width="25%"> <fmt:formatNumber value="${ranklist.rate}" pattern="#.##"/>%</td>
                                         <td width="20%"><fmt:formatNumber value="${ranklist.stockvalue}" pattern="###,###,###,###"/></td>
-                                      	<td><a href="${pageContext.request.contextPath}/waggle/rankInfo/${ranklist.no}">확인하기</a></td>
+                                      	<td><a href="${pageContext.request.contextPath}/waggle/rankInfo/${ranklist.no}">확인</a></td>
                                     </tr>
                                     </c:forEach>
                                 </tbody>

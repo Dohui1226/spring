@@ -98,13 +98,31 @@ select * from (select likeman, count(likeman) count from follow group by likeman
 </select>
 
 
-<select id="myfollower" parameterType="followVO" resultType="ranklistVO" >
-select rate, stockvalue,nickname,hart,rank from (select rate, stockvalue,no,nickname,hart,
+<select id="myfollower" parameterType="wagglejoinVO" resultType="ranklistVO" >
+select rate,no, stockvalue,nickname,hart,rank from (select rate, stockvalue,no,nickname,hart,
 rank() over(order by rate desc) rank from(select a.rate ,a.stockvalue,b.no, b.nickname, b.hart from hn_waggle b , 
 (select * from (SELECT acc_num,rate, stockvalue,
 RANK() OVER (PARTITION BY acc_num ORDER BY no DESC) AS RANK
 FROM acc_daily) where rank=1) a
-where b.member_account = a.acc_num) order by rank) rank , (select me from follow where likeman=#{likeman}) jj
+where b.member_account = a.acc_num) order by rank) rank , (select me from follow where likeman=#{nickname}) jj
 where rank.nickname=jj.me order by rank
 </select>
+
+
+
+<select id="myfollow" parameterType="wagglejoinVO" resultType="ranklistVO" >
+select rate, no,stockvalue,nickname,hart,rank from (select rate, stockvalue,no,nickname,hart,
+rank() over(order by rate desc) rank from(select a.rate ,a.stockvalue,b.no, b.nickname, b.hart from hn_waggle b , 
+(select * from (SELECT acc_num,rate, stockvalue,
+RANK() OVER (PARTITION BY acc_num ORDER BY no DESC) AS RANK
+FROM acc_daily) where rank=1) a
+where b.member_account = a.acc_num) order by rank) rank , (select likeman from follow where me=#{nickname}) jj
+where rank.nickname=jj.likeman order by rank
+</select>
+
+
+
+<delete id="deleteme" parameterType="followVO">
+delete from follow where likeman=#{likeman} and me=#{me}
+</delete>
 </mapper>
