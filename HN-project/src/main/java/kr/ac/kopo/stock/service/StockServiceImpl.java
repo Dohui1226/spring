@@ -47,5 +47,14 @@ public class StockServiceImpl implements StockService {
 		List<StockTodayVO> list =stockdao.stockline(st);
 		return list;
 	}
-
+	
+	public List<StockTodayVO> selectcodename() {
+		List<StockTodayVO> list =stockdao.selectcodename();
+		return list;
+	}
+	
+	/* 랜덤주식 */
+	public void randomstock(StockBuySellVO bs) {
+		stockdao.randomstock(bs);
+	}
 }

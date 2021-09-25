@@ -56,7 +56,17 @@
                                 <tbody>
                                  <c:forEach items="${requestScope.ranklist}" var="ranklist" varStatus="loop"> 
                                     <tr>
-                                        <td width="10%">${ranklist.rank}</td>
+                                 
+                                      
+                                       <td width="10%"> 
+                                       <c:if test="${ranklist.rank eq 1}">
+                                       <i class="ti-crown" style="color: brown"></i> </c:if>
+                                        <c:if test="${ranklist.rank eq 2}">
+                                       <i class="ti-crown" style="color: burlywood"></i> </c:if>
+                                        <c:if test="${ranklist.rank eq 3}">
+                                       <i class="ti-crown" style="color: darkgrey"></i> </c:if>
+                                      ${ranklist.rank}</td>
+                                       
                                         <td width="20%">${ranklist.nickname}</td>
                                         <td width="10%">${ranklist.hart}</td>
                                         <td width="25%"> <fmt:formatNumber value="${ranklist.rate}" pattern="#.##"/>%</td>
@@ -88,6 +98,19 @@
                     </div>
                 </div>
             </div>
+                <div class="card shadow text-center mb-4" width="30px">
+                        
+                          <div class="file-action" width="10px">
+                            <a  class="dropdown-toggle more-vertical p-0 text-muted mx-auto" aria-haspopup="true" aria-expanded="false">
+                         </a>
+                            
+                            
+                          </div>
+                         
+                    
+                  
+                      </div> <!-- .card -->
+                    
 			
 						</div>
 					</div>
@@ -98,5 +121,10 @@
 </body>
 
 
+
+
+  
+  <script src="${pageContext.request.contextPath}/resources/third/js/apps.js"></script> 
+  
   
 </html>

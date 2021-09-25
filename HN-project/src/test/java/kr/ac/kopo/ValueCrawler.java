@@ -28,7 +28,7 @@ public class ValueCrawler{
 	@Autowired
 	private StockDAO mapper;
 	
-	
+	@Ignore
 	@Test
 	public void insertvalue() throws Exception{
 	
@@ -142,17 +142,17 @@ public class ValueCrawler{
 	sqlSessionTemplate.insert("stock.StockDAO.insertvalue",stc);
 	
 	}
-	@Ignore
+
 	@Test
 	public void inserclose() throws Exception{
 		
 		
-
+		try {
 	String[] aa = mapper.selectcode();
 	for(int i=0; i<aa.length;i++) {
 		
 		String code=aa[i];
-		String URL3="https://finance.naver.com/item/frgn.nhn?code="+code+"&page=1";
+		String URL3="https://finance.naver.com/item/frgn.nhn?code="+code+"&page=4";
 		Document doc3;
 	
 		int close=0;
@@ -164,7 +164,7 @@ public class ValueCrawler{
 		try {
 			//종가
 			doc3 = Jsoup.connect(URL3).get();
-			Elements eles3 = doc3.select("#content > div.section.inner_sub > table.type2 > tbody > tr:nth-child(15) > td:nth-child(2) > span");
+			Elements eles3 = doc3.select("#content > div.section.inner_sub > table.type2 > tbody > tr:nth-child(31) > td:nth-child(2) > span");
 			
 		
 			try{
@@ -177,7 +177,7 @@ public class ValueCrawler{
 		
 			
 			//전일비 
-			Elements eles4 = doc3.select("#content > div.section.inner_sub > table.type2 > tbody > tr:nth-child(15) > td:nth-child(3) > span");
+			Elements eles4 = doc3.select("#content > div.section.inner_sub > table.type2 > tbody > tr:nth-child(31) > td:nth-child(3) > span");
 		
 			
 			try{
@@ -190,7 +190,7 @@ public class ValueCrawler{
 	
 			//증감할 전일비
 			
-			Elements eles5 = doc3.select("#content > div.section.inner_sub > table.type2 > tbody > tr:nth-child(15) > td:nth-child(4) > span");
+			Elements eles5 = doc3.select("#content > div.section.inner_sub > table.type2 > tbody > tr:nth-child(31) > td:nth-child(4) > span");
 
 			String alpha = Character.toString(eles5.text().charAt(0));
 			if(alpha.equals("-")) {
@@ -204,7 +204,7 @@ public class ValueCrawler{
 			
 			
 			//날짜
-			Elements eles7 = doc3.select("#content > div.section.inner_sub > table.type2 > tbody > tr:nth-child(15) > td.tc > span");
+			Elements eles7 = doc3.select("#content > div.section.inner_sub > table.type2 > tbody > tr:nth-child(31) > td.tc > span");
 			closedate = eles7.text();
 			
 		}
@@ -230,6 +230,9 @@ public class ValueCrawler{
 		
 		sqlSessionTemplate.insert("stock.StockDAO.insertclose2",st);
 		Thread.sleep(5000); 
+		}
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 		
 	}

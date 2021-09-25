@@ -15,7 +15,7 @@ insert into likecompany(no,stock_code) values(#{no},#{stock_code})
 <!-- 관심기업리스트 -->
 <select id="companylist" parameterType="wagglejoinVO" resultType="stocktodayVO">
 select a.no,a.stock_code,b.stock_name,b.stock_type,c.stock_close,b.value, c.valuediffrate from likecompany a, hn_stock_code b 
-,(select * from (select * from hn_stock_close order by close_date desc)where <![CDATA[rownum <=40]]>)c
+,(select * from (select * from hn_stock_close order by close_date desc)where <![CDATA[rownum <=300]]>)c
 where no=#{no} and a.stock_code=c.stock_code and a.stock_code=b.stock_code
 </select>
 
@@ -67,7 +67,7 @@ where p.no=w.no and me=#{me} and to_char(regdate, 'yyyy-mm-dd') = #{regdate} and
 <select id="rec" parameterType="portfolioVO" resultType="stocktodayVO">
 select * from(select a.stock_code,a.stock_close,a.stock_name,valuediffrate from
 (select * from(select * from hn_stock_close order by close_date desc)
-where <![CDATA[rownum <=40]]> )a, 
+where <![CDATA[rownum <=300]]> )a, 
 (select * from hn_stock_code where stock_type=#{stock_type})b
 where a.stock_code =b.stock_code order by valuediffrate)where  <![CDATA[rownum <=3]]>
 </select>
@@ -85,5 +85,26 @@ delete from likecompany where no=#{no} and stock_code=#{stock_code}
 
 <select id="selectcompany" parameterType="likecompanyVO" resultType="likecompanyVO">
 select * from likecompany where no=#{no} and stock_code=#{stock_code}
+</select>
+
+
+<select id="getclose" parameterType="stocktodayVO" resultType="stocktodayVO">
+select stock_close from (select * from hn_stock_close where stock_name=#{stock_name} order by stock_close desc) where rownum =1
+</select>
+
+<!-- 팔로워 최다 3명 -->
+<select id ="follower3" resultType="followVO">
+select * from (select likeman, count(likeman) count from follow group by likeman order by count desc) where <![CDATA[rownum <=3]]>
+</select>
+
+
+<select id="myfollower" parameterType="followVO" resultType="ranklistVO" >
+select rate, stockvalue,nickname,hart,rank from (select rate, stockvalue,no,nickname,hart,
+rank() over(order by rate desc) rank from(select a.rate ,a.stockvalue,b.no, b.nickname, b.hart from hn_waggle b , 
+(select * from (SELECT acc_num,rate, stockvalue,
+RANK() OVER (PARTITION BY acc_num ORDER BY no DESC) AS RANK
+FROM acc_daily) where rank=1) a
+where b.member_account = a.acc_num) order by rank) rank , (select me from follow where likeman=#{likeman}) jj
+where rank.nickname=jj.me order by rank
 </select>
 </mapper>

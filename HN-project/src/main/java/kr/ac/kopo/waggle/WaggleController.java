@@ -54,6 +54,9 @@ public class WaggleController {
 	private FavoriteService favoriteservice;
 	
 	
+	@GetMapping("/lotto")public String dd() {
+		return "lotto";
+	}
 	
 	/* 와글와글메인 */
 	@GetMapping("/waggle")
@@ -63,13 +66,17 @@ public class WaggleController {
 	
 	
 	/* 와글와글 쿠폰메인 */
-	@GetMapping("/waggle/changecoupon")
+	@Transactional
+	@GetMapping("/waggle/coupon")
 	public String wagglecoupon(HttpSession session, Model model) {
 		WaggleJoinVO waggleVO = (WaggleJoinVO) session.getAttribute("waggleVO");
-	
+		AccountDailyVO ad = service.selectacc(waggleVO);//현금 구하기
+		List<CouponVO> couponlist = service.selectcoupon(waggleVO.getNo());//쿠폰리스트 구하기
 		
-		model.addAttribute("myheart",waggleVO.getHart());
-		return "waggle/changecoupon";
+		model.addAttribute("mycoupon", couponlist); //쿠폰 어느정도있나
+		model.addAttribute("cash",ad.getTcash()); //현금구하기
+		model.addAttribute("myheart",waggleVO.getHart());//하트 구하기
+		return "waggle/coupon";
 	}
 	
 	/* 와글와글 가입화면 */
@@ -84,17 +91,29 @@ public class WaggleController {
 	
 	
 	/* 와글와글 일회성 하트 충전 */
-	@PostMapping("/waggle/addheart")
-	public String addheart(HttpSession session,AddHeartVO heartvo) {
-
+	@Transactional
+	@ResponseBody
+	@PostMapping("/heart/pay")
+	public Map<String,Object> addheart(HttpSession session,AddHeartVO heartvo, @RequestParam(value="price") int price,@RequestParam(value="heart") int heart) {
 		WaggleJoinVO waggleVO = (WaggleJoinVO)session.getAttribute("waggleVO");
 		
 		heartvo.setAnum(waggleVO.getMember_account());
 		heartvo.setNo(waggleVO.getNo());
-	
+		heartvo.setMoney(price);
+		heartvo.setHeart(heart);
 		service.addHeart(heartvo);
-		 
-		return "waggle/comcoupon";
+	
+		
+		
+		waggleVO.setHart(waggleVO.getHart()+heart);
+		session.setAttribute("waggleVO", waggleVO);
+		Map<String, Object> map = new HashMap<String, Object>();
+	
+		
+		map.put("myheart",waggleVO.getHart());//하트
+		AccountDailyVO ad = service.selectacc(waggleVO); //계좌잔액조회
+		map.put("myprice",ad.getTcash());
+		return map;
 	}
 	
 	/* 와글와글 가입 데이터 넘기기 */
@@ -216,18 +235,26 @@ public class WaggleController {
 	
 	
 	/* 쿠폰사기 */
-	@PostMapping("/waggle/change")
-	public String change(HttpSession session,CouponVO couponvo) {
+	@Transactional
+	@ResponseBody
+	@PostMapping("/use/heart")
+	public Map<String, Object>  change(HttpSession session,CouponVO couponvo, @RequestParam(value="heart") int heart) {
 
 		WaggleJoinVO waggleVO = (WaggleJoinVO)session.getAttribute("waggleVO");
 		couponvo.setNo(waggleVO.getNo());
 	
-		service.change(couponvo);		 
-		return "waggle/comcoupon";
+		service.change(couponvo);	
+		
+		waggleVO.setHart(waggleVO.getHart()-heart);
+		session.setAttribute("waggleVO", waggleVO);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("hheart", waggleVO.getHart());
+		return map;
 	}
 	
 	/*쿠폰조회하기*/
-	@GetMapping("/waggle/listcoupon")
+	@PostMapping("/couponlist")
 	public String couponlist(Model modal,CouponVO couponvo, HttpSession session) {
 		WaggleJoinVO waggleVO = (WaggleJoinVO) session.getAttribute("waggleVO");
 
@@ -244,7 +271,20 @@ public class WaggleController {
 		return "waggle/giftcoupon";
 	}
 	
+	/* 쿠폰사용하기 */
+	@ResponseBody
+	@PostMapping("/couponuse")
+	public void couponuse(HttpSession session,@RequestParam(value="coupon_id") String coupon_id,CouponVO cp) {
 	
+		WaggleJoinVO waggle =(WaggleJoinVO) session.getAttribute("waggleVO");
+	
+		cp.setNo(waggle.getNo());
+		
+		cp.setCouponid(coupon_id);
+		
+		
+		service.deletecoupn(cp);
+	}	
 	
 	/* 회원번호로 보유 종목 가격 알기 */
 	
@@ -259,8 +299,6 @@ public class WaggleController {
 		model.addAttribute("list",list);
 		return "waggle/rankInfoDetail";
 	}
-	
-
 	
 	
 }

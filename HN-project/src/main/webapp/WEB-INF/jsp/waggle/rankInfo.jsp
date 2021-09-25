@@ -2,16 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/green-horizotal/style.css"/>
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/jqbar.css" />
 <!doctype html>
 <html class="no-js" lang="en">
 
-<!-- 
-<script type="text/javascript"
-	src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.1/Chart.min.js"></script> -->
+
 
 
 <script type="text/javascript"
@@ -51,7 +48,7 @@
 					</h5>
 					<i class="fa fa-user"></i>&nbsp;
 					<c:if test="${not empty selectf}">
-					<a id="htmltag1" href="javascript:likeman()" style="color:#646464;" >팔로우</a></i>&nbsp;&nbsp;&nbsp;
+					<a id="htmltag1" href="javascript:likeman()" style="color:#646464;" aria-haspopup="true" aria-expanded="false">팔로우</a></i>&nbsp;&nbsp;&nbsp;
 					</c:if>
 					<c:if test="${empty selectf}"> 
 					<a id="htmltag1" href="javascript:likemanback()" style="color:#646464;" >팔로우 끊기</a></i>&nbsp;&nbsp;&nbsp;
@@ -191,6 +188,7 @@
 							</div>
 						
 						</div>
+						
 						<div class="past-statistic-an">
 							<div class="past-statistic-ctn">
 								<h3>
@@ -216,7 +214,7 @@
 							<div class="recent-items-ctn">
 								<div class="left-blog blog-category">
 									<h4>최근 매수 목록</h4>
-									<ul>
+									
 								</div>
 							</div>
 							<div class="recent-items-inn">
@@ -304,9 +302,10 @@
 				
 				</div>
 			</div>
-			<div class="modal-footer">
 			
-				<button id="button-modal2" data-dismiss="modal">닫기</button>
+			<div class="modal-footer">
+	
+				<button id="button-modal2"  data-dismiss="modal">닫기</button>
 			</div>
 		</div>
 	</div>
@@ -424,9 +423,13 @@
 		})
 
 	})
+	
+
+	
+	
 
 	function line() {
-
+		
 		var ctx = document.getElementById('linechart').getContext('2d');
 		var linechart = new Chart(ctx, {
 			type : 'line',
@@ -470,9 +473,10 @@
 			}
 		})
 	}
-
+	
+	 
 	function doughnut() {
-	alert('!!')
+		
 		var sum = Number("{100}");
 
 		var ctx3 = document.getElementById("myPieChart");
@@ -482,9 +486,9 @@
 				labels : pieLabels,
 				datasets : [ {
 					data : piedata,
-					backgroundColor : [ '#5093ce', "#7fc77f", '#36b9cc',
+					backgroundColor : [ '#5093ce', '#36b9cc',
 							'#35a1cc', '#7fc77f', "#dd6864", ],
-					hoverBackgroundColor : [ "#78acd9", "#a3d7a3", '#2c9faf',
+					hoverBackgroundColor : [ "#78acd9", '#2c9faf',
 							'#a3d7a3', '#a3d7a3', "#e6918e" ],
 					hoverBorderColor : "rgba(234, 236, 244, 1)",
 				} ],

@@ -88,7 +88,7 @@
 									<div class="col-md-12 col-sm-12 col-xs-12">
 										<!-- Start Slider content -->
 										<div class="slide-content text-center">
-											<h2 class="title2">내안의 투자플랫폼<br> 와글와글</h2>
+											<h2 class="title2">투자자들의<br> 포트폴리오 공유</h2>
 											<div class="layer-1-3">
 												<a href="${pageContext.request.contextPath}/waggle" class="ready-btn left-btn">시작하기</a>
 											</div>

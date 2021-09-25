@@ -5,6 +5,7 @@ import java.util.List;
 import kr.ac.kopo.vo.FollowVO;
 import kr.ac.kopo.vo.LikeCompanyVO;
 import kr.ac.kopo.vo.PortfolioVO;
+import kr.ac.kopo.vo.RankListVO;
 import kr.ac.kopo.vo.StockTodayVO;
 import kr.ac.kopo.vo.WaggleJoinVO;
 
@@ -49,6 +50,12 @@ public interface FavoriteDAO {
 
 	/* 이기업 관심등록했는지 봐보기 */
 	boolean selectcompany(LikeCompanyVO lc); //false는 등록하지않은것.
+
+	StockTodayVO getclose(StockTodayVO st);
+
+	List<FollowVO> follower3();/* 팔로워 최다 3순위 */
+
+	List<RankListVO> myfollower(FollowVO follow);
 
 	
 }

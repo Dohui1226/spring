@@ -28,5 +28,7 @@ public interface WaggleService {
 	List<DetailStockTypeVO> typecompany(StockBuySellVO buysell);//회원번호로 가져온 보유종목..등 
 	RankListVO wagglemyrank(WaggleJoinVO waggle); //나의랭킹정보
 	List<AccountDailyVO> wagglerateInfo(WaggleJoinVO waggle);//날짜랑 수익률 조회
+	AccountDailyVO selectacc(WaggleJoinVO waggleVO); //계좌잔액조회
+	void deletecoupn(CouponVO cp); //쿠폰사용하기
 	
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import kr.ac.kopo.vo.FollowVO;
 import kr.ac.kopo.vo.LikeCompanyVO;
 import kr.ac.kopo.vo.PortfolioVO;
+import kr.ac.kopo.vo.RankListVO;
 import kr.ac.kopo.vo.StockTodayVO;
 import kr.ac.kopo.vo.WaggleJoinVO;
 @Repository
@@ -105,5 +106,22 @@ public class FavoriteDAOImpl implements FavoriteDAO {
 		return flag; 
 	}
 	
-
+	public StockTodayVO getclose(StockTodayVO st) {
+		StockTodayVO st2 =sqlSessionTemplate.selectOne("favorite.FavoriteDAO.getclose", st);
+		return st2;
+	}
+	
+	/* 팔로워 최다 3순위 */
+	public List<FollowVO> follower3() {
+	 List<FollowVO> list = sqlSessionTemplate.selectList("favorite.FavoriteDAO.follower3");
+		return list;
+	}
+	
+	
+	public List<RankListVO> myfollower(FollowVO follow) {
+		System.out.println("DAO"+follow);
+		List<RankListVO> list = sqlSessionTemplate.selectList("favorite.FavoriteDAO.myfollower");
+		System.out.println("DAO"+list);
+		return list;
+	}
 }

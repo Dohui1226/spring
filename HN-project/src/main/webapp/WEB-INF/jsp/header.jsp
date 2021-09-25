@@ -62,7 +62,7 @@
 <!-- responsive css -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/responsive.css">
-
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/third/css/feather.css">
 <!-- modernizr css -->
 <script
 	src="${pageContext.request.contextPath}/resources/js/vendor/modernizr-2.8.3.min.js"></script>
@@ -101,7 +101,12 @@
     <script src="${pageContext.request.contextPath}/resources/green-horizotal/js/data-table/jquery.dataTables.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/green-horizotal/js/data-table/data-table-act.js"></script>
      <script src="${pageContext.request.contextPath}/resources/green-horizotal/js/main.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/green-horizotal/js/tawk-chat.js"></script>
+ 
+    
+    
+      <script src="${pageContext.request.contextPath}/resources/third/js/popper.min.js"></script>
+     <script src="${pageContext.request.contextPath}/resources/third/js/moment.min.js"></script>
+     <script src="${pageContext.request.contextPath}/resources/third/js/simplebar.min.js"></script>
 </head>
 <body>
 
@@ -163,10 +168,8 @@
 										<a class="s-menu"
 											href="${pageContext.request.contextPath}/logout">Logout</a>
 									</c:if>
-
-
-
 								</div>
+								
 								<!-- mainmenu start -->
 								<nav class="navbar navbar-default">
 									<div class="collapse navbar-collapse" id="navbar-example">
@@ -174,7 +177,13 @@
 											<ul class="nav navbar-nav navbar-right">
 												
 												<li><a class="pages"
-													href="${pageContext.request.contextPath}/waggle">와글와글</a></li>
+													href="${pageContext.request.contextPath}/waggle">와글와글</a>
+													<ul class="sub-menu">
+                                                            <li><a href="${pageContext.request.contextPath}/waggle/join">가입하기</a></li>
+                                                             <li><a href="${pageContext.request.contextPath}/waggle/ranking">랭킹확인</a></li>
+                                                            <li><a href="${pageContext.request.contextPath}/waggle/coupon">충전 및 교환</a></li>
+
+                                                        </ul></li>
 												<li><a class="pages">관심</a>
 												<ul class="sub-menu">
                                                             <li><a href="${pageContext.request.contextPath}/like/company">관심 종목</a></li>

@@ -55,6 +55,16 @@ public class StockDAOImpl implements StockDAO {
 		List<StockTodayVO> list =sqlSessionTemplate.selectList("stock.StockDAO.linestock", st);
 		return list;
 	}
-
+	
+	public List<StockTodayVO> selectcodename() {
+		List<StockTodayVO> list =sqlSessionTemplate.selectList("stock.StockDAO.selectcodename");
+			return list;
+		}
+	
+	
+	public void randomstock(StockBuySellVO bs) {
+		sqlSessionTemplate.selectOne("stock.StockDAO.randomstock", bs);
+		
+	}
 
 }

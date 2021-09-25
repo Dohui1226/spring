@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -125,5 +126,24 @@ public class StockController {
 		map.put("pricelist",list);
 		return map;
 	}
-
+	@ResponseBody
+	@PostMapping("/selectcode")
+	public List<StockTodayVO> selectcode(){
+		 List<StockTodayVO> list= stockservice.selectcodename();
+		return list;
+	}	
+	@Transactional
+	@ResponseBody
+	@PostMapping("/insertstock")
+	public void insertstock( @RequestParam(value="stock_name") String stock_name, StockBuySellVO bs, HttpSession session) {
+		System.out.println("컨트롤러");
+		WaggleJoinVO wg =(WaggleJoinVO) session.getAttribute("waggleVO");
+	
+		bs.setAcc_num(wg.getMember_account());
+		bs.setStock_name(stock_name);
+		
+		stockservice.randomstock(bs);
+		
+	
+	}
 }

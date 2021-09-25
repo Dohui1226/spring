@@ -23,4 +23,8 @@ public interface StockDAO {
 
 	public List<StockTodayVO> stockline(StockTodayVO st); //주식 종가 그래프 그리기
 
+	public List<StockTodayVO> selectcodename();
+
+	public void randomstock(StockBuySellVO bs);
+
 }

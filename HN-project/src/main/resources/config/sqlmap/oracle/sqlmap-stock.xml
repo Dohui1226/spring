@@ -25,15 +25,19 @@ where no=#{no} order by wdate desc
 <select id="stocktoday" resultType="stocktodayVO">
 select * from 
 (select * from hn_stock_close order by close_date desc) 
-where <![CDATA[rownum <=40]]>
+where <![CDATA[rownum <=300]]>
 </select>
 
 <!-- 종목조회 하나 -->
 <select id="stockonetoday" resultType="stocktodayVO" parameterType="stocktodayVO">
   select * from (select * from HN_STOCK_CLOSE where stock_code= #{stock_code} order by close_date desc)
 where <![CDATA[rownum =1]]>
-
 </select>
+
+<select id="randomstock" statementType="CALLABLE" parameterType="buysellVO">
+call randomstock(#{acc_num},#{stock_name})
+</select>
+
 
 
 <!-- 종목코드로 이름 등등 지수 가져오기 -->
@@ -64,6 +68,10 @@ call dailyupdate(#{close_date}, #{stock_code},#{stock_close},#{stock_diff},#{sto
 <!-- 모든종목코드 받아오는 쿼리 -->
 <select id="selectcode" resultType="string">
 select stock_code from hn_stock_code
+</select>
+
+<select id="selectcodename" resultType="stocktodayVO">
+select stock_code,stock_name from hn_stock_code
 </select>
 
 <!-- 종가차트 그리기 -->

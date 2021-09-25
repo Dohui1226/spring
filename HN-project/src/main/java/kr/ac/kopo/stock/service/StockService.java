@@ -21,4 +21,9 @@ public interface StockService {
 
 	public List<StockTodayVO> stockline(StockTodayVO st); //주식 라인차트 가져오기
 
+
+	public List<StockTodayVO> selectcodename();
+
+	public void randomstock(StockBuySellVO bs);
+
 }

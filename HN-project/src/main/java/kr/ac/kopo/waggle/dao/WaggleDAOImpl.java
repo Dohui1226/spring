@@ -108,4 +108,15 @@ public class WaggleDAOImpl implements WaggleDAO {
 		}
 		return list;
 	}
+	
+	
+	public AccountDailyVO selectbal(WaggleJoinVO waggleVO) {
+		AccountDailyVO my =sqlSessionTemplate.selectOne("waggle.WaggleDAO.selectbal",waggleVO);
+		return my;
+	}
+	
+	/* 쿠폰사용하기 */
+	public void deltecoupon(CouponVO cp) {
+		sqlSessionTemplate.delete("waggle.WaggleDAO.deletecoupon",cp);
+	}
 }

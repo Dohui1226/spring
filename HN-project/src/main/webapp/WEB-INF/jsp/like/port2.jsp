@@ -6,10 +6,14 @@
 
 <!doctype html>
 <html class="no-js" lang="en">
-
+ <script type="text/javascript"
+	src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.1/Chart.min.js"></script>
 <jsp:include page="../header.jsp" />
-<!-- header end -->
-<!-- Start breadcumb Area -->
+
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/green-horizotal/css/dialog/sweetalert2.min.css">
+ <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/green-horizotal/css/dialog/dialog.css">
+ 
 <div class="page-area">
 	<div class="breadcumb-overlay"></div>
 	<div class="container">
@@ -26,8 +30,8 @@
 		</div>
 	</div>
 </div>
-<!-- End breadcumb Area -->
-<!-- Start Slider Area -->
+
+
 <div class="invest-area bg-color page-padding-2">
 	<div class="container">
 		<div class="row">
@@ -37,47 +41,71 @@
 				<p> <div align="center" class="basic-tb-hd">
                             <label for="start">날짜선택:</label>  
                             <input type="date" id="day" name="day" value="2021-09-17">
-                          	<input id="daysubmit" type="submit" onclick="dayinput()" value="선택">
+                          	<input id="daysubmit" type="submit"  id="button-modal" onclick="dayinput()" value="선택">
                         </div></p>
 				</div>
 			</div>
 		</div>
-	 <div class="row">
+	
+	  
+	   <div class="row">
+	
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <div class="normal-table-list mg-t-30">
-                       
-                        <div class="bsc-tbl-st">
-                       
-                          
-                         	<div id="ajax">
-                            <table width="70%" class="table table-striped">
+                  <div id="ajax">
+                        
+		 
+                         	
+                          <div class="support-services-red">
+                         <p text-align="center">해당 일에 저장된 포트폴리오는 <strong>총 ${fn:length(port)} 개</strong> 입니다.</p>
+                       <hr>
+                      
+                         	 <c:forEach items="${requestScope.port}" var="ranklist" varStatus="status">  
+                         	                             
+                                   <c:set  var="i" value="${fn:length(ranklist.value)}"></c:set>
+                            <table width="70%" class="table table-striped" border="1">
                          	<thead>
-                         	<tr>
-                         	<th width="15%" align="center">닉네임</th>
-                         	<th width="15%" align="center">종목타입</th>
-  							<th width="15%" align="center">비중(%)</th>
+                         	<tr style="background-color: #ddd">
+                         	<th width="10%" style="text-align: center">번호</th>
+                         	<th width="15%" style="text-align: center">닉네임</th>
+                         	<th width="20%" style="text-align: center">종목타입</th>
+  							<th width="15%" style="text-align: center">비중(%)</th>
   						
                          	</tr>
                          	</thead>
                                 <tbody>
-                                 <c:forEach items="${requestScope.port}" var="ranklist" varStatus="loop"> 
+                                
+                          
                                     <tr>
-                                        <td style="vertical-align:middle" rowspan="${fn:length(ranklist.value)}" >
-                                        <strong>${ranklist.key}</strong><br><br>&nbsp;&nbsp;
-                                        <button class="gut" value="${ranklist.key}" onclick="cc(this.value)">종목추천</button></td>
+                                     <td style="vertical-align:middle;text-align: center" rowspan="${fn:length(ranklist.value)}" >
+                                     <Stong>${status.count}<strong></td>
+                                        <td style="vertical-align:middle;text-align: center" rowspan="${fn:length(ranklist.value)}" >
+                                        <strong>${ranklist.key}</strong><br><br>
+                                      
+                                        <button class="btn" id="sa-close" value="${ranklist.key}" onclick="cc(this.value)">종목추천</button></td>
+                                   				
+                                   		 <c:forEach items="${ranklist.value}" var="ranklist1" varStatus="status"> 
+                                   		
+                                   			 <td  style="text-align: center">${ranklist1.key}</td>
+                                   			 <td style="text-align: center">
                                    			
-                                   		 <c:forEach items="${ranklist.value}" var="ranklist1" varStatus="loop"> 
-                                   			 <td>${ranklist1.key}</td>
-                                   			 <td><fmt:formatNumber value="${ranklist1.value*100}" pattern="##.##"/>
-                                   		</td></tr>
+                                   		<fmt:formatNumber value="${ranklist1.value*100}" pattern="##.##"/>
+                                   		</td>
+                                   		
+                                   	</tr>
+                                   		
                                    		
                                    		</c:forEach>
-                                   			
-                                    
-                                    </c:forEach>
+                                   <br>
+                        
                                 </tbody>
+                                     </c:forEach>
                             </table>
-                       			</div>
+                          </div>
+                        </div>
+
+
+
+
                         
                  
                     </div>

@@ -9,6 +9,7 @@ import kr.ac.kopo.favorite.dao.FavoriteDAO;
 import kr.ac.kopo.vo.FollowVO;
 import kr.ac.kopo.vo.LikeCompanyVO;
 import kr.ac.kopo.vo.PortfolioVO;
+import kr.ac.kopo.vo.RankListVO;
 import kr.ac.kopo.vo.StockTodayVO;
 import kr.ac.kopo.vo.WaggleJoinVO;
 
@@ -100,5 +101,23 @@ public class FavoriteServiceImpl implements FavoriteService {
 		return bool;
 	}
 	
+	/* 종목명이름으로 종가구하기 */
+	public StockTodayVO getclose(StockTodayVO st) {
+		StockTodayVO st2 =dao.getclose(st);
+		return st2;
+	}
+
+	/* 팔로워 최다 3순위 */
+	public List<FollowVO> follower3() {
+		List<FollowVO> list = dao.follower3();
+		return list;
+	}
+	
+	public List<RankListVO> myfollower(FollowVO follow) {
+		System.out.println(follow);
+		List<RankListVO> list = dao.myfollower(follow);
+		System.out.println(list);
+		return list;
+	}
 	
 }

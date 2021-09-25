@@ -1,6 +1,7 @@
 package kr.ac.kopo.favorite;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +24,7 @@ import kr.ac.kopo.favorite.service.FavoriteService;
 import kr.ac.kopo.vo.FollowVO;
 import kr.ac.kopo.vo.LikeCompanyVO;
 import kr.ac.kopo.vo.PortfolioVO;
+import kr.ac.kopo.vo.RankListVO;
 import kr.ac.kopo.vo.StockBuySellVO;
 import kr.ac.kopo.vo.StockTodayVO;
 import kr.ac.kopo.vo.StockWeightVO;
@@ -83,47 +86,54 @@ public class FavoriteController {
 	
 		StockBuySellVO bs = new StockBuySellVO();
 		bs.setMember_account(waggle.getMember_account());
-		double balance =aservice.maxbuy(bs);
-		model.addAttribute("balance",(int)balance);
-		model.addAttribute("nickname",waggle.getNickname());
+		double balance =aservice.maxbuy(bs); //최대 살수 있는 금액을 알아보기 위한 현금...얼마있는지...
 		
-		pf.setMe(waggle.getNo());
-		pf.setNickname(nickname);
-		Map<String,Map<String,Object>> portmap = new HashMap<String, Map<String,Object>>();	
+		model.addAttribute("balance",(int)balance); //잔액 공유영역에 올리기
+		model.addAttribute("nickname",waggle.getNickname()); //내 닉네임 올리기
 		
-		if(day ==null) {
+		pf.setMe(waggle.getNo()); //내와글번호
+		pf.setNickname(nickname); //닉네임받아온거 알고자하는 포트폴리오 주인
+		Map<String,List<Object>> portmap = new HashMap<String, List<Object>>();	
+		
+		if(day ==null) {//포트폴리오 날짜 선택하기
 			Date time = new Date();
 			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 			String time1 = format1.format(time);
 			pf.setRegdate(time1);
+			model.addAttribute("dayday", time1);
 		}
 		else {
 			pf.setRegdate(day);
+			model.addAttribute("dayday", day);
 		}
 		
 		//내가 선택한 포트폴리오
 		List<PortfolioVO> list = service.selectport2(pf);
+		
 		PortfolioVO pf2 = new PortfolioVO();
+		System.out.println("내가선택한 포폴"+list);
+		int stocknum=0;
 		
-		int rbalance=0;
 		for(PortfolioVO a :list) {
-			Map<String,Object> port =new HashMap<String,Object>();
+			List<Object> port =new ArrayList<Object>();
 		
-			int tbalance = (int)(balance* a.getPercent());
+			int tbalance = (int)(balance* a.getPercent());//총구매가능금액...
 			
 			pf2.setStock_type(a.getStock_type());
 			List<StockTodayVO> na =service.recc(pf2);	
-			
+			System.out.println("na+"+na);
 			for(StockTodayVO k: na) {
-				if(tbalance> k.getStock_close()) {
-					int stocknum =tbalance/k.getStock_close();
-					tbalance =tbalance-(stocknum*k.getStock_close());
-					port.put(k.getStock_name(), stocknum);
+				if(tbalance> k.getStock_close()) {//총구매가능금액이 그 종목의 종가보다 크다면... ㅎ사야지
+					stocknum =tbalance/k.getStock_close(); //가격/종가= 살수있는 수량
+					tbalance =tbalance-(stocknum*k.getStock_close()); //남은 잔액
+					
 				}
 				else {
-					
 					continue;
 				}
+				port.add(0,k.getStock_name()); //종목명, 몇주사야하는지
+				port.add(1,(int)(a.getPercent()*100));
+				port.add(2,stocknum);
 				
 			}
 			portmap.put(a.getStock_type(), port);
@@ -136,6 +146,52 @@ public class FavoriteController {
 
 	
 	
+	@PostMapping("/money/select")
+	public String money(@RequestParam("stock_type") String[] stock_type, StockTodayVO st, @RequestParam("money") int money,
+			@RequestParam("percent") int[] percent,Model model) {// 종목이름이랑 원하는 가격, 퍼센트 뽑아온다...
+		model.addAttribute("balance",money);
+		
+		//List<PortfolioVO> list = service.selectport2(pf);
+		Map<String,List<Object>> portmap = new HashMap<String, List<Object>>();	
+		List<Object> list = new ArrayList<Object>();
+		model.addAttribute("balance",money);
+	
+		int stocknum=0;
+		for(int i=0 ; i<stock_type.length;i++) {
+			
+			List<Object> port =new ArrayList<Object>();
+			PortfolioVO pf2 = new PortfolioVO();
+			pf2.setStock_type(stock_type[i]);
+			
+			List<StockTodayVO> na =service.recc(pf2);
+			int mmoney = (int) (money*percent[i]/100);
+		
+			for(StockTodayVO k: na) {
+				if(mmoney> k.getStock_close()) {//총구매가능금액이 그 종목의 종가보다 크다면... ㅎ사야지
+					stocknum =mmoney/k.getStock_close(); //가격/종가= 살수있는 수량
+					mmoney =mmoney-(stocknum*k.getStock_close()); //남은 잔액
+					
+				}
+				else {
+					continue;
+				}
+				port.add(0,k.getStock_name()); //종목명, 몇주사야하는지
+				port.add(1,percent[i]);
+				port.add(2,stocknum);
+				
+			}
+			portmap.put(stock_type[i], port);
+			
+			
+			
+			
+		}
+		model.addAttribute("port2",portmap);
+	
+			return "like/port4";
+	}
+	
+	
 	
 	/* 날짜별 저장한 포트폴리오보기 */
 	@PostMapping("/like/port/select")
@@ -143,7 +199,7 @@ public class FavoriteController {
 		WaggleJoinVO waggle = (WaggleJoinVO)session.getAttribute("waggleVO");
 		pf.setMe(waggle.getNo());	
 		pf.setRegdate(day);
-		
+		model.addAttribute("dayday", day);
 		Map<String,Map<String,Object>> portmap = new HashMap<String, Map<String,Object>>();		
 		List<PortfolioVO> list = service.selectport(pf);	
 		List<PortfolioVO> list2 = service.selectportname(pf);
@@ -216,9 +272,28 @@ public class FavoriteController {
 	
 	
 	/* 관심유저 */
+	@Transactional
 	@GetMapping("/like/follow")
-	public String myfollow(HttpSession session,Model model) {
-		System.out.println("관심유저");
+	public String myfollow(HttpSession session,Model model, FollowVO follow) {
+		
+		List<FollowVO> list= service.follower3();
+		model.addAttribute("follower3",list);
+		
+		//나의 팔로워정보
+		WaggleJoinVO wj = (WaggleJoinVO) session.getAttribute("waggleVO");
+		follow.setMe(wj.getNickname());
+		int followlist =aservice.follow(follow);
+		follow.setLikeman(wj.getNickname());
+		int followerlist =aservice.follower(follow);
+		model.addAttribute("follow",followlist);
+		model.addAttribute("follower",followerlist);
+
+		follow.setLikeman(wj.getNickname());
+		List<RankListVO> rank =service.myfollower(follow);
+		model.addAttribute("myfollower",rank);
+		model.addAttribute("wj",wj);
+		
+		System.out.println(list);
 		return "like/follow";
 	}
 	
@@ -284,4 +359,8 @@ public class FavoriteController {
 		lc.setStock_code(code);
 		service.unlike(lc);
 	}
+	
+
+
 }
+			

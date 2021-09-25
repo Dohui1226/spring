@@ -38,27 +38,33 @@ call changeheart(#{tono},#{fromno},#{heart})
 
 <!--  쿠폰교환  -->
 <select id="change" statementType="CALLABLE" parameterType="couponVO">
-call changecoupon(#{coupontype},#{couponid},#{no},#{heart},#{couponname})
+call changecoupon(#{no},#{heart},#{couponname})
 </select>
 
 <!-- 쿠폰삭제 -->
-<select id="deletecoupon" parameterType="couponVO">
-delete from hn_coupon where coupon_id=#{couponid}
-</select>
+<delete id="deletecoupon" parameterType="couponVO">
+delete from hn_coupon where couponid=#{couponid} and no=#{no}
+</delete>
 <!-- 쿠폰조회 -->
 <select id="selectcoupon" parameterType="int" resultType="couponVO">
 select * from hn_coupon where no=#{no}
 </select>
 
 
+<!-- 계좌잔액구하기 -->
+<select id="selectbal" parameterType="wagglejoinVO" resultType="accountdailyVO">
+select tcash from (select * from acc_daily where acc_num=#{member_account} 
+        order by no desc)where rownum =1
+</select>
+
 <!-- 와글와글 수익률 기준 랭킹조회 -->
 <select id="wagglerank" resultType="ranklistVO">
-select rate, stockvalue,no,nickname,hart,
+select * from (select rate, stockvalue,no,nickname,hart,
 rank() over(order by rate desc) rank from(select a.rate ,a.stockvalue,b.no, b.nickname, b.hart from hn_waggle b , 
 (select * from (SELECT acc_num,rate, stockvalue,
 RANK() OVER (PARTITION BY acc_num ORDER BY no DESC) AS RANK
 FROM acc_daily) where rank=1) a
-where b.member_account = a.acc_num) order by rank
+where b.member_account = a.acc_num) order by rank) where <![CDATA[rownum <=10]]>
 </select>
 
 <!-- 나의등수및 수익률과 포트폴리오보기 -->

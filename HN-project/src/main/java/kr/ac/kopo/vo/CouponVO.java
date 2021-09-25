@@ -3,7 +3,7 @@ package kr.ac.kopo.vo;
 public class CouponVO {
 	
 	private int coupontype;
-	private long couponid;
+	private String couponid;
 	private int no;
 	private int heart;
 	private String couponname;
@@ -14,11 +14,11 @@ public class CouponVO {
 	public void setCoupontype(int coupontype) {
 		this.coupontype = coupontype;
 	}
-	public long getCouponid() {
+	public String getCouponid() {
 		return couponid;
 	}
-	public void setCouponid(long couponid) {
-		this.couponid = couponid;
+	public void setCouponid(String couponid2) {
+		this.couponid = couponid2;
 	}
 	public int getNo() {
 		return no;

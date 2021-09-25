@@ -49,5 +49,11 @@ public class MemberController {
 		
 		return "redirect:/";
 	}
+	
+	
+	@GetMapping("/waggle/panel")
+	public String panel() {
+		return "waggle/panel";
+	}
 
 }

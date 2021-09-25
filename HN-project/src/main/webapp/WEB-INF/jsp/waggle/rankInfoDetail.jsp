@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,26 +17,26 @@
 			$(document)
 					.ready(
 							function() {
-								
+								console.log('ww')
 								var hdata = new Array();
 								var hipeLabels = new Array();
-
+							
 								<c:forEach var="list1" items="${list}" varStatus="listIdx"  >
 								hipeLabels.push("${list1.stock_name}");
 								</c:forEach>
-
+							
 								<c:forEach var="list2" items="${list}" varStatus="listIdx"  >
 								hdata.push("${list2.stockrate*100}");
 								</c:forEach>
 
 								var sum2 = Number("{100}");
-
-								var ctx5 = document
-										.getElementById("myPieChart2");
+									
+								var ctx5 = document.getElementById("myPieChart2");
+							
 								var myPieChart2 = new Chart(
 										ctx5,
 										{
-											type : 'doughnut',
+											type : 'pie',
 											data : {
 												labels : hipeLabels,
 												datasets : [ {
@@ -51,7 +52,7 @@
 															"#a3d7a3",
 															'#2c9faf',
 															'#a3d7a3',
-															'#a3d7a3',
+															
 															"#e6918e" ],
 													hoverBorderColor : "rgba(234, 236, 244, 1)",
 												} ],
@@ -88,11 +89,10 @@
 			<c:forEach items="${requestScope.list}" var="list" varStatus="status">
 				<div>
 				<div style="flex: 0 0 100%; float: left; width: 33%;text-align: center;" >
-					<div class="col" text-align="middle"
-						style="flex-basis: 0; flex-grow: 1; min-width: 0; max-width: 100%;">
-						<strong><a style="color:#646464;"
-							href="${pageContext.request.contextPath}/stock/buysell/${list.stock_code}">${list.stock_name}</a></strong>
+					<div class="col" text-align="middle" style="flex-basis: 0; flex-grow: 1; min-width: 0; max-width: 100%;">
+						<strong> <a style="color:#646464;" href="${pageContext.request.contextPath}/stock/buysell/${list.stock_code}">${list.stock_name}</a></strong>
 					</div>
+		
 					<div class="col" style="color: #adb5bd !important;text-align: center">
 					<fmt:formatNumber value="${list.stockrate*100}" pattern="###.##" />
 					%

@@ -8,30 +8,32 @@
 		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="support-services-blue"/>
+		<item key="selection" value="ialog"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="support-services-blue"/>
-			<item value="canvas"/>
-			<item value="Protfolio2VO"/>
-			<item value="Info"/>
-			<item value="float"/>
-			<item value="margin"/>
-			<item value="stockrate"/>
-			<item value="sum"/>
-			<item value="selectcompany"/>
-			<item value="selectcom"/>
-			<item value="button-modal"/>
-			<item value="buttom-modal"/>
-			<item value="233,146,46,0.96"/>
-			<item value="maxbuy"/>
-			<item value="Expert Management"/>
+			<item value="ialog"/>
+			<item value="modal2"/>
+			<item value="필요"/>
+			<item value="buysell"/>
+			<item value="insertstock"/>
+			<item value="log"/>
+			<item value="aclick"/>
+			<item value="stock"/>
+			<item value="insert"/>
+			<item value="couponuse"/>
+			<item value="ball"/>
+			<item value="lotto"/>
+			<item value="data"/>
+			<item value="data-id"/>
+			<item value="numbers .ball"/>
 		</list>
 		<list key="replacehistory">
+			<item value="${pageContext.request.contextPath}/resources/third/css/"/>
+			<item value="${pageContext.request.contextPath}/resources/third/js/"/>
 			<item value="double"/>
 			<item value="tal/css/"/>
 			<item value="/css/"/>
@@ -40,7 +42,7 @@
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="95"/>
+		<item key="DIALOG_X_ORIGIN" value="102"/>
 		<item key="DIALOG_Y_ORIGIN" value="424"/>
 		<item key="DIALOG_WIDTH" value="288"/>
 		<item key="DIALOG_HEIGHT" value="391"/>

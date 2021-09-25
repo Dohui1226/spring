@@ -9,9 +9,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/green-horizotal/css/wave/waves.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/green-horizotal/css/dialog/sweetalert2.min.css">
  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/green-horizotal/css/dialog/dialog.css">
+ <script type="text/javascript"
+	src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.1/Chart.min.js"></script>
 <jsp:include page="../header.jsp" />
-<!-- header end -->
-<!-- Start breadcumb Area -->
+
 <div class="page-area">
 	<div class="breadcumb-overlay"></div>
 	<div class="container">
@@ -28,8 +29,9 @@
 		</div>
 	</div>
 </div>
-<!-- End breadcumb Area -->
-<!-- Start Slider Area -->
+
+
+
 <div class="invest-area bg-color page-padding-2">
 	<div class="container">
 		<div class="row">
@@ -37,9 +39,9 @@
 				<div class="section-headline text-center">
 					<h3>포트폴리오</h3>
 				<p> <div align="center" class="basic-tb-hd">
-                            <label for="start">날짜선택:</label>  
-                            <input type="date" id="day" name="day" value="2021-09-18">
-                          	<input id="daysubmit"  class="button-modal" type="submit" onclick="dayinput()" value="선택">
+                            <label for="start">날짜:</label>  
+                            <input type="date" id="day" name="day" value="2021-09-25">
+                          	<input id="daysubmit"  id="button-modal" type="submit" onclick="dayinput()" value="선택">
                         </div></p>
 				</div>
 			</div>
@@ -49,52 +51,74 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     <div class="normal-table-list mg-t-30">
                       
-                        <div class="bsc-tbl-st">
-                       <div id="tabl1">
+                       
+                     <div id="tabl1">
                           
                          	
-                            <table width="70%" class="table table-striped">
+                          <div class="support-services-red">
+                          <p>
+                      오늘 저장된 포트폴리오는 <strong>총 ${fn:length(port)} 개</strong> 입니다.</p>
+                       <hr>
+                         	 <c:forEach items="${requestScope.port}" var="ranklist" varStatus="status">  
+                         	                             
+                                   <c:set  var="i" value="${fn:length(ranklist.value)}"></c:set>
+                                  
+                                   
+                            <table width="70%" class="table table-striped" border="1">
                          	<thead>
-                         	<tr>
-                         	<th width="15%" align="center">포트폴리오</th>
-                         	<th width="15%" align="center">종목타입</th>
-  							<th width="15%" align="center">비중(%)</th>
+                         	<tr style="background-color: #ddd">
+                         	<th width="10%" style="text-align: center">번호</th>
+                         	<th width="15%" style="text-align: center">닉네임</th>
+                         	<th width="20%" style="text-align: center">종목타입</th>
+  							<th width="15%" style="text-align: center">비중(%)</th>
   						
                          	</tr>
                          	</thead>
                                 <tbody>
-                                 <c:forEach items="${requestScope.port}" var="ranklist" varStatus="loop"> 
+                                
+                          
                                     <tr>
-                                        <td style="vertical-align:middle;align:center" rowspan="${fn:length(ranklist.value)}" >
-                                        <strong>${ranklist.key}</strong><br><br>&nbsp;&nbsp;
-                                        <div class="dialog-pro dialog">
-                                        <button class="btn btn-info waves-effect" id="sa-close" value="${ranklist.key}" onclick="cc(this.value)">종목추천</button></td>
-                                   			</div>
-                                   		 <c:forEach items="${ranklist.value}" var="ranklist1" varStatus="loop"> 
-                                   			 <td>${ranklist1.key}</td>
-                                   			 <td>
-                                   		<fmt:formatNumber value="${ranklist1.value*100}" pattern="##.##"/>
-                                   		</td></tr>
-                                   		</c:forEach>
+                                     <td style="vertical-align:middle;text-align: center" rowspan="${fn:length(ranklist.value)}" >
+                                     <Stong>${status.count}<strong></td>
+                                        <td style="vertical-align:middle;text-align: center" rowspan="${fn:length(ranklist.value)}" >
+                                        <strong>${ranklist.key}</strong><br><br>
+                                      
+                                        <button class="btn" id="sa-close" value="${ranklist.key}" onclick="cc(this.value)">종목추천</button></td>
+                                   				
+                                   		 <c:forEach items="${ranklist.value}" var="ranklist1" varStatus="status"> 
+                                   		
+                                   			 <td  style="text-align: center">${ranklist1.key}</td>
+                                   			 <td style="text-align: center">
                                    			
-                                    
-                                    </c:forEach>
-                                </tbody>
-                            </table>
-                       			</div>
+                                   		<fmt:formatNumber value="${ranklist1.value*100}" pattern="##.##"/>
+                                   		</td>
+                                   		
+                                   	</tr>
+                                   		
+                                   		
+                                   		</c:forEach>
+                                   <br>
                         
-                 
-                    </div>
-                </div>
-            </div>
-					<div class="col-lg-6 col-md-6 col-sm-8 col-xs-12">
+                                </tbody>
+                                     </c:forEach>
+                            </table>
+                          </div>
+                        </div>
+
+</div>
+</div>
+
+
+          
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 					
 					<br>
 					<br>
 					 <div class="bsc-tbl-st">
 					
 					<div id="tabl2">
-						<div class="accordion-stn">
+						<div class="support-services-red ">
+					
 						<h4 align="center">자주 하는 질문</h4>
 						<br>
                                     <div class="panel-group" data-collapse-color="nk-green" id="accordionGreen" role="tablist" aria-multiselectable="true">
@@ -120,6 +144,7 @@
 														</a>
                                                 </h4>
                                             </div>
+                                          
                                             <div id="accordionGreen-two" class="collapse" role="tabpanel">
                                                 <div class="panel-body">
                                                     <p style="font-size:medium">기업이 현재의 재무상태를 유지할 경우, 해당 기업의 지속적인 초과이익을 현재가치로 계산하여 기업가치를 측정합니다.
@@ -146,6 +171,12 @@
                                         </div>
                                     </div>
 						</div>
+							  <div class="chart">
+				<div class="min-height: 182.75px;">
+					<canvas id="myPieChart8" height="300vh" width="150vh"></canvas>
+				</div>	
+			</div>
+					
 					</div>
 					</div>
 			</div>
@@ -160,7 +191,7 @@
 var dayinfo;
 function dayinput(){	
 	dayinfo =document.querySelector("#day").value;
-
+	
 	$.ajax({
 		type:"post",
 		url:"${pageContext.request.contextPath}/like/port/select",
@@ -172,7 +203,7 @@ function dayinput(){
 		let content =html.find('div#ajax');
 		let contents =content.html();
 		
-		console.log(contents)
+	
 		$("#tabl1").html(contents);
 	}).fail(function (jqXHR, textStatus, errorThrown) {
 		console.log("에러"); 
@@ -194,21 +225,30 @@ function cc(param){
 		data:{day :dayinfo,nickname:param}, 
 		dataType:"text"
 	}).done(function(result){
-		console.log(result)
+	
 		
 		let html = $('<div>').html(result)
-		console.log(html);
+	
 		
 		let content= html.find('div#recc')
 		let contents =content.html();
 		
-		console.log(contents);
+	
 		$("#tabl2").html(contents)
-	})
+	}).fail(function (jqXHR, textStatus, errorThrown) {
+		console.log("에러"); 
+		console.log(jqXHR);
+		console.log(textStatus);
+		console.log(errorThrown);
+	});
 	
 	
 }
 
 
+
+
 </script>
+<script
+	src="${pageContext.request.contextPath}/resources/green-horizotal/js/charts/Chart.js"></script>
 </html>

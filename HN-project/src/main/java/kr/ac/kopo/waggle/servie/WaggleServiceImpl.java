@@ -62,27 +62,14 @@ public class WaggleServiceImpl implements WaggleService{
 	public void addHeart(AddHeartVO heart) {
 		waggleDAO.addHeart(heart);
 		
-		System.out.println(heart);
+		
 		
 	}
 	/*쿠폰으로 바꾸기*/
 	public void change(CouponVO couponvo) {
 	
-		switch(couponvo.getCoupontype()) {
-	    case 1: 
-	    	couponvo.setCouponname("1일 수수료 100% 쿠폰");
-	         break;
-	    case 5: 
-	    	couponvo.setCouponname("5일 수수료 100% 쿠폰");
-	         break;
-	    case 28:
-	    	couponvo.setCouponname("4주 수수료 100% 쿠폰");
-	    	break;
-	    case 100:
-	    	couponvo.setCouponname("주식 뽑기 쿠폰");
-	         break;
-	}
-	
+		
+	   couponvo.setCouponname("주식 뽑기 쿠폰");
 		waggleDAO.change(couponvo);
 		
 	}
@@ -134,6 +121,18 @@ public class WaggleServiceImpl implements WaggleService{
 		List<AccountDailyVO> list = waggleDAO.wagglerateInfo(waggle);
 		return list;
 	}
+	
+	public AccountDailyVO selectacc(WaggleJoinVO waggleVO) {
+		AccountDailyVO ad =waggleDAO.selectbal(waggleVO);
+		return ad;
+	}
+	
+	/* 쿠폰사용하기 */
+	public void deletecoupn(CouponVO cp) {
+		waggleDAO.deltecoupon(cp);
+		
+	}
+	
 	}
 
 
