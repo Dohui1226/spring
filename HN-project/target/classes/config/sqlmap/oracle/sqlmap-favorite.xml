@@ -67,7 +67,7 @@ where p.no=w.no and me=#{me} and to_char(regdate, 'yyyy-mm-dd') = #{regdate} and
 <select id="rec" parameterType="portfolioVO" resultType="stocktodayVO">
 select * from(select a.stock_code,a.stock_close,a.stock_name,valuediffrate from
 (select * from(select * from hn_stock_close order by close_date desc)
-where <![CDATA[rownum <=300]]> )a, 
+where <![CDATA[rownum <=299]]> )a, 
 (select * from hn_stock_code where stock_type=#{stock_type})b
 where a.stock_code =b.stock_code order by valuediffrate)where  <![CDATA[rownum <=3]]>
 </select>

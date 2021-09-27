@@ -30,5 +30,7 @@ public interface WaggleDAO {
 	List<AccountDailyVO> wagglerateInfo(WaggleJoinVO waggle);//계좌번호로 날짜랑 수익률 조회
 	AccountDailyVO selectbal(WaggleJoinVO waggleVO);
 	void deltecoupon(CouponVO cp); //쿠폰사용하기
+	List<RankListVO> wagglevalue();
+	RankListVO mystockvalue(WaggleJoinVO waggle);
 
 }

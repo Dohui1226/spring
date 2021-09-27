@@ -81,11 +81,7 @@
 		<constructor-arg ref="sqlSessionFactory" />
 	</bean>
 	
-	<websocket:handlers>
-		<websocket:mapping handler="chatHandler" path="/chat" />
-		 <websocket:sockjs />
-	</websocket:handlers>
-	<bean id="chatHandler" class="kr.ac.kopo.chat.ChatHandler" />
+	
 
  
 </beans>

@@ -30,5 +30,7 @@ public interface WaggleService {
 	List<AccountDailyVO> wagglerateInfo(WaggleJoinVO waggle);//날짜랑 수익률 조회
 	AccountDailyVO selectacc(WaggleJoinVO waggleVO); //계좌잔액조회
 	void deletecoupn(CouponVO cp); //쿠폰사용하기
+	List<RankListVO> wagglevalue();
+	RankListVO mystockvaluek(WaggleJoinVO waggle);
 	
 }

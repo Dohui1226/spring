@@ -133,6 +133,19 @@ public class WaggleServiceImpl implements WaggleService{
 		
 	}
 	
+	
+	
+	public List<RankListVO> wagglevalue() {
+		List<RankListVO> list = waggleDAO.wagglevalue();
+		return list;
+	}
+	
+	
+	
+	public RankListVO mystockvaluek(WaggleJoinVO waggle) {
+		RankListVO list = waggleDAO.mystockvalue(waggle);
+		return list;
+	}
 	}
 
 

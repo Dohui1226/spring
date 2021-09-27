@@ -152,19 +152,20 @@ public class ValueCrawler{
 	for(int i=0; i<aa.length;i++) {
 		
 		String code=aa[i];
-		String URL3="https://finance.naver.com/item/frgn.nhn?code="+code+"&page=4";
+		String URL3="https://finance.naver.com/item/frgn.nhn?code="+code+"&page=3";
 		Document doc3;
 	
 		int close=0;
 		int diff=0;
+		int volum=0;
+		double y_diff =0.0;
 		String stockname=null;
 		String closedate = null;
-		
 		
 		try {
 			//종가
 			doc3 = Jsoup.connect(URL3).get();
-			Elements eles3 = doc3.select("#content > div.section.inner_sub > table.type2 > tbody > tr:nth-child(31) > td:nth-child(2) > span");
+			Elements eles3 = doc3.select("#content > div.section.inner_sub > table.type2 > tbody > tr:nth-child(14) > td:nth-child(2) > span");
 			
 		
 			try{
@@ -177,7 +178,7 @@ public class ValueCrawler{
 		
 			
 			//전일비 
-			Elements eles4 = doc3.select("#content > div.section.inner_sub > table.type2 > tbody > tr:nth-child(31) > td:nth-child(3) > span");
+			Elements eles4 = doc3.select("#content > div.section.inner_sub > table.type2 > tbody > tr:nth-child(14) > td:nth-child(3) > span");
 		
 			
 			try{
@@ -187,15 +188,37 @@ public class ValueCrawler{
 				diff=Integer.parseInt(eles4.text());
 			}
 			
-	
+			//등락률
+			Elements eles9 = doc3.select("#content > div.section.inner_sub > table.type2 > tbody > tr:nth-child(14) > td:nth-child(4) > span");
+
+			y_diff =Double.parseDouble(eles9.text().replaceAll("%",""));
+			
+			
 			//증감할 전일비
 			
-			Elements eles5 = doc3.select("#content > div.section.inner_sub > table.type2 > tbody > tr:nth-child(31) > td:nth-child(4) > span");
+			Elements eles5 = doc3.select("#content > div.section.inner_sub > table.type2 > tbody > tr:nth-child(14) > td:nth-child(4) > span");
 
 			String alpha = Character.toString(eles5.text().charAt(0));
 			if(alpha.equals("-")) {
 				diff=-diff;
+				
 			}
+			
+			
+			
+			//거래량
+			
+			Elements eles8 = doc3.select("#content > div.section.inner_sub > table.type2 > tbody > tr:nth-child(14) > td:nth-child(5) > span");
+				try{
+				
+				volum= Integer.parseInt(eles8.text().replaceAll(",",""));
+			}catch(Exception e) {
+				volum=Integer.parseInt(eles8.text());
+			}
+			
+			
+		
+			
 		
 			//종목명
 			Elements eles6 = doc3.select("#middle > div.h_company > div.wrap_company > h2 > a");
@@ -204,23 +227,18 @@ public class ValueCrawler{
 			
 			
 			//날짜
-			Elements eles7 = doc3.select("#content > div.section.inner_sub > table.type2 > tbody > tr:nth-child(31) > td.tc > span");
+			Elements eles7 = doc3.select("#content > div.section.inner_sub > table.type2 > tbody > tr:nth-child(14) > td.tc > span");
 			closedate = eles7.text();
+			System.out.println(closedate);
 			
 		}
 			
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		
-		
 		StockTodayVO st =new StockTodayVO();
-		st.setClose_date(closedate);
-		st.setStock_code(aa[i]);
-		st.setStock_close(close);
-		st.setStock_diff(diff);
-		st.setStock_name(stockname);
+		System.out.println(y_diff);
+		System.out.println(volum);
 		System.out.println(closedate);
 		System.out.println(aa[i]);
 		System.out.println(close);
@@ -228,8 +246,18 @@ public class ValueCrawler{
 		System.out.println(stockname);
 		System.out.println(st);
 		
+		
+		st.setClose_date(closedate);
+		st.setStock_code(aa[i]);
+		st.setStock_close(close);
+		st.setStock_diff(diff);
+		st.setStock_name(stockname);
+		st.setY_diff(y_diff);
+		st.setVolum(volum);
+		
+		
 		sqlSessionTemplate.insert("stock.StockDAO.insertclose2",st);
-		Thread.sleep(5000); 
+		Thread.sleep(2000); 
 		}
 		}catch(Exception e) {
 			e.printStackTrace();

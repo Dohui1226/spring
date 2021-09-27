@@ -119,4 +119,17 @@ public class WaggleDAOImpl implements WaggleDAO {
 	public void deltecoupon(CouponVO cp) {
 		sqlSessionTemplate.delete("waggle.WaggleDAO.deletecoupon",cp);
 	}
+	
+
+	public List<RankListVO> wagglevalue() {
+		List<RankListVO> list = sqlSessionTemplate.selectList("waggle.WaggleDAO.wagglevalue");
+		return list;
+	}
+	
+	
+	
+	public RankListVO mystockvalue(WaggleJoinVO waggle) {
+		RankListVO list = sqlSessionTemplate.selectOne("waggle.WaggleDAO.mystockvalue", waggle);
+		return list;
+	}
 }

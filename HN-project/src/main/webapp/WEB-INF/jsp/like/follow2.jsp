@@ -15,7 +15,7 @@
 		<table class="table table-hover">
 			<thead style="background-color: cornsilk;" class="thead-dark">
 				<tr>
-					<th width="10%">순위</th>
+					<th width="10%">수익률순위</th>
 					<th style="text-align: center">닉네임</th>
 					<th style="text-align: center">하트 갯수</th>
 					<th style="text-align: center">수익률(%)</th>
@@ -33,7 +33,7 @@
 					<td style="text-align: center">${followlist.hart}</td>
 
 					<td style="text-align: center"><fmt:formatNumber
-							value="${followlist.rate*100}" pattern="#.##" />%</td>
+							value="${followlist.rate}" pattern="#.##" />%</td>
 					<td style="text-align: center"><a data-id="${followlist.no}"
 						class="ialog1">삭제</a></td>
 					<td style="text-align: center"><a
@@ -53,7 +53,7 @@
 		<table class="table table-hover">
 			<thead style="background-color: cornsilk;" class="thead-dark">
 				<tr>
-					<th width="10%">순위</th>
+					<th width="10%">수익률순위</th>
 					<th style="text-align: center">닉네임</th>
 					<th style="text-align: center">하트 갯수</th>
 					<th style="text-align: center">수익률(%)</th>
@@ -70,7 +70,7 @@
 						<td style="text-align: center">${followerlist.nickname}</td>
 						<td style="text-align: center">${followerlist.hart}</td>
 						<td style="text-align: center"><fmt:formatNumber
-							value="${followerlist.rate*100}" pattern="#.##" />%</td>
+							value="${followerlist.rate}" pattern="#.##" />%</td>
 						<td style="text-align: center"><a data-id="${followerlist.no}" class="ialog2">삭제</a></td>
 						<td style="text-align: center"><a
 							href="${pageContext.request.contextPath}/waggle/rankInfo/${followerlist.no}">보기</a></td>

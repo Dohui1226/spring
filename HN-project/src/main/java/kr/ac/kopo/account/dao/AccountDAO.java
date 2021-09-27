@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.ac.kopo.vo.AccountDailyVO;
 import kr.ac.kopo.vo.AccountVO;
+import kr.ac.kopo.vo.ChangeHeartVO;
 import kr.ac.kopo.vo.FollowVO;
 import kr.ac.kopo.vo.MemberVO;
 import kr.ac.kopo.vo.MyStockVO;
@@ -29,5 +30,7 @@ public interface AccountDAO {
 	int follower(FollowVO follow); //내가 팔로우하는 사람들
 
 	boolean selectfollow(FollowVO follow); //내가 그사람 팔로우 하나요?
+
+	void changeheart(ChangeHeartVO ch);
 
 }

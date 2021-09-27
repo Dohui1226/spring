@@ -177,7 +177,7 @@
 											<ul class="nav navbar-nav navbar-right">
 												
 												<li><a class="pages"
-													href="${pageContext.request.contextPath}/waggle">와글와글</a>
+													href="${pageContext.request.contextPath}/waggle">하나팔로우</a>
 													<ul class="sub-menu">
                                                             <li><a href="${pageContext.request.contextPath}/waggle/join">가입하기</a></li>
                                                              <li><a href="${pageContext.request.contextPath}/waggle/ranking">랭킹확인</a></li>
@@ -195,8 +195,7 @@
 											
 												<li><a class="pages"
 													href="${pageContext.request.contextPath}/stocklist">종목조회</a></li>
-												<li><a class="pages"
-													href="${pageContext.request.contextPath}/chat">채팅방</a></li>
+												
 												<li><a class="pages"
 													href="${pageContext.request.contextPath}/myasset">내 자산</a>
 												</li>

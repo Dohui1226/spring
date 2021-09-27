@@ -178,43 +178,7 @@
 	</div>
 
 
-	<div class="modal fade" id="modal2" role="dialog">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">결제창</h4>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>
-				<div class="modal-body">
-					<a class="support-images" href="#"><i
-						class="flaticon-035-savings"></i></a>
-					<div class="support-content">
-						<h6>매도 정보를 입력하세요.</h6>
-						<%-- <form
-						action="${pageContext.request.contextPath}/stock/sell/${stockcode.stock_code}" method="post">
-						주문 금액 : ${stocktoday.stock_close}<br> <select name="sellorder" onchange="order2(this.value)">
-							<option value="">가능</option>
-							<option value="1">100%</option>
-							<option value="2">50%</option>
-							<option value="4">25%</option>
-							<option value="10">10%</option>
-						</select> <input type="text" id="changemodal2" name="stock_num"
-							placeholder="수량" value=""><br> 
-							총 거래금액:<input type="text" id="totalcost2" style="border: none;" value="" readonly><br>  --%>
-						<br>*매도시 증권거래세를 포함하여 거래금액의 0.25% 수수료가 부과됩니다.
-						<%-- 		<fmt:formatNumber id="fee2" value="" pattern="#,###" /> --%>
-						<input type="hidden" name="fee" id="feerate2"
-							style="border: none;" value=""> <br>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<input type="submit" id="button-modal" value="매도">
-					<button id="button-modal2" data-dismiss="modal">닫기</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 
 </div>
 
@@ -226,6 +190,25 @@
 
 
 </body>
+<script>
+
+window.onload = function() { 
+	 
+if('${msg1}'=== 'true') {
+  
+	alert('매수 완료')
+}
+
+
+if('${msg2}'=== 'true') {
+	  
+	alert('매도 완료')
+}
+
+}
+
+
+</script>
 
 <%-- 	 <script src="${pageContext.request.contextPath}/resources/green-horizotal/js/bootstrap.min.js"></script> --%>
 <script
@@ -250,8 +233,6 @@
 	src="${pageContext.request.contextPath}/resources/green-horizotal/js/sparkline/sparkline-active.js"></script>
 
 <script>
-
-
 
 function order1(param){
 

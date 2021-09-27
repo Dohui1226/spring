@@ -26,4 +26,6 @@ public interface StockService {
 
 	public void randomstock(StockBuySellVO bs);
 
+	public StockTodayVO stocksearch(StockTodayVO st);
+
 }

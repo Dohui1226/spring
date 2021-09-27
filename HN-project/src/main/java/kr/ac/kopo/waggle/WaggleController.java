@@ -228,8 +228,12 @@ public class WaggleController {
 		
 		List<RankListVO> list = service.wagglerank();
 		RankListVO mylist= service.wagglemyrank(waggle);//나의리스트 작성하기
+		List<RankListVO> valuelist = service.wagglevalue();
+		RankListVO myvalue= service.mystockvaluek(waggle);//나의리스트 작성하기
+		model.addAttribute("valuelist",valuelist);
 		model.addAttribute("ranklist", list);
 		model.addAttribute("mylist",mylist);
+		model.addAttribute("myvalue",myvalue);
 		return "waggle/ranking";
 	}
 	

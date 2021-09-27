@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import kr.ac.kopo.account.dao.AccountDAO;
 import kr.ac.kopo.vo.AccountDailyVO;
 import kr.ac.kopo.vo.AccountVO;
+import kr.ac.kopo.vo.ChangeHeartVO;
 import kr.ac.kopo.vo.FollowVO;
 import kr.ac.kopo.vo.MemberVO;
 import kr.ac.kopo.vo.MyStockVO;
@@ -76,5 +77,11 @@ public class AccountServiceImpl implements AccountService {
 	public boolean selectfollow(FollowVO follow) {
 		boolean bool= dao.selectfollow(follow);
 		return bool;
+	}
+	
+	
+	public void changeheart(ChangeHeartVO ch) {
+		dao.changeheart(ch);
+		
 	}
 }

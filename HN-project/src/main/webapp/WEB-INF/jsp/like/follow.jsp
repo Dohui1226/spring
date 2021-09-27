@@ -281,7 +281,7 @@ body, div, button, h1 {
 																		<thead style="background-color: cornsilk;"
 																			class="thead-dark">
 																			<tr>
-																				<th width="10%">순위</th>
+																				<th width="10%">수익률순위</th>
 																				<th style="text-align: center">닉네임</th>
 																				<th style="text-align: center">하트 갯수</th>
 																				<th style="text-align: center">수익률(%)</th>
@@ -298,7 +298,7 @@ body, div, button, h1 {
 																					<td style="text-align: center">${followerlist.nickname}</td>
 																					<td style="text-align: center">${followerlist.hart}
 																					</td>
-																					<td style="text-align: center">${followerlist.rate*100}%
+																					<td style="text-align: center">${followerlist.rate}%
 																					</td>
 																					<td style="text-align: center">
 																					<a data-id="${followerlist.no}"
@@ -348,11 +348,11 @@ body, div, button, h1 {
 																					<td style="text-align: center">${followlist.hart}</td>
 
 																					<td style="text-align: center">
-																					<fmt:formatNumber value="${followlist.rate*100}" pattern="#.##" />%</td>
+																					<fmt:formatNumber value="${followlist.rate}" pattern="#.##" />%</td>
 																					<td style="text-align: center"><a
 																						data-id="${followlist.no}" class="ialog1">삭제</a></td>
 																					<td style="text-align: center"><a
-																						href="${pageContext.request.contextPath}/waggle/rankInfo/${followlist.no}">보기</a></td>
+																						href="#paymodal" data-id=" ${followlist.rank}" data-value="${followlist.no}" data-toggle="modal" class="move"}">보기</a></td>
 
 
 																				</tr>
@@ -463,61 +463,39 @@ body, div, button, h1 {
 	</div>
 </div>
 </div>
+<div class="modal fade" id="paymodal" >
+	<div class="modal-dialog modal-m">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">하트 사용 확인</h4>
+					
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<form method="post" action="${pageContext.request.contextPath}/ranking/payheart">
+			<div class="modal-body">
+				<p style="text-align:center">
+				선택하신 포트폴리오 및 필요 하트 수는 다음과 같습니다.<br>
+				하트를 사용하시겠습니까?</p>
+				<p style="text-align:center"><strong>랭킹 :<input name="rank" text="text" style="border:none;text-align:right;width: 50px;" value="" id="rankingvalue" readonly>위</strong><br>
+				<input type="hidden" value="" name="no" id="novalue">
+				<strong>필요하트 :<input text="text" style="text-align:right;border:none;width: 50px;" value="" id="heart" readonly>
+				개</strong><br>
+				
+				</p>
+				</div>
+			
+			
+			<div class="modal-footer">
+				
+				<input type="submit" id="button-modal" value="사용"></form>
+				<button id="button-modal2"  data-dismiss="modal">닫기</button>
+				</div></div>
+				
+			</div>
 <!-- End Right Sidebar -->
 </div>
 <!-- End row -->
 
-<div class="modal fade" id="modalcode" role="dialog">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title">쿠폰확인하기</h4>
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-			</div>
-			<div class="modal-body" align="center">
-				&nbsp;&nbsp;<input type="text" style="border: none;"
-					id="couponmodal" value="" readonly>
-				<div id="bcTarget" style="margin-top: 30px;"></div>
-
-
-			</div>
-			<div class="modal-footer">
-				<button id="button-modal" onclick="sendLinkCustom()">카카오톡
-					공유</button>
-				<button id="button-modal2" data-dismiss="modal">닫기</button>
-			</div>
-		</div>
-	</div>
-</div>
-
-
-
-<div class="modal fade" id="modal2" role="dialog">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title">주식 뽑기</h4>
-
-			</div>
-			<div class="modal-body" align="center">
-				<div id="wrapper">
-					<h1 id="title">종목은?</h1>
-
-					<button id="btn">추첨하기</button>
-				</div>
-
-				<form name="cat">
-					<input type="hidden" id="modalvalue" value="" />
-			</div>
-			<div class="modal-footer">
-				<!-- onclick="couponuse(this.cat) -->
-				<button id="button-modal2" onclick="couponuse()"
-					data-dismiss="modal">닫기</button>
-			</div>
-			</from>
-		</div>
-	</div>
-</div>
 
 <!-- Start Footer Area -->
 <jsp:include page="../footer.jsp" />
@@ -526,8 +504,22 @@ body, div, button, h1 {
 
 
 </body>
-
-
+<script>
+$(document).on("click", ".move", function() {
+	var rank = $(this).attr('data-id');
+	var no = $(this).attr('data-value')
+	if(rank==1||rank==2||rank==3){
+		$(".modal-body #heart").val(100);
+		$(".modal-body #rankingvalue").val(rank);
+		$(".modal-body #novalue").val(no);
+	}
+	else{
+		$(".modal-body #heart").val(50);
+	$(".modal-body #rankingvalue").val(rank);
+	$(".modal-body #novalue").val(no);
+}
+});
+</script>
 <script
 	src="${pageContext.request.contextPath}/resources/green-horizotal/js/main.js"></script>
 <script

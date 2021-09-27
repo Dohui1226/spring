@@ -11,11 +11,25 @@ public class StockTodayVO {
 	private int value;
 	private double valuediffrate;
 	private String stock_type;
+	private int volum;
+	private double y_diff;
 	
 	
 	
 	
 	
+	public double getY_diff() {
+		return y_diff;
+	}
+	public void setY_diff(double y_diff) {
+		this.y_diff = y_diff;
+	}
+	public int getVolum() {
+		return volum;
+	}
+	public void setVolum(int volum) {
+		this.volum = volum;
+	}
 	public String getStock_type() {
 		return stock_type;
 	}

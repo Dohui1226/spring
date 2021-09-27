@@ -25,7 +25,7 @@ where acc_num=#{member_account} order by no desc) where rownum=1
 select a.stock_code, a.stock_num, a.stock_code, a.buyprice, a.stock_diff, a.stock_diff_rate,
 b.stock_close,b.stock_name
 from buystock a join (select * from(select * from hn_stock_close order by close_date desc)
-<![CDATA[where rownum <= 300]]>) b
+<![CDATA[where rownum <= 299]]>) b
 on  a.acc_num=#{member_account} and a.stock_code=b.stock_code
 </select>
 
@@ -71,6 +71,11 @@ select nvl(count,0) count from (select count(*) count from follow where me=#{me}
 <select id ="follower" parameterType= "followVO" resultType="int">
 select nvl(count,0) count from(select count(*) count from follow where likeman=#{likeman} group by likeman)
 </select> 
+
+
+<select id="changeheart" parameterType="changeheartVO" statementType="CALLABLE">
+call changeheart(#{tono},#{fromno},#{heart})
+</select>
 
 
 </mapper>

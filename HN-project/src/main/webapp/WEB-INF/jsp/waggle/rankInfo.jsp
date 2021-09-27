@@ -387,7 +387,7 @@
 	var vardataco = [];
 	
 	$(document).ready(function() {
-
+	
 		$.ajax({
 				url : '${pageContext.request.contextPath}/waggle/rankInfo/piechart',
 				type : 'post',
@@ -404,14 +404,14 @@
 				$.each(map.rateme, function(index,item) {
 					let arr =item.wdate.split(' ');
 					varlabels.push(arr[0]);
-					var rate1 = item.rate* 100
+					var rate1 = item.rate;
 					vardatame.push(rate1.toFixed(2));
 				
 
 				})
 				$.each(map.rateanother, function(index,item) {
 					
-					var rate2 = item.rate * 100
+					var rate2 = item.rate
 					vardataco.push(rate2.toFixed(2));
 				
 				})
@@ -436,7 +436,7 @@
 			data : {
 				labels :  varlabels ,
 				datasets : [ {
-					label : '상대방 수익률',
+					label : '나의 수익률',
 					type : 'line', // 'line' type
 					fill : false,
 					backgroundColor : '#00c292',
@@ -445,7 +445,7 @@
 					pointRadius : 0, // 각 지점에 포인트 주지 
 					data : vardataco
 				}, {
-					label : '내 수익률',
+					label : '상대방 수익률',
 					type : 'line',
 					fill : false,
 					backgroundColor : '#fb9678',
@@ -487,7 +487,7 @@
 				datasets : [ {
 					data : piedata,
 					backgroundColor : [ '#5093ce', '#36b9cc',
-							'#35a1cc', '#7fc77f', "#dd6864", ],
+							'#35a1cc', '#7fc77f', "#dd6864",'#FF681F' ],
 					hoverBackgroundColor : [ "#78acd9", '#2c9faf',
 							'#a3d7a3', '#a3d7a3', "#e6918e" ],
 					hoverBorderColor : "rgba(234, 236, 244, 1)",

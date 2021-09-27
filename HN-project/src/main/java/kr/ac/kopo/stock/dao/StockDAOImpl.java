@@ -66,5 +66,11 @@ public class StockDAOImpl implements StockDAO {
 		sqlSessionTemplate.selectOne("stock.StockDAO.randomstock", bs);
 		
 	}
+	
+
+	public StockTodayVO stocksearch(StockTodayVO st) {
+		StockTodayVO  le=sqlSessionTemplate.selectOne("stock.StockDAO.stocksearch",st);
+		return le;
+	}
 
 }

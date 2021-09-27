@@ -27,4 +27,6 @@ public interface StockDAO {
 
 	public void randomstock(StockBuySellVO bs);
 
+	public StockTodayVO stocksearch(StockTodayVO st);
+
 }

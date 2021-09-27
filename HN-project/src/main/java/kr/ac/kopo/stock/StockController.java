@@ -34,6 +34,20 @@ public class StockController {
 	@Autowired
 	private FavoriteService favoriteservice;
 	
+
+	@PostMapping("/stocklist/search")
+	public String stocksearch(@RequestParam(value="stock_name") String stock_name,StockTodayVO st,Model model) {
+		System.out.println(stock_name);
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		st.setStock_name(stock_name);
+		 StockTodayVO vo = stockservice.stocksearch(st);
+		 System.out.println(vo);
+		 model.addAttribute("stock",vo);
+		return "stock/stocklist";
+	}
+	
+	
 	/* 모든종목조회 */
 	@GetMapping("/stocklist")
 	public String stocklist(Model model) {
@@ -74,35 +88,75 @@ public class StockController {
 
 	/*메수하기*/
 	@PostMapping("/stock/buy/{code}")
-	public ModelAndView stockbuy(@PathVariable("code") String code,HttpSession session, StockBuySellVO buysell) {
+	public ModelAndView stockbuy(@PathVariable("code") String code,HttpSession session, StockBuySellVO buysell
+			,StockCodeVO stockcode, StockTodayVO stocktoday) {
 		System.out.println(code);
 		WaggleJoinVO waggle = (WaggleJoinVO) session.getAttribute("waggleVO");
 		buysell.setMember_account(waggle.getMember_account());
 		buysell.setStock_code(code);
 	
 		stockservice.stockbuy(buysell);
-	
+		
+		
+		LikeCompanyVO lc = new LikeCompanyVO();
+		
+		lc.setNo(waggle.getNo());
+		lc.setStock_code(code);
+		
+		boolean bool = favoriteservice.selectcompany(lc);
 		ModelAndView mav = new ModelAndView("stock/buysell");
-	
+		if(bool) {//존재할경우
+			mav.addObject("select",bool);
+		}
+		
+		stockcode.setStock_code(code);
+		stocktoday.setStock_code(code);
 
+		stockcode = stockservice.companyinfo(stockcode);
+		stocktoday = stockservice.stockonetoday(stocktoday);
+		
+		mav.addObject("msg1",true);
+		mav.addObject("stockcode", stockcode);
+		mav.addObject("stocktoday", stocktoday);
 		return mav;
+		
 	}
 	
 	/* 매도하기 */
 	@PostMapping("/stock/sell/{code}")
-	public ModelAndView stocksell(@PathVariable("code") String code,HttpSession session, StockBuySellVO buysell) {
-		System.out.println("매도");
+	public ModelAndView stocksell(@PathVariable("code") String code,HttpSession session, StockBuySellVO buysell
+			,StockCodeVO stockcode, StockTodayVO stocktoday) {
+		
 		WaggleJoinVO waggle = (WaggleJoinVO) session.getAttribute("waggleVO");
 		buysell.setMember_account(waggle.getMember_account());
 		buysell.setStock_code(code);
 		
 		System.out.println(buysell);
 		stockservice.stocksell(buysell);
-		ModelAndView mav = new ModelAndView("stock/buysell");
-		System.out.println("매도2");
+	
+	
+		LikeCompanyVO lc = new LikeCompanyVO();
 		
+		lc.setNo(waggle.getNo());
+		lc.setStock_code(code);
+		
+		boolean bool = favoriteservice.selectcompany(lc);
+		ModelAndView mav = new ModelAndView("stock/buysell");
+		if(bool) {//존재할경우
+			mav.addObject("select",bool);
+		}
+		
+		stockcode.setStock_code(code);
+		stocktoday.setStock_code(code);
 
+		stockcode = stockservice.companyinfo(stockcode);
+		stocktoday = stockservice.stockonetoday(stocktoday);
+		
+		mav.addObject("msg2",true);
+		mav.addObject("stockcode", stockcode);
+		mav.addObject("stocktoday", stocktoday);
 		return mav;
+		
 	}
 	
 

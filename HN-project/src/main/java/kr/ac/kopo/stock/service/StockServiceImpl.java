@@ -57,4 +57,10 @@ public class StockServiceImpl implements StockService {
 	public void randomstock(StockBuySellVO bs) {
 		stockdao.randomstock(bs);
 	}
+	
+	@Override
+	public StockTodayVO stocksearch(StockTodayVO st) {
+		StockTodayVO vo =stockdao.stocksearch(st);
+		return vo;
+	}
 }
