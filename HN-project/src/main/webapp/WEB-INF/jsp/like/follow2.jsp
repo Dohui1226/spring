@@ -15,7 +15,7 @@
 		<table class="table table-hover">
 			<thead style="background-color: cornsilk;" class="thead-dark">
 				<tr>
-					<th width="10%">수익률순위</th>
+					<th width="10%">순위</th>
 					<th style="text-align: center">닉네임</th>
 					<th style="text-align: center">하트 갯수</th>
 					<th style="text-align: center">수익률(%)</th>
@@ -53,7 +53,7 @@
 		<table class="table table-hover">
 			<thead style="background-color: cornsilk;" class="thead-dark">
 				<tr>
-					<th width="10%">수익률순위</th>
+					<th width="10%">순위</th>
 					<th style="text-align: center">닉네임</th>
 					<th style="text-align: center">하트 갯수</th>
 					<th style="text-align: center">수익률(%)</th>
@@ -66,7 +66,8 @@
 				<c:forEach items="${requestScope.myfollower}" var="followerlist"
 					varStatus="loop">
 					<tr>
-						<td>${followerlist.rank}</td>
+						<th width="10%">${followlist.rank}
+																					</th>
 						<td style="text-align: center">${followerlist.nickname}</td>
 						<td style="text-align: center">${followerlist.hart}</td>
 						<td style="text-align: center"><fmt:formatNumber

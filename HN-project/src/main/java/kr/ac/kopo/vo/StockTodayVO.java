@@ -13,11 +13,18 @@ public class StockTodayVO {
 	private String stock_type;
 	private int volum;
 	private double y_diff;
+	private int count;
 	
 	
 	
 	
 	
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
 	public double getY_diff() {
 		return y_diff;
 	}

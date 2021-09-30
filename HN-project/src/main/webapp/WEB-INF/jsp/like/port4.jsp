@@ -19,7 +19,7 @@
                          	<tr style="background-color: #ddd">
                          	<th width="15%" align="center">종목타입</th>
                          	<th width="20%" align="center">종목명</th>
-                         	<th width="15%" align="center">비중(%)</th>
+                         	<!-- <th width="15%" align="center">비중(%)</th> -->
   							<th width="15%" align="center">수량(주)</th>
   						
                          	</tr>
@@ -38,10 +38,10 @@
                                    			<c:if test="${i%j == 0 }"> 
                                    			<td style="vertical-align: middle;text-align: center">${ranklist1}</td> 
                                    			</c:if>
-                                   			 
+                                   			<%--  
                                    			 <c:if test="${i%j == 1 }">                                  			 
                                    			<td style="vertical-align: middle;text-align: center">${ranklist1}</td>
-                                   			</c:if>
+                                   			</c:if> --%>
                                    			
                                    		 <c:if test="${i%j == 2 }">  
                                    		 	<td style="vertical-align: middle;text-align: center">${ranklist1}</td>

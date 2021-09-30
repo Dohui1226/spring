@@ -118,17 +118,18 @@ public class WaggleController {
 	
 	/* 와글와글 가입 데이터 넘기기 */
 	@PostMapping("/waggle/join")
-	public String wirte(@Valid WaggleJoinVO waggle, HttpSession session) {
+	public String wirte(@Valid WaggleJoinVO waggle, HttpSession session, Model model) {
 		//아이디		
 		MemberVO userVO = (MemberVO)session.getAttribute("userVO");//로그인정보가져오기
 
 		waggle.setMember_id(userVO.getMember_id());
 		service.join(waggle);//와글 가입
 		
-		if(service.joincheck(userVO)){//와글 가입이 되었다면		
 			session.setAttribute("waggleVO", waggle); //와글정보 세션 등록
-		}
-		return "redirect:/waggle";
+			session.setAttribute("msg", true);
+		
+		
+		return "redirect:/waggle/join";
 	}
 	
 
@@ -148,7 +149,7 @@ public class WaggleController {
 
 		follow.setLikeman(waggle.getNickname());
 		int followerlist =accountservice.follower(follow);
-		
+		System.out.println(followerlist);
 		WaggleJoinVO waggle2 =(WaggleJoinVO) session.getAttribute("waggleVO");
 		follow.setMe(waggle2.getNickname());
 	

@@ -142,7 +142,8 @@ public class ValueCrawler{
 	sqlSessionTemplate.insert("stock.StockDAO.insertvalue",stc);
 	
 	}
-
+	
+	
 	@Test
 	public void inserclose() throws Exception{
 		
@@ -152,7 +153,7 @@ public class ValueCrawler{
 	for(int i=0; i<aa.length;i++) {
 		
 		String code=aa[i];
-		String URL3="https://finance.naver.com/item/frgn.nhn?code="+code+"&page=3";
+		String URL3="https://finance.naver.com/item/frgn.nhn?code="+code+"&page=1";
 		Document doc3;
 	
 		int close=0;
@@ -165,7 +166,7 @@ public class ValueCrawler{
 		try {
 			//종가
 			doc3 = Jsoup.connect(URL3).get();
-			Elements eles3 = doc3.select("#content > div.section.inner_sub > table.type2 > tbody > tr:nth-child(14) > td:nth-child(2) > span");
+			Elements eles3 = doc3.select("#content > div.section.inner_sub > table.type2 > tbody > tr:nth-child(30) > td:nth-child(2) > span");
 			
 		
 			try{
@@ -178,7 +179,7 @@ public class ValueCrawler{
 		
 			
 			//전일비 
-			Elements eles4 = doc3.select("#content > div.section.inner_sub > table.type2 > tbody > tr:nth-child(14) > td:nth-child(3) > span");
+			Elements eles4 = doc3.select("#content > div.section.inner_sub > table.type2 > tbody > tr:nth-child(30) > td:nth-child(3) > span");
 		
 			
 			try{
@@ -189,14 +190,14 @@ public class ValueCrawler{
 			}
 			
 			//등락률
-			Elements eles9 = doc3.select("#content > div.section.inner_sub > table.type2 > tbody > tr:nth-child(14) > td:nth-child(4) > span");
+			Elements eles9 = doc3.select("#content > div.section.inner_sub > table.type2 > tbody > tr:nth-child(30) > td:nth-child(4) > span");
 
 			y_diff =Double.parseDouble(eles9.text().replaceAll("%",""));
 			
 			
 			//증감할 전일비
 			
-			Elements eles5 = doc3.select("#content > div.section.inner_sub > table.type2 > tbody > tr:nth-child(14) > td:nth-child(4) > span");
+			Elements eles5 = doc3.select("#content > div.section.inner_sub > table.type2 > tbody > tr:nth-child(30) > td:nth-child(4) > span");
 
 			String alpha = Character.toString(eles5.text().charAt(0));
 			if(alpha.equals("-")) {
@@ -208,7 +209,7 @@ public class ValueCrawler{
 			
 			//거래량
 			
-			Elements eles8 = doc3.select("#content > div.section.inner_sub > table.type2 > tbody > tr:nth-child(14) > td:nth-child(5) > span");
+			Elements eles8 = doc3.select("#content > div.section.inner_sub > table.type2 > tbody > tr:nth-child(30) > td:nth-child(5) > span");
 				try{
 				
 				volum= Integer.parseInt(eles8.text().replaceAll(",",""));
@@ -226,8 +227,9 @@ public class ValueCrawler{
 			stockname=eles6.text();
 			
 			
+			
 			//날짜
-			Elements eles7 = doc3.select("#content > div.section.inner_sub > table.type2 > tbody > tr:nth-child(14) > td.tc > span");
+			Elements eles7 = doc3.select("#content > div.section.inner_sub > table.type2 > tbody > tr:nth-child(30) > td.tc > span");
 			closedate = eles7.text();
 			System.out.println(closedate);
 			
@@ -257,6 +259,7 @@ public class ValueCrawler{
 		
 		
 		sqlSessionTemplate.insert("stock.StockDAO.insertclose2",st);
+		
 		Thread.sleep(2000); 
 		}
 		}catch(Exception e) {
@@ -264,5 +267,76 @@ public class ValueCrawler{
 		}
 		
 	}
+	
+	@Ignore
+	@Test
+	public void infoinsert() throws Exception{
+		
+		
+		try {
+			
+	String[] aa = mapper.selectcode();
+	for(int i=0; i<aa.length;i++) {
+	
+		String code=aa[i];
+		String URL3="http://media.kisline.com/highlight/mainHighlight.nice?paper_stock="+code+"&nav=1";
+		Document doc3;
+	//	String text1 ="";
+	//	String text2=null;
+		//String text3=null;
+		
+		try {
+			//종가
+			doc3 = Jsoup.connect(URL3).get();
+			Elements eles3 = doc3.select("#tcaFVlanREZS > table:nth-child(2) > tbody > tr:nth-child(1) > td.num.ext2");
+		System.out.println(eles3);
+			
+		/*
+		 * text1 = eles3.text().replaceAll("<li>","").replaceAll("</li>",
+		 * "").replaceAll("-",""); System.out.println(text1);
+		 * 
+		 * Elements eles4 =
+		 * doc3.select("#h09 > table > tbody > tr > td.first > ul > li:nth-child(2)");
+		 * text2 = eles4.text().replaceAll("<li>","").replaceAll("</li>",
+		 * "").replaceAll("-",""); System.out.println(text2);
+		 * 
+		 * 
+		 * Elements eles5 =
+		 * doc3.select("#h09 > table > tbody > tr > td.first > ul > li:nth-child(3)");
+		 * text3 = eles5.text().replaceAll("<li>","").replaceAll("</li>",
+		 * "").replaceAll("-",""); System.out.println(text3);
+		 */
+			
+			//전일비 
+			
+			
+		}
+			
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		StockCodeVO st = new StockCodeVO();
+		st.setStock_code(aa[i]);
+		//st.setStocktext1(text1);
+	//	st.setStocktext2(text2);
+	//	st.setStocktext3(text3);
+	//	sqlSessionTemplate.insert("stock.StockDAO.inserttext",st);
+		
+		System.out.println(st);
+		
+		Thread.sleep(2000); 
+		}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
 }
 

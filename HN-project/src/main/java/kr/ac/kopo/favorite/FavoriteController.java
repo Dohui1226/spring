@@ -49,9 +49,27 @@ public class FavoriteController {
 	public String myfavorite(HttpSession session, Model model) {
 		WaggleJoinVO waggle = (WaggleJoinVO)session.getAttribute("waggleVO");
 		List<StockTodayVO> st = service.likecomapnylist(waggle);
-	
+		List<StockTodayVO> rank = service.likecompanycount();
+		int cnt =  service.mycountcompany(waggle);
 		model.addAttribute("companylist",st);
+		model.addAttribute("rank",rank);
+		model.addAttribute("company",cnt);
 		return "like/company";
+	}
+	
+	
+	@PostMapping("/company/delete")
+	public String deletecompan(HttpSession session, Model model,@RequestParam(value="stock_code") String stock_code){
+		WaggleJoinVO waggle = (WaggleJoinVO)session.getAttribute("waggleVO");
+		StockTodayVO st = new StockTodayVO();
+		st.setCount(waggle.getNo());
+		st.setStock_code(stock_code);
+		service.deletecompan(st);
+		
+		
+		List<StockTodayVO> st2 = service.likecomapnylist(waggle);
+		model.addAttribute("slist",st2);
+		return "like/company2";
 	}
 	
 	/*포트폴리오 등록*/
@@ -145,6 +163,20 @@ public class FavoriteController {
 		return "/like/port3";
 	}
 
+	@PostMapping("/like/companyfind")
+	public String companytype(HttpSession session,@RequestParam("stock_type") String stock_type,
+			StockTodayVO st, Model model) {
+		System.out.println(stock_type);
+		WaggleJoinVO waggle = (WaggleJoinVO) session.getAttribute("waggleVO");
+		System.out.println(waggle);
+		st.setCount(waggle.getNo());
+		st.setStock_type(stock_type);
+		List<StockTodayVO> list = service.companyliketype(st);
+		System.out.println(list);
+		model.addAttribute("slist", list);
+		
+		return "/like/company2";
+	}
 	
 	
 	@PostMapping("/money/select")

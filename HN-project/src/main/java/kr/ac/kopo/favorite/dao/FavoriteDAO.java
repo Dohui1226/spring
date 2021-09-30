@@ -61,5 +61,13 @@ public interface FavoriteDAO {
 
 	void deleteme(FollowVO fl);
 
+	List<StockTodayVO> likecompanycount();
+
+	int mycountcompany(WaggleJoinVO waggle);
+
+	List<StockTodayVO> compayliketype(StockTodayVO st);
+
+	void deletecompan(StockTodayVO st);
+
 	
 }

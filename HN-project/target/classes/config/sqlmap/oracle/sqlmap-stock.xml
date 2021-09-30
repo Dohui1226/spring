@@ -74,6 +74,14 @@ select stock_code from hn_stock_code
 select stock_code,stock_name from hn_stock_code
 </select>
 
+<insert id="inserttext" parameterType="stockcodeVO">
+insert into stock_detail(stock_code,stocktext1, stocktext2, stocktext3) values(#{stock_code},#{stocktext1},#{stocktext2},#{stocktext3})
+</insert>
+
+<!-- 종목정보 -->
+<select id="stockinfo" parameterType="stockcodeVO" resultType="stockcodeVO">
+select * from stock_detail where stock_code=#{stock_code}
+</select>
 <!-- 종가차트 그리기 -->
 <select id="linestock" resultType="stocktodayVO" parameterType="stocktodayVO">
 select close_date, stock_close from hn_stock_close where stock_code=#{stock_code} order by close_date

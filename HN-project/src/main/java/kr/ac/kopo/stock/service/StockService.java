@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.ac.kopo.vo.StockBuySellVO;
 import kr.ac.kopo.vo.StockCodeVO;
+import kr.ac.kopo.vo.StockInfoVO;
 import kr.ac.kopo.vo.StockTodayVO;
 
 public interface StockService {
@@ -27,5 +28,7 @@ public interface StockService {
 	public void randomstock(StockBuySellVO bs);
 
 	public StockTodayVO stocksearch(StockTodayVO st);
+
+	public List<StockInfoVO> stockinfo(StockInfoVO si);
 
 }

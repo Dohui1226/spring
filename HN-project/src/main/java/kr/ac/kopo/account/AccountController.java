@@ -121,9 +121,9 @@ public class AccountController {
 			if( rank ==1|| rank ==2 || rank==3) {
 				ch.setHeart(100);
 			}
-			
+			else {
 			ch.setHeart(50);
-			
+			}
 			service.changeheart(ch);
 			WaggleJoinVO waggle2 = wservice.selectaccount(no);
 			buysell.setMember_account(waggle2.getMember_account());

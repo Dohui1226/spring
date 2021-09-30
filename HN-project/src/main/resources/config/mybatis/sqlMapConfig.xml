@@ -39,7 +39,9 @@
 			alias="portfolioVO" />	
 			
 		<typeAlias type="kr.ac.kopo.vo.DetailStockTypeVO"
-			alias="detailstocktypeVO" />									
+			alias="detailstocktypeVO" />
+			<typeAlias type="kr.ac.kopo.vo.StockInfoVO"
+			alias="stockinfoVO" />										
 		
 	</typeAliases>
 </configuration>

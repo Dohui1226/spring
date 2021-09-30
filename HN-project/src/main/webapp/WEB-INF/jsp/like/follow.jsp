@@ -26,9 +26,13 @@ keyframes done { 70% {
 
 
 
+
+
 %
 {
 transform
+
+
 
 
 
@@ -46,6 +50,8 @@ transform
 
 
 
+
+
 scale
 
 
@@ -53,7 +59,11 @@ scale
 
 
 
+
+
 (
+
+
 
 
 
@@ -71,7 +81,11 @@ scale
 
 
 
+
+
 )
+
+
 
 
 
@@ -199,15 +213,13 @@ body, div, button, h1 {
 <!doctype html>
 <html class="no-js" lang="en">
 
-<!-- 
-<script type="text/javascript"
-	src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.1/Chart.min.js"></script> -->
 
 
 <script type="text/javascript"
 	src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.1/Chart.min.js"></script>
 <!-- Mirrored from rockstheme.com/rocks/aievari-live/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Mar 2020 08:27:42 GMT -->
 <jsp:include page="../header.jsp" />
+
 <!-- header end -->
 <!-- Start breadcumb Area -->
 <div class="page-area">
@@ -234,7 +246,7 @@ body, div, button, h1 {
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="section-headline text-center">
 
-					<h3>Follow</h3>
+					<h3>유저</h3>
 					<p>
 						<strong>${wj.nickname}</strong>
 					</p>
@@ -260,11 +272,11 @@ body, div, button, h1 {
 												<div class="sidget-tabs-list">
 													<ul class="nav nav-tabs">
 
-														<li class="active"><a data-toggle="tab" href="#followerpage"
+														<li class="active"><a data-toggle="tab"
+															href="#followerpage"
 															style="width: 150; text-align: center; color: #646464;">
 																팔로워 </a></li>
 														<li class><a data-toggle="tab" href="#followpage"
-															
 															style="width: 150; text-align: center; color: #646464;">
 																팔로잉 </a></li>
 
@@ -281,7 +293,7 @@ body, div, button, h1 {
 																		<thead style="background-color: cornsilk;"
 																			class="thead-dark">
 																			<tr>
-																				<th width="10%">수익률순위</th>
+																				<th width="10%">순위</th>
 																				<th style="text-align: center">닉네임</th>
 																				<th style="text-align: center">하트 갯수</th>
 																				<th style="text-align: center">수익률(%)</th>
@@ -298,11 +310,11 @@ body, div, button, h1 {
 																					<td style="text-align: center">${followerlist.nickname}</td>
 																					<td style="text-align: center">${followerlist.hart}
 																					</td>
-																					<td style="text-align: center">${followerlist.rate}%
+																					<td style="text-align: center"><fmt:formatNumber
+																							value="${followerlist.rate}" pattern="#.##" />%</td>
 																					</td>
-																					<td style="text-align: center">
-																					<a data-id="${followerlist.no}"
-																						class="ialog2">삭제</a></td>
+																					<td style="text-align: center"><a
+																						data-id="${followerlist.no}" class="ialog2">삭제</a></td>
 																					<td style="text-align: center"><a
 																						href="${pageContext.request.contextPath}/waggle/rankInfo/${followerlist.no}">보기</a></td>
 																				</tr>
@@ -343,16 +355,18 @@ body, div, button, h1 {
 																				var="followlist" varStatus="loop">
 																				<tr>
 																					<th width="10%">${followlist.rank}
-																					</td>
+																					</th>
 																					<td style="text-align: center">${followlist.nickname}</td>
 																					<td style="text-align: center">${followlist.hart}</td>
 
-																					<td style="text-align: center">
-																					<fmt:formatNumber value="${followlist.rate}" pattern="#.##" />%</td>
+																					<td style="text-align: center"><fmt:formatNumber
+																							value="${followlist.rate}" pattern="#.##" />%</td>
 																					<td style="text-align: center"><a
 																						data-id="${followlist.no}" class="ialog1">삭제</a></td>
 																					<td style="text-align: center"><a
-																						href="#paymodal" data-id=" ${followlist.rank}" data-value="${followlist.no}" data-toggle="modal" class="move"}">보기</a></td>
+																						href="#paymodal" data-id=" ${followlist.rank}"
+																						data-value="${followlist.no}" data-toggle="modal"
+																						class="move"}">보기</a></td>
 
 
 																				</tr>
@@ -365,6 +379,7 @@ body, div, button, h1 {
 																</div>
 															</div>
 														</div>
+
 													</div>
 												</div>
 											</div>
@@ -376,7 +391,8 @@ body, div, button, h1 {
 					</div>
 					<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
 						<div
-							class="statistic-right-area notika-shadow mg-tb-30 sm-res-mg-t-0">
+							class="statistic-right-area notika-shadow mg-tb-30 sm-res-mg-t-0"
+							style="padding-bottom: 0; padding-top: 0;">
 							<div class="left-blog blog-category">
 								<h4>정보</h4>
 								<p></p>
@@ -388,7 +404,7 @@ body, div, button, h1 {
 									<h3>
 										<a href="${pageContext.request.contextPath}/like/follow"
 											style="color: #646464"><i class="fa fa-user"
-											style="color: yellowblue"></i>&nbsp; &nbsp;<span
+											style="color: darkgreen"></i>&nbsp; &nbsp;<span
 											class="counter" id="follower">${follower}</span> </a>
 									</h3>
 									<a href="${pageContext.request.contextPath}/like/follow"
@@ -409,6 +425,7 @@ body, div, button, h1 {
 								</div>
 
 							</div>
+
 
 						</div>
 
@@ -452,6 +469,7 @@ body, div, button, h1 {
 								</table>
 							</div>
 						</div>
+
 					</div>
 
 
@@ -463,37 +481,71 @@ body, div, button, h1 {
 	</div>
 </div>
 </div>
-<div class="modal fade" id="paymodal" >
+<div class="modal fade" id="paymodal">
 	<div class="modal-dialog modal-m">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title">하트 사용 확인</h4>
-					
+
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
-			<form method="post" action="${pageContext.request.contextPath}/ranking/payheart">
-			<div class="modal-body">
-				<p style="text-align:center">
-				선택하신 포트폴리오 및 필요 하트 수는 다음과 같습니다.<br>
-				하트를 사용하시겠습니까?</p>
-				<p style="text-align:center"><strong>랭킹 :<input name="rank" text="text" style="border:none;text-align:right;width: 50px;" value="" id="rankingvalue" readonly>위</strong><br>
-				<input type="hidden" value="" name="no" id="novalue">
-				<strong>필요하트 :<input text="text" style="text-align:right;border:none;width: 50px;" value="" id="heart" readonly>
-				개</strong><br>
-				
-				</p>
+			<form method="post"
+				action="${pageContext.request.contextPath}/ranking/payheart">
+				<div class="modal-body">
+					<p style="text-align: center">
+						선택하신 포트폴리오 및 필요 하트 수는 다음과 같습니다.<br> 하트를 사용하시겠습니까?
+					</p>
+					<p style="text-align: center">
+						<strong>랭킹 :<input name="rank" text="text"
+							style="border: none; text-align: right; width: 50px;" value=""
+							id="rankingvalue" readonly>위
+						</strong><br> <input type="hidden" value="" name="no" id="novalue">
+						<strong>필요하트 :<input text="text"
+							style="text-align: right; border: none; width: 50px;" value=""
+							id="heart" readonly> 개
+						</strong><br>
+
+					</p>
 				</div>
-			
-			
-			<div class="modal-footer">
-				
-				<input type="submit" id="button-modal" value="사용"></form>
-				<button id="button-modal2"  data-dismiss="modal">닫기</button>
-				</div></div>
-				
-			</div>
-<!-- End Right Sidebar -->
+
+
+				<div class="modal-footer">
+
+					<input type="submit" id="button-modal" value="사용">
+			</form>
+			<button id="button-modal2" data-dismiss="modal">닫기</button>
+		</div>
+	</div>
+
 </div>
+
+<div id="modal" class="modal fade" tabindex="-1" role="dialog"
+					>
+				<div class="modal-dialog modal-ss">
+
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+							<h5 class="modal-title">알림창</h5>
+								<button type="button" class="close button modalClose"
+									data-dismiss="modal" style="box-shadow: none;">&times;</button>
+
+							</div>
+							<div class="modal-body">
+								<p style="text-align:center;" id="info"></p>
+							</div>
+							<div class="modal-footer">
+						
+								<button type="button" id="button-modal2"
+									data-dismiss="modal">닫기</button>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+<!-- End Right Sidebar -->
+
 <!-- End row -->
 
 
@@ -504,44 +556,41 @@ body, div, button, h1 {
 
 
 </body>
+
 <script>
-$(document).on("click", ".move", function() {
-	var rank = $(this).attr('data-id');
-	var no = $(this).attr('data-value')
-	if(rank==1||rank==2||rank==3){
-		$(".modal-body #heart").val(100);
-		$(".modal-body #rankingvalue").val(rank);
-		$(".modal-body #novalue").val(no);
-	}
-	else{
-		$(".modal-body #heart").val(50);
-	$(".modal-body #rankingvalue").val(rank);
-	$(".modal-body #novalue").val(no);
-}
-});
+	$(document).on("click", ".move", function() {
+		var rank = $(this).attr('data-id');
+		var no = $(this).attr('data-value')
+		if (rank == 1 || rank == 2 || rank == 3) {
+			$(".modal-body #heart").val(100);
+			$(".modal-body #rankingvalue").val(rank);
+			$(".modal-body #novalue").val(no);
+		} else {
+			$(".modal-body #heart").val(50);
+			$(".modal-body #rankingvalue").val(rank);
+			$(".modal-body #novalue").val(no);
+		}
+	});
 </script>
+
 <script
-	src="${pageContext.request.contextPath}/resources/green-horizotal/js/main.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/green-horizotal/js/knob/jquery.knob.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/green-horizotal/js/knob/jquery.appear.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/green-horizotal/js/knob/knob-active.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/green-horizotal/js/flot/flot-active.js""></script>
-<script
-	src="${pageContext.request.contextPath}/resources/green-horizotal/js/flot/curvedLines.js"></script>
+	src="${pageContext.request.contextPath}/resources/green-horizotal/js/flot/jquery.flot.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/green-horizotal/js/flot/jquery.flot.resize.js"></script>
 <script
-	src="${pageContext.request.contextPath}/resources/green-horizotal/js/flot/jquery.flot.js"></script>
-
-
+	src="${pageContext.request.contextPath}/resources/green-horizotal/js/flot/jquery.flot.pie.js"></script>
 <script
-	src="${pageContext.request.contextPath}/resources/green-horizotal/js/sparkline/sparkline-active.js"></script>
+	src="${pageContext.request.contextPath}/resources/green-horizotal/js/flot/jquery.flot.tooltip.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/green-horizotal/js/flot/jquery.flot.orderBars.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/green-horizotal/js/flot/curvedLines.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/green-horizotal/js/flot/flot-active.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/green-horizotal/js/sparkline/jquery.sparkline.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/green-horizotal/js/sparkline/sparkline-active.js"></script>
 
 <script
 	src="${pageContext.request.contextPath}/resources/green-horizotal/js/counterup/jquery.counterup.min.js"></script>
@@ -559,75 +608,82 @@ $(document).on("click", ".move", function() {
 
 
 <script>
+	$(".ialog1").click(function() { //팔로잉 삭제
 
-$(".ialog1").click(function(){ //팔로잉 삭제
+		var no = $(this).data('id')
+		deletefollow(no);
+	})
 
-	var no=$(this).data('id')
-	 deletefollow(no);
-})
+	$(".ialog2").click(function() { //
 
-$(".ialog2").click(function(){ //
+		var no = $(this).data('id')
+
+		deletefollower(no);
+	})
+
+	function deletefollow(no) {
 	
-	var no=$(this).data('id')
-
-	 deletefollower(no); 
-})
-
-
-	  function deletefollow(no){
-		
 		$.ajax({
 			type : 'post',
 			url : '${pageContext.request.contextPath}/like/deletefollow2',
-			data: {no :no},
-			dataType: 'text',
+			data : {
+				no : no
+			},
+			dataType : 'text',
 			success : function(result) {
 				
 				alert('팔로잉 취소 완료')
 				let html = $('<div>').html(result)
-				let content =html.find('div#pagefollow2');
-				let contents =content.html();				
+				let content = html.find('div#pagefollow2');
+				let contents = content.html();
 				$("#pagefollow").html(contents);
-				var real= $('#follow').text()
+				var real = $('#follow').text()
+
+				$('#follow').text(real - 1)
+			
+				$('#info').text('팔로우 삭제');
+				//$('#modal').modal('show');
+			},
+			error : function(request, status, error) {
+				alert("code = " + request.status + " message = "
+						+ request.responseText + " error = " + error); // 실패 시 처리
+			}
+
+		})
+
+	}
+	
+	
+
+	function deletefollower(no) {
+	 	
+		$.ajax({
+			type : "post",
+			url : "${pageContext.request.contextPath}/like/deletefollower2",
+			data : {
+				no : no
+			},
+			dataType : 'text',
+			success : function(result) {
+				alert('팔로워 삭제 완료')
+				//deletealert('팔로워 삭제');
+				let html = $('<div>').html(result)
+				let content = html.find('div#pagefollower2');
 				
-				 $('#follow').text(real-1) 
-			}, error:function(request,status,error){
-		        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-		       }
+				let contents = content.html();
 
+				$("#pagefollower").html(contents);
+				var real = $('#follower').text()
 
+				$('#follower').text(real - 1)
+				$('#info').text('dd');
+				$('#modal').modal('show'); 
 
-		}) 
-		
-	} 
-function deletefollower(no){
-	
-	$.ajax({
-		type : "post",
-		url : "${pageContext.request.contextPath}/like/deletefollower2",
-		data: {no :no},
-		dataType: 'text',
-		success : function(result) {
-			alert('팔로워 삭제 완료')
-		
-			let html = $('<div>').html(result)
-			let content =html.find('div#pagefollower2');
-			
-			let contents =content.html();	
-			
-			$("#pagefollower").html(contents);
-			var real= $('#follower').text()
-		
-			 $('#follower').text(real-1) 
-		
-		}
-	}) 
-	
-}  
-	
+			}
+		})
 	
 
-	
+	}
 </script>
 
 <script type="text/JavaScript"

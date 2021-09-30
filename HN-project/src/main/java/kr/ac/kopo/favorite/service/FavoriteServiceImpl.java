@@ -132,4 +132,31 @@ public class FavoriteServiceImpl implements FavoriteService {
 		dao.deleteme(fl);
 		
 	}
+	
+
+	public List<StockTodayVO> likecompanycount() {
+		List<StockTodayVO> rank = dao.likecompanycount();
+		return rank;
+	}
+	
+	
+
+	public int mycountcompany(WaggleJoinVO waggle) {
+		int num = dao.mycountcompany(waggle);
+		return num;
+	}
+	
+	
+	@Override
+	public List<StockTodayVO> companyliketype(StockTodayVO st) {
+		List<StockTodayVO> list = dao.compayliketype(st);
+		System.out.println(list);
+		return list;
+	}
+	
+	@Override
+	public void deletecompan(StockTodayVO st) {
+		dao.deletecompan(st);
+		
+	}
 }

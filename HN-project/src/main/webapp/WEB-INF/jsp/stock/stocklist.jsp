@@ -39,7 +39,10 @@
 					<c:forEach items="${requestScope.stocklist}" var="stocklist"
 						varStatus="loop" end="0">
 
-						<p>기준 날짜 : &nbsp;${stocklist.close_date} &nbsp; 종가</p>
+						<p>기준 : &nbsp;${stocklist.close_date} &nbsp; 종가</p>
+						<fmt:parseDate var="startDate_D"  value="${stocklist.close_date}" pattern="yyyy-MM-dd"/>
+
+
 					</c:forEach>
 
 
@@ -51,14 +54,13 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
+			
 				<div class="deposite-content">
+
 					<div class="diposite-box">
 						<div class="subs-feilds">
-<!-- <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-<div class="support-services-red ">
-</div>
-</div>
- -->							<form action="#">
+
+						<form action="#">
 								<div class="blog-search-option">
 									<input id="holder" type="text" placeholder="종목명 검색">
 									<button class="button" onclick="search()">

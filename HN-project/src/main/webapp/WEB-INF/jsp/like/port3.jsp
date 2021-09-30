@@ -174,7 +174,7 @@
                          	<tr style="background-color: #ddd">
                          	<th width="15%" align="center">종목타입</th>
                          	<th width="20%" align="center">종목명</th>
-                         	<th width="15%" align="center">비중(%)</th>
+                         	<!-- <th width="15%" align="center">비중(%)</th> -->
   							<th width="15%" align="center">수량(주)</th>
   						
                          	</tr>
@@ -182,11 +182,13 @@
                                 <tbody>
                                 <c:set var="i" value="0" />
                                 <c:set var="j" value="3" />
+                            
+                             
                                  <c:forEach items="${requestScope.port2}" var="ranklist" varStatus="loop"> 
                                     <tr>
                                       <td style="vertical-align:middle;text-align: center" rowspan="${fn:length(ranklist.value)/3}" >
                                         <strong>${ranklist.key}</strong>
-                                     
+                                  
                                         </td>
                                    			
                                    		 <c:forEach items="${ranklist.value}" var="ranklist1" varStatus="loop"> 
@@ -194,13 +196,17 @@
                                    			<td style="vertical-align: middle;text-align: center">${ranklist1}</td> 
                                    			</c:if>
                                    			 
-                                   			 <c:if test="${i%j == 1 }">                                  			 
-                                   			<td style="vertical-align: middle;text-align: center">${ranklist1}</td>
-                                   			</c:if>
+                                   			<%--  <c:if test="${i%j == 1 }">        
                                    			
+                                   			                        			 
+                                   			<td style="vertical-align: middle;text-align: center">${ranklist1}</td>
+                                   			 
+                                   			</c:if>
+                                   			 --%>
                                    		 <c:if test="${i%j == 2 }">  
-                                   		 	<td style="vertical-align: middle;text-align: center">${ranklist1}</td>
+                                   		 	<td style="vertical-align: middle;text-align: center" >${ranklist1}</td>
                                    		 	</tr>
+                                   		 	
                                    		 </c:if>      
                                    		<c:set var="i" value="${i+1 }" />
 

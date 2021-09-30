@@ -14,11 +14,39 @@ insert into likecompany(no,stock_code) values(#{no},#{stock_code})
 
 <!-- 관심기업리스트 -->
 <select id="companylist" parameterType="wagglejoinVO" resultType="stocktodayVO">
-select a.no,a.stock_code,b.stock_name,b.stock_type,c.stock_close,b.value, c.valuediffrate from likecompany a, hn_stock_code b 
-,(select * from (select * from hn_stock_close order by close_date desc)where <![CDATA[rownum <=300]]>)c
-where no=#{no} and a.stock_code=c.stock_code and a.stock_code=b.stock_code
+select a.stock_code, b.stock_name, b.stock_type,c.stock_close, c.stock_diff,c.y_diff,volum from (select * from likecompany where no=#{no}) a, 
+(select * from hn_stock_code) b,
+(select * from (select * from hn_stock_close order by close_date desc)where <![CDATA[rownum <=299]]>) c
+where a.stock_code =b.stock_code
+and b.stock_code=c.stock_code
 </select>
 
+<!-- 최다 관심기업수 3개 -->
+<select id="likecompanycount" resultType="stocktodayVO">
+
+select a.count, a.stock_code, b.stock_name from (select * from 
+(select count(stock_code) count,stock_code from likecompany group by stock_code order by count desc)
+where <![CDATA[rownum <=3]]>) a, (select * from hn_stock_code) b where a.stock_code=b.stock_code
+
+
+
+</select>
+<select id="deletecompan" parameterType="stocktodayVO">
+delete from likecompany where no=#{count} and stock_code=#{stock_code}
+</select>
+<!-- 나의관심기업수는? -->
+<select id="mycountcompany" parameterType="wagglejoinVO" resultType="int">
+select count(stock_code) count from likecompany where no =#{no}
+</select>
+<!-- 
+타입별 관심기업 -->
+<select id="companyliketype" parameterType="stocktodayVO" resultType="stocktodayVO">
+select * from (select a.stock_code, b.stock_name, b.stock_type, c.stock_diff,c.y_diff,volum, c.stock_close from (select * from likecompany where no=#{count}) a, 
+(select * from hn_stock_code) b,
+(select * from (select * from hn_stock_close order by close_date desc)where<![CDATA[rownum <=299]]>) c
+where a.stock_code =b.stock_code
+and b.stock_code=c.stock_code) where stock_type=#{stock_type}
+</select>
 <!-- 팔로우하기 -->
 <select id="likeman" parameterType="followVO">
 insert into follow(me, likeman) values(#{me},#{likeman})
@@ -69,7 +97,7 @@ select * from(select a.stock_code,a.stock_close,a.stock_name,valuediffrate from
 (select * from(select * from hn_stock_close order by close_date desc)
 where <![CDATA[rownum <=299]]> )a, 
 (select * from hn_stock_code where stock_type=#{stock_type})b
-where a.stock_code =b.stock_code order by valuediffrate)where  <![CDATA[rownum <=3]]>
+where a.stock_code =b.stock_code order by valuediffrate) where  <![CDATA[rownum <=3]]>
 </select>
 
 <!-- 포트폴리오 저장횟수 증가시키기 -->

@@ -137,6 +137,37 @@ public class FavoriteDAOImpl implements FavoriteDAO {
 		sqlSessionTemplate.delete("favorite.FavoriteDAO.deleteme",fl);
 		
 	}
+	
+	/* 최다관심기업3순위 */
+	@Override
+	public List<StockTodayVO> likecompanycount() {
+		List<StockTodayVO> list = sqlSessionTemplate.selectList("favorite.FavoriteDAO.likecompanycount");
+		return list;
+	}
+	
+	
+	@Override
+	public int mycountcompany(WaggleJoinVO waggle) {
+		int num = sqlSessionTemplate.selectOne("favorite.FavoriteDAO.mycountcompany",waggle);
+		return num;
+	}
+	
+	
+	@Override
+	public List<StockTodayVO> compayliketype(StockTodayVO st) {
+		System.out.println(st);
+		List<StockTodayVO> list = sqlSessionTemplate.selectList("favorite.FavoriteDAO.companyliketype",st);
+		System.out.println("dao"+list);
+		return list;
+	}
+	
+	
+	@Override
+	public void deletecompan(StockTodayVO st) {
+		sqlSessionTemplate.delete("favorite.FavoriteDAO.deletecompan",st);
+		
+	}
+	
 }
 
 

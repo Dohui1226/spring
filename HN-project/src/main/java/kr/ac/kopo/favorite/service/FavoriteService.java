@@ -60,4 +60,12 @@ public interface FavoriteService {
 	List<RankListVO> myfollower(WaggleJoinVO wj);
 
 	List<RankListVO> myfollow(WaggleJoinVO wj);
+
+	List<StockTodayVO> likecompanycount();
+
+	int mycountcompany(WaggleJoinVO waggle);
+
+	List<StockTodayVO> companyliketype(StockTodayVO st);
+
+	void deletecompan(StockTodayVO st);
 }

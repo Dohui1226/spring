@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import kr.ac.kopo.stock.dao.StockDAO;
 import kr.ac.kopo.vo.StockBuySellVO;
 import kr.ac.kopo.vo.StockCodeVO;
+import kr.ac.kopo.vo.StockInfoVO;
 import kr.ac.kopo.vo.StockTodayVO;
 
 @Service
@@ -62,5 +63,12 @@ public class StockServiceImpl implements StockService {
 	public StockTodayVO stocksearch(StockTodayVO st) {
 		StockTodayVO vo =stockdao.stocksearch(st);
 		return vo;
+	}
+	
+	
+	@Override
+	public List<StockInfoVO> stockinfo(StockInfoVO si) {
+		List<StockInfoVO> list = stockdao.stockinfo(si);
+		return list;
 	}
 }

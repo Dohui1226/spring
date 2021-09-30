@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.ac.kopo.vo.StockBuySellVO;
 import kr.ac.kopo.vo.StockCodeVO;
+import kr.ac.kopo.vo.StockInfoVO;
 import kr.ac.kopo.vo.StockTodayVO;
 
 
@@ -71,6 +72,13 @@ public class StockDAOImpl implements StockDAO {
 	public StockTodayVO stocksearch(StockTodayVO st) {
 		StockTodayVO  le=sqlSessionTemplate.selectOne("stock.StockDAO.stocksearch",st);
 		return le;
+	}
+	
+	
+	@Override
+	public List<StockInfoVO> stockinfo(StockInfoVO si) {
+		List<StockInfoVO> list = sqlSessionTemplate.selectList("stock.StockDAO.stockinfo",si);
+		return list;
 	}
 
 }

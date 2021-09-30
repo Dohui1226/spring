@@ -149,14 +149,7 @@
 									  <canvas align="middle" style="height:400px;width:700px;" id="linechart"></canvas>
 									  	<br>
 										 <br>
-													<div class="left-head-blog right-side">
-
-														<div class="left-blog-page">
-															<div class="left-blog blog-category">
-															<h4>최저 수익률</h4>
-															</div>
-															</div>
-															</div>
+													
 													
 									</div>
 									</div>
@@ -402,15 +395,15 @@
 
 				})
 				$.each(map.rateme, function(index,item) {
-					let arr =item.wdate.split(' ');
-					varlabels.push(arr[0]);
+					
 					var rate1 = item.rate;
 					vardatame.push(rate1.toFixed(2));
 				
 
 				})
 				$.each(map.rateanother, function(index,item) {
-					
+					let arr =item.wdate.split(' ');
+					varlabels.push(arr[0]);
 					var rate2 = item.rate
 					vardataco.push(rate2.toFixed(2));
 				

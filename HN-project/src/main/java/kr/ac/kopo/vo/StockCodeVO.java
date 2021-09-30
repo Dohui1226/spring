@@ -6,8 +6,29 @@ public class StockCodeVO {
 	private String stock_index;
 	private String stock_type;
 	private int value;
+	private String stocktext1;
+	private String stocktext2;
+	private String stocktext3;
 	
 	
+	public String getStocktext1() {
+		return stocktext1;
+	}
+	public void setStocktext1(String stocktext1) {
+		this.stocktext1 = stocktext1;
+	}
+	public String getStocktext2() {
+		return stocktext2;
+	}
+	public void setStocktext2(String stocktext2) {
+		this.stocktext2 = stocktext2;
+	}
+	public String getStocktext3() {
+		return stocktext3;
+	}
+	public void setStocktext3(String stocktext3) {
+		this.stocktext3 = stocktext3;
+	}
 	public int getValue() {
 		return value;
 	}
@@ -41,7 +62,8 @@ public class StockCodeVO {
 	@Override
 	public String toString() {
 		return "StockCodeVO [stock_code=" + stock_code + ", stock_name=" + stock_name + ", stock_index=" + stock_index
-				+ ", stock_type=" + stock_type + ", value=" + value + "]";
+				+ ", stock_type=" + stock_type + ", value=" + value + ", stocktext1=" + stocktext1 + ", stocktext2="
+				+ stocktext2 + ", stocktext3=" + stocktext3 + "]";
 	}
 	
 	

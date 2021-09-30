@@ -14,7 +14,7 @@
 
 <!-- all css here -->
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/green-horizotal/css/bootstrap.min.css">
+   <%--  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/green-horizotal/css/bootstrap.min.css"> --%>
    
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/green-horizotal/css/font-awesome.min.css">
    
@@ -92,9 +92,9 @@
 <script src="${pageContext.request.contextPath}/resources/js/plugins.js"></script>
 <!-- main js -->
 <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/green-horizotal/js/vendor/jquery-1.12.4.min.js"></script>
+ <%--  <script src="${pageContext.request.contextPath}/resources/green-horizotal/js/vendor/jquery-1.12.4.min.js"></script> --%>
   
-    <script src="${pageContext.request.contextPath}/resources/green-horizotal/js/bootstrap.min.js"></script>
+    <%-- <script src="${pageContext.request.contextPath}/resources/green-horizotal/js/bootstrap.min.js"></script> --%>
     <script src="${pageContext.request.contextPath}/resources/green-horizotal/js/counterup/jquery.counterup.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/green-horizotal/js/counterup/waypoints.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/green-horizotal/js/counterup/counterup-active.js"></script>

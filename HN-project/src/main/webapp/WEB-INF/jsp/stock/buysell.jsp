@@ -6,9 +6,39 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/green-horizotal/style.css">
 <html class="no-js" lang="en">
+
+
 <!-- Mirrored from rockstheme.com/rocks/aievari-live/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Mar 2020 08:27:42 GMT -->
 <jsp:include page="../header.jsp" />
+<script>
 
+$(document).ready(function(){
+
+	var msg1='${msg1}'
+	msg1 =msg1.trim();
+	
+	var msg2='${msg2}'
+		msg2 =msg2.trim();
+	
+	 if(msg1 ==='true'){
+		
+	
+		   $('#info').text('매수 완료하였습니다.'); 
+		 $('#modal').modal('show');   
+	} 
+	
+	 if(msg2==='true'){
+		
+		   $('#info').text('매도 완료하였습니다.'); 
+		 $('#modal').modal('show');  
+	} 
+
+	
+});
+
+
+
+</script>
 <!-- header end -->
 <!-- Start breadcumb Area -->
 <div class="page-area">
@@ -27,6 +57,7 @@
 		</div>
 	</div>
 </div>
+
 <!-- End breadcumb Area -->
 <!-- Start Slider Area -->
 <div class="invest-area bg-color page-padding-2">
@@ -47,40 +78,66 @@
 					</c:if>
 
 				</div>
-				<hr>
+				
 			</div>
 		</div>
 
 
 		<div class="pricing-content" align="center"">
-			<h4>
-				<fmt:formatNumber value="${stocktoday.stock_close}" pattern="#,###" />
-			</h4>
-			<c:if test="${stocklist.stock_diff lt 0}">
-				전일대비<td style="color: blue">▼${Math.abs(stocklist.stock_diff)}</td>
+			<p><h3>
+			<c:if test="${stocktoday.stock_diff lt 0}">
+				<p style="color: blue">
+				<fmt:formatNumber value="${stocktoday.stock_close}" pattern="#,###" /></p>
 			</c:if>
 			<c:if test="${stocklist.stock_diff gt 0}">
-				전일대비<td style="color: red">▲ ${stocklist.stock_diff}</td>
+			<p style="color: red">
+				<fmt:formatNumber value="${stocktoday.stock_close}" pattern="#,###" /></p>
 			</c:if>
-			<c:if test="${stocklist.stock_diff eq 0}">
-				전일대비<td>${stocklist.stock_diff}</td>
+			<c:if test="${stocktoday.stock_diff eq 0}">
+			<fmt:formatNumber value="${stocktoday.stock_close}" pattern="#,###" /></p>
 			</c:if>
-
+			</h3>
+			<c:if test="${stocktoday.stock_diff lt 0}">
+				<p style="color: blue">▼${Math.abs(stocktoday.stock_diff)} &nbsp; ${stocktoday.y_diff}%</p>
+			</c:if>
+			<c:if test="${stocklist.stock_diff gt 0}">
+				<p style="color: red">▲ ${stocktoday.stock_diff}</p>
+			</c:if>
+			<c:if test="${stocktoday.stock_diff eq 0}">
+				<p>${stocktoday.stock_diff}</p>
+			</c:if>
+</p>
 		</div>
 
 		<div class="blog-left-content">
 			<div class="col-md-8 col-sm-8 col-xs-8">
 				<div class="single-blog">
 					<div class="blog-image">
+					<hr>
+					<strong><i class="fa fa-building">
+											</i> &nbsp;기업개요 및 현황</strong>
+					<ul>
+					<li style="padding:10px"> <i class="fa fa-right">
+											</i>${stockinfo[0].stocktext1}
+					</li>
+					<li style="padding:10px">${stockinfo[0].stocktext2}
+					</li>
+					<li style="padding:10px">${stockinfo[0].stocktext3}
+					</li>
+					</ul>
+				
+					<hr>
 						<div class="sale-statistic-inner notika-shadow mg-tb-30">
 							<div class="curved-inner-pro"></div>
-							<canvas align="middle" height="200px" id="linechart"></canvas>
+							<canvas align="middle" height="180px" id="linechart"></canvas>
 						</div>
 					</div>
+					
 				</div>
 
 
 			</div>
+			
 			<div class="blog-sidebar-right">
 				<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
 					<div class="support-services-red ">
@@ -90,14 +147,14 @@
 							action="${pageContext.request.contextPath}/stock/buy/${stockcode.stock_code}"
 							method="post">
 							<p>
-								<select id="buyorder" onchange="order1(this.value)">
+								<select id="buyorder" onchange="order1(this.value)" style="float:middle;height:40px;border-radius: 4px">
 									<option value="">가능</option>
 									<option value="1">100%</option>
 									<option value="2">50%</option>
 									<option value="4">25%</option>
 									<option value="10">10%</option>
-								</select> <input type="text" style="width: 70%;" id="changemodal1"
-									name="stock_num" placeholder="수량" value=""><br>
+								</select> <input type="text" style="width: 70%;height:40px;" id="changemodal1"
+									name="stock_num" onkeyup="cal()" placeholder="수량" value=""><br>
 							</p>
 							총 거래금액 :&nbsp;<input type="text" id="totalcost1"
 								style="border: none; width: 60%" value="" readonly><br>
@@ -105,6 +162,7 @@
 								id="button-modal"
 								style="border: none; background-color: #E00400; color: #FFF; width: 100%;"
 								value="매수">
+								</form>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
@@ -115,20 +173,21 @@
 							action="${pageContext.request.contextPath}/stock/sell/${stockcode.stock_code}"
 							method="post">
 							<p>
-								<select name="sellorder" onchange="order2(this.value)">
+								<select id="sellorder" onchange="order2(this.value)" style="float:middle;height:40px;border-radius: 4px">
 									<option value="">가능</option>
 									<option value="1">100%</option>
 									<option value="2">50%</option>
 									<option value="4">25%</option>
 									<option value="10">10%</option>
-								</select> <input type="text" style="width: 70%;" id="changemodal2"
-									name="stock_num" placeholder="수량" value=""><br>
+								</select> <input type="text" style="width: 70%;height:40px;" id="changemodal2"
+									name="stock_num"  onkeyup="cal2()"placeholder="수량" value=""><br>
 							</p>
 							총 거래금액 :&nbsp;<input type="text" id="totalcost2"
 								style="border: none; width: 60%" value="" readonly><br>
 							<br> <input type="submit" id="button-modal2"
 								style="border: none; background-color: #003ACE; width: 100%;"
 								value="매도">
+								</form>
 					</div>
 
 				</div>
@@ -137,47 +196,54 @@
 		</div>
 	</div>
 
-
-	<div class="modal fade" id="modal" role="dialog">
-		<div class="modal-dialog modal-lg">
+<!-- 
+	<div class="modal fade" id="modal" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title">결제창</h4>
+					<h5 style="text-align:center"class="modal-title">알림창</h5>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<div class="modal-body">
-					<a class="support-images" href="#"><i
-						class="flaticon-035-savings"></i></a>
+				
 					<div class="support-content">
-						<h6>매수 정보를 입력하세요.</h6>
-						<%-- 		<form
-						action="${pageContext.request.contextPath}/stock/buy/${stockcode.stock_code}"
-						method="post">
-						주문 금액 : ${stocktoday.stock_close}<br> <select id="buyorder"
-							onchange="order1(this.value)">
-							<option value="">가능</option>
-							<option value="1">100%</option>
-							<option value="2">50%</option>
-							<option value="4">25%</option>
-							<option value="10">10%</option>
-						</select> <input type="text" id="changemodal1" name="stock_num"
-							placeholder="수량" value=""><br>
-						총 거래금액:<input type="text" id="totalcost1" style="border: none;" value="" readonly><br>  --%>
-						<br>*매수시 거래금액의 0.015% 수수료가 부과됩니다.&nbsp; <br>
-						<%-- 	<fmt:formatNumber id="fee1" value="" pattern="#,###" /> --%>
-						<!-- <input type="hidden" name="fee" id="feerate1" style="border:none;" value=""> <br> -->
+						
+						<p id="info"></p>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<input type="submit" id="button-modal" value="매수">
+				
 					<button id="button-modal2" data-dismiss="modal">닫기</button>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
+ -->
+<div id="modal" class="modal fade" tabindex="-1" role="dialog"
+					>
+				<div class="modal-dialog modal-ss">
 
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+							<h5 class="modal-title">알림창</h5>
+								<button type="button" class="close button modalClose"
+									data-dismiss="modal" style="box-shadow: none;">&times;</button>
 
+							</div>
+							<div class="modal-body">
+								<p style="text-align:center;" id="info"></p>
+							</div>
+							<div class="modal-footer">
+						
+								<button type="button" id="button-modal2"
+									data-dismiss="modal">닫기</button>
+							</div>
+						</div>
+
+					</div>
+				</div>
 	
 
 </div>
@@ -190,29 +256,8 @@
 
 
 </body>
-<script>
-
-window.onload = function() { 
-	 
-if('${msg1}'=== 'true') {
-  
-	alert('매수 완료')
-}
 
 
-if('${msg2}'=== 'true') {
-	  
-	alert('매도 완료')
-}
-
-}
-
-
-</script>
-
-<%-- 	 <script src="${pageContext.request.contextPath}/resources/green-horizotal/js/bootstrap.min.js"></script> --%>
-<script
-	src="${pageContext.request.contextPath}/resources/green-horizotal/js/vendor/jquery-1.12.4.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/green-horizotal/js/flot/jquery.flot.js"></script>
 <script
@@ -233,6 +278,20 @@ if('${msg2}'=== 'true') {
 	src="${pageContext.request.contextPath}/resources/green-horizotal/js/sparkline/sparkline-active.js"></script>
 
 <script>
+
+function cal(){
+	var close = parseInt('${stocktoday.stock_close}');
+	var num = parseInt(window.event.keyCode)-48
+	
+	$('#totalcost1').val(num*close)
+}
+
+function cal2(){
+	var close = parseInt('${stocktoday.stock_close}');
+	var num = parseInt(window.event.keyCode)-48
+	
+	$('#totalcost2').val(num*close)
+}
 
 function order1(param){
 

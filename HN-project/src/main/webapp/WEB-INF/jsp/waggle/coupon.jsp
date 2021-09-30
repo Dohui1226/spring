@@ -140,10 +140,12 @@ body, div, button, h1 {
 	src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.1/Chart.min.js"></script> -->
 
 
-<script type="text/javascript"
-	src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.1/Chart.min.js"></script>
+<!-- <script type="text/javascript"
+	src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.1/Chart.min.js"></script> -->
 <!-- Mirrored from rockstheme.com/rocks/aievari-live/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Mar 2020 08:27:42 GMT -->
 <jsp:include page="../header.jsp" />
+
+	
 <!-- header end -->
 <!-- Start breadcumb Area -->
 <div class="page-area">
@@ -526,46 +528,62 @@ body, div, button, h1 {
 
 <!-- End Footer area -->
 
+<div id="modalcc" class="modal fade" tabindex="-1" role="dialog">
+				<div class="modal-dialog modal-sm">
+
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+							<h5 class="modal-title">알림창</h5>
+								<button type="button" class="close button modalClose"
+									data-dismiss="modal" style="box-shadow: none;">&times;</button>
+
+							</div>
+							<div class="modal-body">
+								<p style="text-align:center;" id="info"></p>
+							</div>
+							<div class="modal-footer">
+						
+								<button type="button" id="button-modal2"
+									data-dismiss="modal">닫기</button>
+							</div>
+						</div>
+
+					</div>
+				</div>
 
 </body>
 
 
-<script
-	src="${pageContext.request.contextPath}/resources/green-horizotal/js/main.js"></script>
-<script
+
+<%-- <script
 	src="${pageContext.request.contextPath}/resources/green-horizotal/js/knob/jquery.knob.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/green-horizotal/js/knob/jquery.appear.js"></script>
 <script
-	src="${pageContext.request.contextPath}/resources/green-horizotal/js/knob/knob-active.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/green-horizotal/js/flot/flot-active.js""></script>
-<script
+	src="${pageContext.request.contextPath}/resources/green-horizotal/js/knob/knob-active.js"></script> --%>
+<%-- <script
+	src="${pageContext.request.contextPath}/resources/green-horizotal/js/flot/flot-active.js"></script> --%>
+<%-- <script
 	src="${pageContext.request.contextPath}/resources/green-horizotal/js/flot/curvedLines.js"></script>
 <script
-	src="${pageContext.request.contextPath}/resources/green-horizotal/js/flot/jquery.flot.resize.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/green-horizotal/js/flot/jquery.flot.js"></script>
+	src="${pageContext.request.contextPath}/resources/green-horizotal/js/flot/jquery.flot.resize.js"></script> --%>
+<%-- <script
+	src="${pageContext.request.contextPath}/resources/green-horizotal/js/flot/jquery.flot.js"></script> --%>
 
 
-<script
+<%-- <script
 	src="${pageContext.request.contextPath}/resources/green-horizotal/js/sparkline/sparkline-active.js"></script>
 <script
-	src="${pageContext.request.contextPath}/resources/green-horizotal/js/sparkline/jquery.sparkline.min.js"></script>
+	src="${pageContext.request.contextPath}/resources/green-horizotal/js/sparkline/jquery.sparkline.min.js"></script> --%>
 
-<script
-	src="${pageContext.request.contextPath}/resources/green-horizotal/js/counterup/jquery.counterup.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/green-horizotal/js/counterup/waypoints.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/green-horizotal/js/counterup/counterup-active.js"></script>
+
+<%-- <script
+	src="${pageContext.request.contextPath}/resources/green-horizotal/js/counterup/waypoints.min.js"></script> --%>
 
 
 
-<script
-	src="${pageContext.request.contextPath}/resources/green-horizotal/js/jquery.scrollUp.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/green-horizotal/js/charts/Chart.js"></script>
+
 
 
 <script>
@@ -617,7 +635,6 @@ function couponuse2(){
 	
 } 
 	
-	/* 이거 작동됨 */
 	function insertstock(){
 		console.log(stockname)
 		 $.ajax({
@@ -645,6 +662,12 @@ function couponuse2(){
 	   
 	}
 	
+
+
+		
+	
+	
+	
 	
 	document.getElementById("btn").addEventListener("click", function () {
 		 $.ajax({
@@ -658,10 +681,7 @@ function couponuse2(){
 					        btn.classList.add("hide");
 					        lottery();
 					      
-						})
-						
-						
-						
+						})					
 				}
 		 	
 			})
@@ -679,8 +699,7 @@ function couponuse2(){
 	    setTimeout(() => {
 	        clearInterval(effect);
 	        element.classList.add("done");
-	       /*  element.innerText = numbers[random]; */
-	        /* numbers.splice(random, 1); */
+	       
 	        
 	    }, time * 3000 + 1000);
 	 
@@ -704,9 +723,10 @@ function couponuse2(){
 			dataType: 'json',
 			success : function(result) {
 				
-				alert("하트 충전이 완료되었습니다.")
+				/* alert("하트 충전이 완료되었습니다.") */
 				$('#heart').text(result.myheart)
 				$('#balance').text(result.myprice)
+				modalf('하트충전완료');
 
 			}
 		})
@@ -798,11 +818,27 @@ function couponuse2(){
 		frm.total_sum2.value = pricesum;
 	}
 	
-	
+
+	 function modalf(param){
+	alert('!')
+		var $k=jQuery.noConflict();	
+			$k('#info').text(param)
+		
+			$k('#modalcc').modal('show');
+			alert('!!')
+	 }
 
 	
 </script>
+<script
+	src="${pageContext.request.contextPath}/resources/green-horizotal/js/main.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/green-horizotal/js/jquery.scrollUp.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/green-horizotal/js/charts/Chart.js"></script>
 
+<script
+	src="${pageContext.request.contextPath}/resources/green-horizotal/js/counterup/counterup-active.js"></script>
 <script type="text/JavaScript"
 	src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 

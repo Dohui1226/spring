@@ -32,6 +32,12 @@ input[id="cb1"]:checked + label {
 				.getElementById("accountinfo").value
 
 	}
+	window.onload = function() { 
+	if('${msg}'=== 'true') {
+	  
+		alert('가입 완료')
+	}
+	}
 </script>
 
 <jsp:include page="../header.jsp" />
@@ -85,14 +91,13 @@ input[id="cb1"]:checked + label {
 													<h4 class="check-title">
 														<a data-toggle="collapse" class="active"
 															data-parent="#accordion" href="#check1"> <span
-															class="acc-icons"></span>랭킹 투자자의 포트폴리오 확인 및 비교하기
+															class="acc-icons"></span>랭킹 투자자의 포트폴리오
 														</a>
 													</h4>
 												</div>
 												<div id="check1" class="panel-collapse collapse in">
 													<div class="panel-body">
-														<p>내 포트폴리오와 랭킹 투자자의 포트폴리오를 비교하면서 랭킹 투자자의 포트폴리오를 통해
-															투자종목/섹터를 확인 할 수 있습니다.</p>
+														<p>랭킹 포트폴리오를 확인하면서 어떤 업종에 분산 투자를 했는지 알 수 있습니다.<br> 해당 랭킹 유저와 과거 수익률을 비교할 수 있습니다. 이를 통해 지속적으로 수익을 창출하는 유저인지 알 수 있습니다.</p>
 													</div>
 												</div>
 											</div>
@@ -102,15 +107,13 @@ input[id="cb1"]:checked + label {
 												<div class="panel-heading">
 													<h4 class="check-title">
 														<a data-toggle="collapse" data-parent="#accordion"
-															href="#check2"> <span class="acc-icons"></span>전문 PB가
-															아닌 랭킹 투자자와의 1:1 메세지 커뮤니케이션으로 조언받기
+															href="#check2"> <span class="acc-icons"></span>랭킹 투자자의 매매내역
 														</a>
 													</h4>
 												</div>
 												<div id="check2" class="panel-collapse collapse">
 													<div class="panel-body">
-														<p>전문 PB가 부담스러운 고객님들은 랭킹 투자자에게 하트를 지불하고, 메세지를 통하여
-															커뮤니케이션하면서 투자안목을 넓힐 수 있습니다.</p>
+														<p>랭킹 투자자가 최근 거래한 종목과 금액을 알 수 있습니다. </p>
 													</div>
 												</div>
 											</div>
@@ -120,14 +123,14 @@ input[id="cb1"]:checked + label {
 												<div class="panel-heading">
 													<h4 class="check-title">
 														<a data-toggle="collapse" data-parent="#accordion"
-															href="#check3"> <span class="acc-icons"></span>코인을
-															쿠폰으로 교환하여 수수료 우대 및 주식 뽑기
+															href="#check3"> <span class="acc-icons"></span>하트/
+															쿠폰 구매 및 쿠폰 사용/공유
 														</a>
 													</h4>
 												</div>
 												<div id="check3" class="panel-collapse collapse ">
 													<div class="panel-body">
-														<p>차곡차곡 적립한 코인을 쿠폰교환소에서 다양한 혜택을 제공하는 쿠폰으로 교환할 수 있습니다.
+														<p>차곡차곡 적립한 하트를 교환소에서 주식뽑기 쿠폰으로 으로 교환할 수 있습니다. <br>보유한 쿠폰은 카카오톡으로 공유할 수 있습니다.
 														</p>
 													</div>
 												</div>
@@ -138,13 +141,13 @@ input[id="cb1"]:checked + label {
 												<div class="panel-heading">
 													<h4 class="check-title">
 														<a data-toggle="collapse" data-parent="#accordion"
-															href="#check4"> <span class="acc-icons"></span>저렴한 비용
+															href="#check4"> <span class="acc-icons"></span>관심 기능
 														</a>
 													</h4>
 												</div>
 												<div id="check4" class="panel-collapse collapse ">
 													<div class="panel-body">
-														<p>부족한 포인트는 저렴한 비용으로 월 결제 1900원 또는 추가 충전이 가능합니다.</p>
+														<p>개인을 팔로우하여 해당 포트폴리오를 지속적으로 학인 할 수 있습니다.<br> 나의 팔로워들을 확인하여 원하지 않는 팔로워를 삭제할 수 있습니다.<br> 관심 기업을 등록하여 관심기업 목록에서 주기적으로 기업의 주가를 관찰 할 수 있습니다.</p>
 													</div>
 												</div>
 											</div>
@@ -161,7 +164,7 @@ input[id="cb1"]:checked + label {
 												</div>
 												<div id="check5" class="panel-collapse collapse">
 													<div class="panel-body">
-														<p>랭킹 투자자의 섹터별 종목 추천을 제공합니다.</p>
+														<p>랭킹 포트폴리오의 업종별 분산 투자 비율을 저장하여 현재 주가 중 가장 큰 괴리율을 보이는 종목으로 추천할 수 있습니다.</p>
 													</div>
 												</div>
 											</div>
@@ -223,7 +226,7 @@ input[id="cb1"]:checked + label {
 			<div class="modal-body">
 				<a class="support-images" href="#"><i class="flaticon-035-savings"></i></a>
 				<div class="support-content">	
-				<p>종합계좌로 연결을 추천합니다.</p>
+				<p><strong>종합계좌로 연결을 추천합니다.</strong></p>
 				<c:forEach items="${requestScope.accountlist}" var="accountlist" varStatus="loop"> 
 					<input type="radio" name="accountinfo" id="accountinfo" value="${accountlist.acc_num}">&nbsp;${accountlist.acc_num}&nbsp; &nbsp; ${accountlist.acc_name} <br>
 					</c:forEach>
