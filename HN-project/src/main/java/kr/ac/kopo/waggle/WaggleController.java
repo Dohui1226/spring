@@ -12,6 +12,7 @@ import javax.websocket.server.PathParam;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,6 +41,8 @@ import kr.ac.kopo.vo.StockTodayVO;
 import kr.ac.kopo.vo.StockWeightVO;
 import kr.ac.kopo.vo.WaggleJoinVO;
 import kr.ac.kopo.waggle.servie.WaggleService;
+import net.nurigo.java_sdk.api.Message;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @SessionAttributes({"waggleVO"})
 @Controller
@@ -102,7 +105,7 @@ public class WaggleController {
 		heartvo.setMoney(price);
 		heartvo.setHeart(heart);
 		service.addHeart(heartvo);
-	
+		this.msgSend(heart);
 		
 		
 		waggleVO.setHart(waggleVO.getHart()+heart);
@@ -115,6 +118,30 @@ public class WaggleController {
 		map.put("myprice",ad.getTcash());
 		return map;
 	}
+	
+	/* 문자메세지보냄 */
+	public void msgSend(int heart) { 
+		String api_key = "NCSP5MNQPQYFNCZ1"; 
+		//사이트에서 발급 받은 API KEY 
+		String api_secret = "A3Z03VRIDFHTJPPNW20TZL67MHRRQVFY";
+		//사이트에서 발급 받은 API SECRET KEY 
+		Message coolsms = new Message(api_key, api_secret); 
+		HashMap<String, String> params = new HashMap<String, String>(); 
+		params.put("to", "01038803302");
+		params.put("from", "01038803302"); //사전에 사이트에서 번호를 인증하고 등록하여야 함 
+		params.put("type", "SMS"); 
+		params.put("text", "[하나팔로우] 34,800원으로 하트 "+heart+"개를 구매하셨습니다."); //메시지 내용
+		params.put("app_version", "test app 1.2");
+		try {
+			JSONObject obj = (JSONObject) coolsms.send(params); 
+			System.out.println(obj.toString()); //전송 결과 출력 
+			} catch (CoolsmsException e) { 
+				System.out.println(e.getMessage());
+				System.out.println(e.getCode()); 
+				} 
+		}
+	
+	
 	
 	/* 와글와글 가입 데이터 넘기기 */
 	@PostMapping("/waggle/join")

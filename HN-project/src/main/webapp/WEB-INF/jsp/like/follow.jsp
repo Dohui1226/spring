@@ -641,8 +641,6 @@ body, div, button, h1 {
 
 				$('#follow').text(real - 1)
 			
-				$('#info').text('팔로우 삭제');
-				//$('#modal').modal('show');
 			},
 			error : function(request, status, error) {
 				alert("code = " + request.status + " message = "
@@ -676,8 +674,8 @@ body, div, button, h1 {
 				var real = $('#follower').text()
 
 				$('#follower').text(real - 1)
-				$('#info').text('dd');
-				$('#modal').modal('show'); 
+				//$('#info').text('dd');
+				//$('#modal').modal('show'); 
 
 			}
 		})

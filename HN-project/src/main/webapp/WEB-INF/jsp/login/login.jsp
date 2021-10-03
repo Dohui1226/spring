@@ -65,14 +65,9 @@ function checkForm(){
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12">
                                             <div class="clear"></div>
-                                            <div class="separetor"><span>Or with Sign</span></div>
-                                            <div class="sign-icon">
-                                                <ul>
-                                                    <li><a class="facebook" href="#">Facebook</a></li>
-                                                    <li><a class="twitter" href="#">twitter</a></li>
-                                                    <li><a class="google" href="#">google+</a></li>
-                                                </ul>
-                                                <div class="acc-not">Don't have an account  <a href="signup.html"> Sign up</a></div>
+                                            
+                                            
+                                                <div class="acc-not"><a href="signup.html">회원가입</a></div>
                                             </div> 
                                         </div> 
                                     </form> 

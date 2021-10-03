@@ -722,11 +722,11 @@ function couponuse2(){
 			},
 			dataType: 'json',
 			success : function(result) {
-				
-				/* alert("하트 충전이 완료되었습니다.") */
+		
+				 alert("하트 충전이 완료되었습니다.");
 				$('#heart').text(result.myheart)
 				$('#balance').text(result.myprice)
-				modalf('하트충전완료');
+				
 
 			}
 		})
@@ -819,14 +819,14 @@ function couponuse2(){
 	}
 	
 
-	 function modalf(param){
+	 /* function modalf(param){
 	alert('!')
 		var $k=jQuery.noConflict();	
 			$k('#info').text(param)
 		
 			$k('#modalcc').modal('show');
 			alert('!!')
-	 }
+	 } */
 
 	
 </script>

@@ -142,7 +142,7 @@
 								<c:forEach items="${requestScope.stocklist}" var="stocklist"
 									varStatus="loop">
 									<tr>
-										<td>${stocklist.stock_name}</td>
+										<td><a style="color:black" href="${pageContext.request.contextPath}/stock/buysell/${stocklist.stock_code}">${stocklist.stock_name}</a></td>
 										<td>${stocklist.stock_num}</td>
 										<td><fmt:formatNumber value="${stocklist.buyprice}"
 												pattern="###,###,###,###" /></td>
@@ -217,8 +217,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/jqbar.js"
 	type="text/javascript"></script>
 
-<script
-	src="${pageContext.request.contextPath}/resources/green-horizotal/js/tawk-chat.js"></script>
+
 <script
 	src="${pageContext.request.contextPath}/resources/green-horizotal/js/main.js"></script>
 <script

@@ -40,7 +40,7 @@
 					<h3>포트폴리오</h3>
 				<p> <div align="center" class="basic-tb-hd">
                             <label for="start">날짜:</label>  
-                            <input type="date" id="day" name="day" value="2021-09-28">
+                            <input type="date" id="day" name="day" value="2021-09-17">
                           	<input id="daysubmit"  id="button-modal" type="submit" onclick="dayinput()" value="선택">
                         </div></p>
 				</div>

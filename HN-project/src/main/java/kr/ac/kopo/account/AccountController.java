@@ -131,13 +131,15 @@ public class AccountController {
 			List<StockBuySellVO> listsell = service.transsell(buysell);
 			List<StockBuySellVO> listbuy = service.transbuy(buysell);
 
-			
-			follow.setMe(waggle.getNickname());
+		
+			follow.setMe(waggle2.getNickname());
 			int followlist =service.follow(follow);
-
-			follow.setLikeman(waggle.getNickname());
-			int followerlist =service.follower(follow);
+			System.out.println("팔로잉"+followlist);
 			
+			
+			follow.setLikeman(waggle2.getNickname());
+			int followerlist =service.follower(follow);
+			System.out.println("팔로워"+followerlist);
 			
 			follow.setMe(waggle.getNickname());
 		

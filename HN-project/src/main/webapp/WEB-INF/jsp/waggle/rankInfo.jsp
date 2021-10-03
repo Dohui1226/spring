@@ -332,8 +332,7 @@
 	src="${pageContext.request.contextPath}/resources/green-horizotal/js/chat/moment.min.js"></script>
 
 
-<script
-	src="${pageContext.request.contextPath}/resources/green-horizotal/js/tawk-chat.js"></script>
+
 <script
 	src="${pageContext.request.contextPath}/resources/green-horizotal/js/main.js"></script>
 <script

@@ -39,9 +39,9 @@
 					<c:forEach items="${requestScope.stocklist}" var="stocklist"
 						varStatus="loop" end="0">
 
-						<p>기준 : &nbsp;${stocklist.close_date} &nbsp; 종가</p>
+						<%-- <p>기준 : &nbsp;${stocklist.close_date} &nbsp; 종가</p>
 						<fmt:parseDate var="startDate_D"  value="${stocklist.close_date}" pattern="yyyy-MM-dd"/>
-
+ --%>
 
 					</c:forEach>
 
