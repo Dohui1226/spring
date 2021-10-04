@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="org.apache.ibatis.session.SqlSession"/>
-    <fullyQualifiedTypeName name="kr.ac.kopo.board.BoardVO"/>
-    <fullyQualifiedTypeName name="com.fasterxml.jackson.databind.ObjectMapper"/>
-    <fullyQualifiedTypeName name="org.springframework.web.socket.handler.TextWebSocketHandler"/>
-    <fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
     <fullyQualifiedTypeName name="kr.ac.kopo.chat.ChatHandler"/>
     <fullyQualifiedTypeName name="java.lang.Override"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
     <fullyQualifiedTypeName name="org.springframework.web.socket.TextMessage"/>
-    <fullyQualifiedTypeName name="org.json.JSONObject"/>
     <fullyQualifiedTypeName name="java.lang.Exception"/>
     <fullyQualifiedTypeName name="org.springframework.web.socket.WebSocketSession"/>
     <fullyQualifiedTypeName name="javax.websocket.server.ServerEndpoint"/>
@@ -31,7 +25,6 @@
     <fullyQualifiedTypeName name="kr.ac.kopo.vo.PortfolioVO"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="kr.ac.kopo.vo.Portfolio2VO"/>
-    <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
@@ -60,4 +53,11 @@
     <fullyQualifiedTypeName name="kr.ac.kopo.vo.StockTodayVO"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
     <fullyQualifiedTypeName name="kr.ac.kopo.vo.StockInfoVO"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="org.springframework.messaging.Message"/>
+    <fullyQualifiedTypeName name="com.google.inject.spi.Message"/>
+    <fullyQualifiedTypeName name="net.nurigo.java_sdk.api.Message"/>
+    <fullyQualifiedTypeName name="net.nurigo.java_sdk.exceptions.CoolsmsException"/>
+    <fullyQualifiedTypeName name="org.json.JSONObject"/>
+    <fullyQualifiedTypeName name="org.json.simple.JSONObject"/>
 </qualifiedTypeNameHistroy>

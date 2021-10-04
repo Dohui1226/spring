@@ -30,5 +30,7 @@ public interface StockService {
 	public StockTodayVO stocksearch(StockTodayVO st);
 
 	public List<StockInfoVO> stockinfo(StockInfoVO si);
+	
+	public void inserclosepre();
 
 }

@@ -33,4 +33,6 @@ public interface StockDAO {
 
 	public List<StockInfoVO> stockinfo(StockInfoVO si);
 
+	public void inserclosepre(StockTodayVO st);
+
 }

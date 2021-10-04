@@ -17,7 +17,7 @@
 			$(document)
 					.ready(
 							function() {
-								alert('!')
+								
 								var hdata = new Array();
 								var hipeLabels = new Array();
 							

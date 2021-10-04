@@ -5,7 +5,15 @@
 
 <!-- Mirrored from rockstheme.com/rocks/aievari-live/index-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Mar 2020 08:27:43 GMT -->
 <jsp:include page="header.jsp"/>
-		<!-- mobile-menu-area start -->
+<script>
+$(document).ready(function() {
+	
+			$('#paymodal').modal('show')
+			
+		});
+</script>
+		
+<!-- mobile-menu-area start -->
 		<div class="mobile-menu-area hidden-lg hidden-md hidden-sm">
 			<div class="container">
 				<div class="row">
@@ -1106,8 +1114,36 @@
 		</div>
 	</div>
 	<!-- End FAQ area -->
-	
-	
+	<!--  <div class="modal fade" id="paymodal">
+				<div class="modal-dialog modal-m">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title"> 하트 증가 알림</h4>
+
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+						
+							<div class="modal-body">
+								<p style="text-align: center">
+									
+					
+									증가한 하트 : <strong>${cheart.num*100}</strong>개<br>
+									포트폴리오 열람 수 : ${cheart.num} 명<br>
+								</p>
+								
+							</div>
+
+
+							<div class="modal-footer">
+
+								
+						
+						<button id="button-modal2" data-dismiss="modal">닫기</button>
+					</div>
+				</div>
+</div>
+</div> -->
+		
 	<!--  Footer Area -->
 	<jsp:include page="footer.jsp"/>
 
@@ -1117,5 +1153,5 @@
 	
 </body>
 
-<!-- Mirrored from rockstheme.com/rocks/aievari-live/index-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Mar 2020 08:27:46 GMT -->
+
 </html>

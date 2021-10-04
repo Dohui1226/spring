@@ -107,8 +107,10 @@ public class WaggleController {
 		service.addHeart(heartvo);
 		this.msgSend(heart);
 		
-		
+			System.out.println("충전하트....몇개.."+heart);
 		waggleVO.setHart(waggleVO.getHart()+heart);
+		System.out.println("총하트 :"+waggleVO.getHart()+heart
+				);
 		session.setAttribute("waggleVO", waggleVO);
 		Map<String, Object> map = new HashMap<String, Object>();
 	
@@ -132,13 +134,12 @@ public class WaggleController {
 		params.put("type", "SMS"); 
 		params.put("text", "[하나팔로우] 34,800원으로 하트 "+heart+"개를 구매하셨습니다."); //메시지 내용
 		params.put("app_version", "test app 1.2");
-		try {
-			JSONObject obj = (JSONObject) coolsms.send(params); 
-			System.out.println(obj.toString()); //전송 결과 출력 
-			} catch (CoolsmsException e) { 
-				System.out.println(e.getMessage());
-				System.out.println(e.getCode()); 
-				} 
+		
+		  try { JSONObject obj = (JSONObject) coolsms.send(params);
+		  System.out.println(obj.toString()); //전송 결과 출력
+		  } catch (CoolsmsException e) {
+		  System.out.println(e.getMessage()); System.out.println(e.getCode()); }
+		 
 		}
 	
 	

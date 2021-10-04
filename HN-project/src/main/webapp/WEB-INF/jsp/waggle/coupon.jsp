@@ -323,9 +323,9 @@ body, div, button, h1 {
 																			class="thead-dark">
 																			<tr>
 
-																				<th style="text-align: center">쿠폰 이름</th>
-																				<th style="text-align: center">필요 하트</th>
-																				<th style="text-align: center" width="15%">결제</th>
+																				<th style="text-align: center;background-color:#ddd">쿠폰 이름</th>
+																				<th style="text-align: center;background-color:#ddd">필요 하트</th>
+																				<th style="text-align: center;background-color:#ddd" width="15%">결제</th>
 
 																			</tr>
 																		</thead>
@@ -346,14 +346,14 @@ body, div, button, h1 {
 																	<div id="tab">
 																	<table class="table table-hover">
 
-																		<thead style="background-color: aliceblue;"
+																		<thead style="background-color:#ddd;"
 																			class="thead-dark">
 																			<tr>
-																				<th witdh="30%" style="text-align: center">쿠폰명</th>
-																				<th witdh="30%" style="text-align: center">쿠폰
+																				<th witdh="30%" style="text-align: center;background-color:#ddd">쿠폰명</th>
+																				<th witdh="30%" style="text-align: center;background-color:#ddd">쿠폰
 																					번호</th>
-																				<th witdh="20%" style="text-align: center">공유</th>
-																				<th witdh="20%" style="text-align: center">사용</th>
+																				<th witdh="20%" style="text-align: center;background-color:#ddd">공유</th>
+																				<th witdh="20%" style="text-align: center;background-color:#ddd">사용</th>
 																			</tr>
 																		</thead>
 																		<tbody>

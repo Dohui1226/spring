@@ -81,4 +81,9 @@ public class StockDAOImpl implements StockDAO {
 		return list;
 	}
 
+	@Override
+	public void inserclosepre(StockTodayVO st) {
+		sqlSessionTemplate.insert("stock.StockDAO.insertclose2",st);
+		
+	}
 }

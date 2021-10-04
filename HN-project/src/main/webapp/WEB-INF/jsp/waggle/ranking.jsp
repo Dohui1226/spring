@@ -399,9 +399,41 @@ body, div, button, h1 {
 					<!-- End row -->
 				</div>
 			</div>
+ <%--  <div class="modal fade" id="paymodal">
+				<div class="modal-dialog modal-m">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">하트 사용 확인</h4>
+
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+						<form method="post"
+							action="${pageContext.request.contextPath}/ranking/payheart">
+							<div class="modal-body">
+								<p style="text-align: center">
+									하트가 부족합니다. 하트를 충전하시겠습니까?<br><br>
+									보유 하트 : 50 개<br>
+									필요 하트 : 100 개<br>
+								</p>
+								<p style="text-align: center">
+									
+
+								</p>
+							</div>
 
 
-			<div class="modal fade" id="paymodal">
+							<div class="modal-footer">
+
+								
+						</form>
+						<button id="button-modal" ><a href="${pageContext.request.contextPath}/waggle/coupon">이동</a></button>
+						<button id="button-modal2" data-dismiss="modal">닫기</button>
+					</div>
+				</div>
+
+			</div>   --%>
+
+			 <div class="modal fade" id="paymodal">
 				<div class="modal-dialog modal-m">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -437,7 +469,10 @@ body, div, button, h1 {
 					</div>
 				</div>
 
-			</div>
+			</div>  
+			
+			
+			
 		</div>
 	</div>
 </div>
