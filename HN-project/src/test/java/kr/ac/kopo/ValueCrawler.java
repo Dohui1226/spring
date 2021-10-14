@@ -33,19 +33,16 @@ public class ValueCrawler{
 	@Autowired
 	private StockDAO mapper;
 	
-	@Ignore
+	
 	@Test
 	public void insertvalue() throws Exception{
 	
 
-	//String[] aa = mapper.selectcode();
-	//for(int i=0; i<aa.length-1;i++) {
-		
-	//System.out.println(Arrays.toString(aa));
+	
 	
 	
 	String code1="A";
-	String code2="010400";
+	String code2="000540";
 	String code=code1+code2;//회사코드
 	double roe; //최종roe
 	double roe1 = 0 ; //3년전 roe
@@ -75,7 +72,7 @@ public class ValueCrawler{
 		
 		String[] rate = eles.text().split(" ");
 		rate1 =Double.parseDouble(rate[0].replaceAll("\\.", ""))/10000;
-			
+		System.out.println("요구수익률 :"+rate1);	
 		
 		doc2 = Jsoup.connect(URL2).get();			
 		Elements eles1 = doc2.select(".us_table_ty1 > tbody> tr:nth-child(7)> td.r"); 
@@ -94,12 +91,14 @@ public class ValueCrawler{
 			stock3=0;
 		}
 		stock = stock1-stock3;		
-	
+		System.out.println("유통주식 :"+stock);	
+		
 		doc3 = Jsoup.connect(URL3).get();
 		Elements eles3 = doc3.select("#highlight_D_Y > table > tbody > tr:nth-child(10) > td:nth-child(6)");
 		
 	
 		equity =Double.parseDouble(eles3.text().replaceAll(",",""))*100000000;
+		System.out.println("equity : "+equity);
 	
 		doc4 = Jsoup.connect(URL3).get();
 		Elements eles4 =doc4.select("#highlight_D_A > table > tbody > tr:nth-child(18) > td:nth-child(2)");
@@ -127,11 +126,14 @@ public class ValueCrawler{
 	else {
 		roe =(roe1+(roe2*2)+(roe3*3))/6/100;		
 	}
-
+	
+	System.out.println("roe :"+roe);	
+	
 	double totalvalue = (equity +(equity*(roe-rate1))/rate1);
 
 	int value = (int) (totalvalue/stock);
-
+	
+	System.out.println("목표가"+value);
 	StockCodeVO stc = new StockCodeVO();	
 		
 	stc.setValue(value);
@@ -139,9 +141,9 @@ public class ValueCrawler{
 	
 	
 	
-	Thread.sleep(5000); 
+	//Thread.sleep(5000); 
 	
-	sqlSessionTemplate.insert("stock.StockDAO.insertvalue",stc);
+	//sqlSessionTemplate.insert("stock.StockDAO.insertvalue",stc);
 	
 	}
 	
@@ -242,11 +244,7 @@ public class ValueCrawler{
 		}
 		
 	}
-	@Test
-	@Scheduled(cron = "0 45 16 ? * MON-FRI")
-	public void testsc() {
-		System.out.println("grgr");
-	}
+	
 	
 	
 	
